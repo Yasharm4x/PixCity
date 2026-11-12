@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#151515">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Hyderabad · Yash Sharma</title>
 <meta name="description" content="Yash Sharma, Data Engineer at Deloitte (AI & Data), Hyderabad. A living isometric pixel Hyderabad built out of his career.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +19,9 @@ body.night{--bg:#0f1738;--ink:#eef1ff;--muted:#a7b0d6;--card:#18224d;--accent:#9
 html,body{height:100%;margin:0;overflow:hidden;background:#151515;color:var(--ink);font:15px/1.55 'Space Grotesk',system-ui,sans-serif}
 a{color:inherit}
 button{font:inherit;color:inherit}
-#app{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr}
+html,body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+.stage,.bar,.ctrl,.pad,.acts,.hud-tl{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#app{position:fixed;inset:0;height:100dvh;display:grid;grid-template-rows:auto 1fr}
 .bar{display:flex;align-items:center;gap:10px;padding:8px 12px;padding-top:max(8px,env(safe-area-inset-top));background:#151515;color:#fff;border-bottom:3px solid #000;z-index:20;min-width:0}
 .brand{line-height:1;min-width:0}
 .brand b{font-family:'Silkscreen';font-weight:700;font-size:22px;letter-spacing:1px;display:block}
@@ -165,7 +171,7 @@ body.noctl .ctrl,body.noctl .pad,body.noctl .acts{display:none!important}
 /* dialogs */
 .modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(5,8,22,.62);padding:14px}
 .modal[hidden]{display:none}
-.panel{width:min(680px,100%);max-height:92vh;overflow:auto;background:#10183a;color:#eef1ff;border:4px solid #fff;box-shadow:0 0 0 4px #151515,12px 12px 0 4px #151515;padding:18px 22px 16px;animation:pop .18s steps(3)}
+.panel{width:min(680px,100%);max-height:92vh;max-height:calc(100dvh - 28px);overflow:auto;background:#10183a;color:#eef1ff;border:4px solid #fff;box-shadow:0 0 0 4px #151515,12px 12px 0 4px #151515;padding:18px 22px 16px;animation:pop .18s steps(3)}
 .panel .fine{color:#a7b0d6}
 @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
 .mhead{display:flex;justify-content:space-between;gap:12px;align-items:center}
@@ -232,6 +238,27 @@ body.noctl .ctrl,body.noctl .pad,body.noctl .acts{display:none!important}
 .achtoast span{font-size:13px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:reduce){.panel{animation:none}.achtoast,.side{transition:none}}
+
+/* ---------- phones ---------- */
+@media (max-width:700px),(max-height:500px){
+ .bar{padding:6px 8px;padding-top:max(6px,env(safe-area-inset-top));padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right));gap:6px}
+ .barbtns{flex-wrap:nowrap;gap:4px}.ib{padding:7px 8px;font-size:12px;min-width:34px;min-height:34px}.ib .lbl{display:none}
+ #sfxBtn,#musicBtn,#ctlBtn{display:none}
+ .brand small{display:none}.brand b{font-size:16px}
+ .achtoast{top:auto;bottom:max(12px,env(safe-area-inset-bottom));min-width:0;width:max-content;max-width:86vw;padding:7px 11px}.achtoast b{font-size:12px}.achtoast span{font-size:12px}
+ .hint{font-size:10px;line-height:1.6;padding:6px 8px}
+ .modal{padding:8px;padding-bottom:max(8px,env(safe-area-inset-bottom))}.panel{padding:12px 14px 12px;width:100%}
+ .side{width:min(470px,100vw);padding-bottom:env(safe-area-inset-bottom)}
+ .tourcard{max-width:calc(100% - 16px)}.photobar{bottom:max(8px,env(safe-area-inset-bottom));gap:5px;padding:7px 8px}.photobar input[type=range]{width:110px}
+ .welcome .panel,.welcome>div{max-height:calc(100dvh - 90px);overflow:auto}
+}
+@media (max-height:500px){
+ .scene{width:auto;max-width:100%;height:34dvh;margin-left:auto;margin-right:auto}
+ #mini{width:120px}.hud-tl .chip{font-size:10px;padding:3px 6px}
+ .hint{bottom:max(8px,env(safe-area-inset-bottom))}
+ .ctrl{top:auto;bottom:max(8px,env(safe-area-inset-bottom));right:max(8px,env(safe-area-inset-right));grid-template-columns:repeat(4,36px)}.ctrl .wide{grid-column:span 2}.ctrl button{height:36px}#mouseBtn,#helpBtn{display:none}
+ .pad{left:max(8px,env(safe-area-inset-left));bottom:max(8px,env(safe-area-inset-bottom))}.acts{right:max(170px,calc(env(safe-area-inset-right) + 170px))}
+}
 </style>
 </head>
 <body>
@@ -299,7 +326,7 @@ body.noctl .ctrl,body.noctl .pad,body.noctl .acts{display:none!important}
           <button class="pbtn" id="wQuest">📜 CAREER STORY</button>
           <button class="pbtn" id="wResume">📄 SKIP TO RÉSUMÉ</button>
         </div>
-        <div class="wkeys"><kbd>↑↓←→</kbd>/<kbd>WASD</kbd> walk · <kbd>E</kbd> enter · click or tap to walk · scroll / pinch to zoom · drag to pan · <kbd>[</kbd><kbd>]</kbd> rotate · <kbd>☰</kbd> menu</div>
+        <div class="wkeys" id="wkeys"><kbd>↑↓←→</kbd>/<kbd>WASD</kbd> walk · <kbd>E</kbd> enter · click or tap to walk · scroll / pinch to zoom · drag to pan · <kbd>[</kbd><kbd>]</kbd> rotate · <kbd>☰</kbd> menu</div>
       </div>
     </div>
     <div class="fade" id="fade"></div>
@@ -1615,9 +1642,9 @@ function openModal(n) { cur = n; const b = B[n];
   const links = (b.links || []).concat(b.contact ? cl : []); $('#mLinks').innerHTML = links.map(([l, h]) => `<a href="${esc(h)}" target="_blank" rel="noopener">${esc(l)}</a>`).join('') + (b.contact && CONFIG.email ? `<span>${esc(CONFIG.email)}</span>` : '');
   renderExtra(b); const lk = $('#mLike'); lk.textContent = likes.has(b.id) ? '♥ LIKED' : '♡ LIKE'; lk.classList.toggle('liked', likes.has(b.id));
   const bl = b.floors.flatMap(f => (f.bullets || []).map(x => ({text: x, role: f.role})));
-  if (b.id === 'golconda') bl.unshift({text: 'Press E here to clap at the Fateh Darwaza gate.', role: 'The gate', clap: true});
+  if (b.id === 'golconda') bl.unshift({text: coarse ? 'Tap the gate marker to clap at the Fateh Darwaza gate.' : 'Press E (or tap the marker) to clap at the Fateh Darwaza gate.', role: 'The gate', clap: true});
   inside = {x: 22, tx: null, near: -1, dist: 0, flip: false, exhibits: bl.map((e, q) => ({...e, x: Math.round(48 + q * (112 / Math.max(1, bl.length - 1 || 1)) * (bl.length > 1 ? 1 : 0) + (bl.length === 1 ? 56 : 0))}))};
-  $('#mExhibit').innerHTML = bl.length ? `<b>WALK INSIDE:</b> use ← → or click the room to visit each of the ${bl.length} exhibit${bl.length > 1 ? 's' : ''}.` : '<b>Have a look around.</b>';
+  $('#mExhibit').innerHTML = bl.length ? `<b>WALK INSIDE:</b> ${coarse ? 'tap the room' : 'use ← → or click the room'} to visit each of the ${bl.length} exhibit${bl.length > 1 ? 's' : ''}.` : '<b>Have a look around.</b>';
   showDlg('#modal'); typewrite($('#mQuote'), b.quote); beep(660, .06); setTimeout(() => beep(990, .08), 70);
   visited.add(b.id); store.set('visited', [...visited]); if (B.every(x => visited.has(x.id))) unlock('tour'); if (LANDMARKS.every(x => visited.has(x))) unlock('landmarks');
   if (quest.active && QUEST[quest.idx] === b.id) advanceQuest(); renderPlaces(); }
@@ -1630,7 +1657,7 @@ function renderExtra(b) { const ex = $('#mExtra');
 function stepModal(d) { const n = (cur + d + B.length) % B.length, b = B[n]; teleport(b.door[0], b.door[1]); openModal(n); }
 $('#mPrev').addEventListener('click', () => stepModal(-1)); $('#mNext').addEventListener('click', () => stepModal(1));
 $('#mLike').addEventListener('click', () => { const b = B[cur]; if (likes.has(b.id)) likes.delete(b.id); else { likes.add(b.id); unlock('like'); beep(988, .08); } store.set('likes', [...likes]); const lk = $('#mLike'); lk.textContent = likes.has(b.id) ? '♥ LIKED' : '♡ LIKE'; lk.classList.toggle('liked', likes.has(b.id)); renderPlaces(); });
-$('#mScene').addEventListener('pointerdown', e => { const r = e.currentTarget.getBoundingClientRect(); inside.tx = Math.max(10, Math.min(186, (e.clientX - r.left) / r.width * 200 - 8)); });
+$('#mScene').addEventListener('pointerdown', e => { const r = e.currentTarget.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 200; const ex = inside.exhibits[inside.near]; if (ex && Math.abs(x - ex.x) < 9) { useExhibit(); return; } inside.tx = Math.max(10, Math.min(186, x - 8)); });
 function useExhibit() { const ex = inside.exhibits[inside.near]; if (!ex) return beep(180, .05); if (ex.clap) { clapEcho(); return; } beep(990, .05); }
 function clapEcho() { unlock('clap'); $('#mExhibit').innerHTML = '<b>👏 CLAP!</b> ...clap... ..clap.. .clap. (heard all the way up at the Bala Hissar)'; if (sfx) { [0, 380, 720, 1000].forEach((t, q) => setTimeout(() => { try { const a = AC(), s = a.createBufferSource(), gn = a.createGain(); s.buffer = noiseBuf(a, .08); gn.gain.value = .25 / (q + 1); s.connect(gn).connect(a.destination); s.start(); } catch (er) {} }, t)); } }
 const WALL = {agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
@@ -1861,6 +1888,10 @@ function frame(now) { requestAnimationFrame(frame); if (SET.low) { skip = !skip;
   try { drawCabin(dt); if (openDlg === '#modal') drawScene(dt); if (game.on) drawGame(); } catch (e) { report(e); } }
 
 /* ---------- init ---------- */
+if (coarse) { const wk = $('#wkeys'); if (wk) wk.innerHTML = 'TAP to walk · TAP buildings and people · PINCH to zoom · DRAG to pan · TWIST to rotate · ☰ for everything else'; }
+addEventListener('orientationchange', () => setTimeout(() => { resize(); snapCam(); }, 250));
+if (window.visualViewport) visualViewport.addEventListener('resize', () => { resize(); snapCam(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { if (music.on) clearInterval(music.timer); } else if (music.on) setMusic(true); last = performance.now(); });
 curSeason = season(); rain = curSeason === 'monsoon'; snow = curSeason === 'winter'; snowT = snow ? 1 : 0; rainT = rain ? 1 : 0;
 bakeAll(); resize(); snapCam(); if (cssW < 640) { setZoom(fitZ * 1.5); snapCam(); } syncControls(); weatherLabel();
 document.body.classList.toggle('night', nightness(hour) > .5); nightT = nightness(hour); duskT = Math.min(1, duskness(hour)); wasNight = nightT > .5;
