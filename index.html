@@ -414,6 +414,7 @@ const FRIENDS = [
   {name:'Rashi',    hair:'long',  hairColor:'#4a2c18', skin:'#e0b08a', shirt:'#f2b632', pants:'#6b4a2a', acc:'shades',     home:'kc', roam:true, lines:['Lunch at Knowledge City?', 'KFC or burritos? Decide.', 'This city looks good at night.']},
   {name:'Mitali',   hair:'long',  hairColor:'#1b1b1b', skin:'#c98a62', shirt:'#7b5cc6', pants:'#1f2a44', acc:'none',       home:'lab', roam:true, lines:['Rules extracted. Over to your mapping agent.', 'Did you push the fix?', 'Demo is recorded. Ship it.']},
   {name:'Sujal',    hair:'short', hairColor:'#2a2a2a', skin:'#b97c52', shirt:'#27ae60', pants:'#151515', acc:'headphones', home:'cyber', roam:true, lines:['Metro or bike?', 'Cyber Towers at night hits different.', 'LoRA or full fine-tune? Fight me.']},
+  {name:'Sakshi',   hair:'long',  hairColor:'#3a2214', skin:'#e0b08a', shirt:'#ff7eb6', pants:'#7b5cc6', acc:'none',       home:'sakshi', sister:true, pos:[30.7, 28.6], lines:['Bhaiya! Take me and Bruno along?', 'Tap me to come along, tap again and I go home.', 'Double-tap for a hug!', 'Chai at Irani cafe? You are paying.']},
   {name:'Mom',      hair:'long',  hairColor:'#2a1a12', skin:'#d29a6c', shirt:'#c2185b', pants:'#c2185b', acc:'none',       home:'home', stationary:true, pos:[36.2, 28.75], parent:true, lines:['Beta, did you eat?', 'Take Bruno for a walk, he is waiting.', 'Call more often!', 'Wear a jacket, it is cold.']},
   {name:'Dad',      hair:'short', hairColor:'#6a6a6a', skin:'#c68a5e', shirt:'#e8dcc0', pants:'#3a3a3a', acc:'none',       home:'home', stationary:true, pos:[37.65, 28.75], parent:true, lines:['How is work at Deloitte?', 'Drive carefully, beta.', 'Proud of you.', 'Check the car tyres this weekend.']},
   {name:'Chai Uncle', hair:'buzz', hairColor:'#e8e8e8', skin:'#a8714a', shirt:'#ffffff', pants:'#6b4a2a', acc:'none',     home:'chai', stationary:true, lines:['Irani chai and Osmania biscuit?', 'Chai first, code later.', 'Rs 20. Best deal in the city.']}
@@ -508,9 +509,12 @@ const B = [
   floors:[{role:'Side quests',when:'',bullets:['Built More Than Football, a mobile web app for my weekly football group.','Into dramatics too, whenever there is a stage.']}],tags:['Football','Dramatics']},
  {id:'grove',kind:'grove',short:'GUEST GROVE',name:'Guest Grove',years:'Plant one',where:'Visitors\' trees',type:'place',at:[13,26,7,3],flat:true,door:[16.5,25.5],
   quote:'Leave a tree. Leave a note.',floors:[],tags:[]},
- {id:'lot',kind:'lot',short:'EMPTY LOT',name:'Empty Lot',years:'Next',where:'Available now',type:'place',at:[25,26,6,3],flat:true,door:[27.5,25.5],
+ {id:'lot',kind:'lot',short:'EMPTY LOT',name:'Empty Lot',years:'Next',where:'Available now',type:'place',at:[25,26,4,3],flat:true,door:[27,25.5],
   quote:'This lot is open.',
   floors:[{role:'Build the next one with me',when:'',bullets:['Got a data problem, a role or a strange idea? Let\'s put up the next building.']}],tags:[],contact:true},
+ {id:'sakshi',kind:'sakshi',short:"SAKSHI'S HOME",name:"Sakshi's Home",years:"Yash's sister",where:'Next door',type:'place',at:[29.2,26.2,1.7,1.6],h:22,door:[30.05,28.3],
+  quote:'The cutest house on the street. Sakshi lives here.',
+  floors:[{role:'Resident',when:'',bullets:['Sakshi, Yash\'s sister.','Tap her once and she joins Yash and Bruno. Tap her again and she heads home.','Double-tap her for a hug.']}],tags:[]},
  {id:'home',kind:'home',short:'HOME',name:'Yash\'s Home',years:'Bruno\'s turf',where:'Hyderabad',type:'place',at:[35,26,4,2],h:50,door:[36.9,28.5],
   quote:'Home. Bruno runs this place.',
   floors:[{role:'Residents',when:'',bullets:['A three-floor villa. Mom and Dad usually wait by the door.','Three cars in the carport: red, orange and green.','Yash Sharma, Data Engineer.','Bruno, Head of Security and Snacks.']}],tags:[]}
@@ -546,7 +550,7 @@ for (let j = 0; j < MH; j++) { TL.push([]); for (let i = 0; i < MW; i++) {
   TL[j].push(t); } }
 const zone = (i0, i1, j0, j1, t) => { for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) if (TL[j] && TL[j][i] !== undefined) TL[j][i] = t; };
 zone(13, 20, 15, 21, 'P'); zone(25, 30, 15, 21, 'P'); zone(35, 38, 16, 20, 'W'); zone(37, 37, 18, 18, 'I');
-zone(1, 7, 26, 28, 'F'); zone(13, 19, 26, 28, 'H'); zone(25, 30, 26, 28, 'D');
+zone(1, 7, 26, 28, 'F'); zone(13, 19, 26, 28, 'H'); zone(25, 30, 26, 28, 'D'); zone(29, 30, 26, 28, 'H');
 zone(43, 51, 16, 20, 'W'); zone(47, 47, 16, 20, 'Q'); zone(43, 51, 26, 29, 'Y'); zone(0, 5, 0, 5, 'Y'); zone(44, 50, 9, 9, 'P');
 const solid = TL.map(r => r.map(t => t === 'W' || t === 'I' || t === 'M'));
 const block = (i0, j0, i1, j1) => { for (let j = Math.floor(j0); j < Math.ceil(j1); j++) for (let i = Math.floor(i0); i < Math.ceil(i1); i++) if (solid[j] && solid[j][i] !== undefined) solid[j][i] = true; };
@@ -743,6 +747,15 @@ const PAINT = {
     box(hx + .05, hj + .05, .3, .3, 34, 6, {L: '#3f9a45', R: '#2f7a35', T: '#5cb85c'}); box(hx + hw - .35, hj + hd - .3, .25, .25, 34, 5, {L: '#3f9a45', R: '#2f7a35', T: '#5cb85c'});
     stampL(hx, hj, hw, hd, 0, 34, 13, DOOR(13), {d: '#2a2a2a', g: '#c98f3d', k: '#6b4a2a'}); };
   byDepth([[car(j + .08, '#e2474b'), i + 3.55, j + .33], [car(j + .72, '#ff8a3d'), i + 3.55, j + .97], [car(j + 1.36, '#27ae60'), i + 3.55, j + 1.61], [villa, hx + hw / 2, hj + hd / 2]]); },
+ sakshi(b) { const [i, j, w, d] = b.at, h = 14, wall = {L: '#ffc9df', R: '#f4a9c8', T: '#ffd9e8'};
+  box(i - .05, j - .05, w + .1, d + .1, 0, 2, {L: '#ffffff', R: '#e6e0e8', T: '#fff6fa'}); box(i, j, w, d, 2, h, wall, 701); box(i - .02, j - .02, w + .04, d + .04, 2 + h - 2, 2, {L: '#ffffff', R: '#ece6ee', T: '#ffffff'});
+  hip(i - .12, j - .12, w + .24, d + .24, 2 + h, 6, {L: '#a77be0', R: '#8a5fc4', T: '#b98ff0'}, 2);
+  box(i + w - .45, j + .25, .25, .25, 2 + h + 4, 10, {L: '#e8826a', R: '#c86a54', T: '#f0a08a'});
+  const RW = ['.xxxx.', 'xccccx', 'xccccx', 'xccccx', 'xccccx', '.xxxx.'];
+  stampL(i, j, w, d, 2, 4, h - 4, RW, {x: '#ffffff', c: '#9fd8f0'}); stampL(i, j, w, d, 2, 14, 10, DOOR(10), {d: '#ffffff', g: '#ffd0e4', k: '#b0507a'});
+  stampL(i, j, w, d, 2, 22, h - 3, HEART, {x: '#e2474b'}); stampR(i, j, w, d, 2, 6, h - 4, RW, {x: '#ffffff', c: '#9fd8f0'});
+  stampR(i, j, w, d, 2, 5, 4, ['fpfyfp', 'gggggg', 'gggggg'], {f: '#ff4fa3', p: '#ffd34f', y: '#ffffff', g: '#7a4f2e'}); stampL(i, j, w, d, 2, 3, 4, ['fpfyf', 'ggggg', 'ggggg'], {f: '#ff4fa3', p: '#ffd34f', y: '#ffffff', g: '#7a4f2e'});
+  for (let k = 0; k < 6; k++) box(i + .05 + k * .3, j + d + .45, .06, .06, 0, 5, {L: '#ffffff', R: '#e6e0e8', T: '#ffffff'}); box(i, j + d + .45, w, .04, 3, 1, {L: '#ffffff', R: '#e6e0e8', T: '#ffffff'}); },
  kc(b) { const [i, j] = b.at, g1 = win({px: 5, w: 3, py: 6, h: 4, m: 5, glass: '#8fd6e8', lit: .75, litc: '#ffe9a8', litc2: '#9ff0ff', top: 6}), g2 = win({px: 5, w: 3, py: 6, h: 4, m: 5, glass: '#5a7fc8', lit: .7, litc: '#ffd36a', top: 6});
   const g3 = win({px: 4, w: 2, py: 5, h: 3, m: 4, glass: '#c9d6e2', lit: .65, litc: '#fff1c4', top: 5}), g4 = win({px: 5, w: 3, py: 5, h: 3, m: 5, glass: '#7fd3a8', lit: .7, litc: '#c8ffe0', top: 6});
   const crown = c => ({L: c, R: shade(c, .8), T: shade(c, 1.15), glowTop: '#bff4ff'});
@@ -990,7 +1003,7 @@ const ACH = [
   {id: 'metro', name: 'Commuter', desc: 'Ride the metro'}, {id: 'bike', name: 'Two Wheels', desc: 'Ride the bike'}, {id: 'tree', name: 'Green Thumb', desc: 'Plant a tree in the Guest Grove'},
   {id: 'like', name: 'Fan', desc: 'Like a building'}, {id: 'style', name: 'New Look', desc: 'Customise your avatar'}, {id: 'ask', name: 'Curious', desc: 'Ask Yash a question'},
   {id: 'photo', name: 'Postcard', desc: 'Take a photo in photo mode'}, {id: 'sunset', name: 'Golden Hour', desc: 'Watch a sunset over the city'}, {id: 'night', name: 'Night Owl', desc: 'See the city at night'},
-  {id: 'rain', name: 'Monsoon', desc: 'Make it rain'}, {id: 'storm', name: 'Thunderstruck', desc: 'See a night thunderstorm'}, {id: 'festival', name: 'Festive', desc: 'Catch a festival in the city'}, {id: 'snow', name: 'Let It Snow', desc: 'See snowfall in a Hyderabad winter'}, {id: 'xmas', name: 'Merry Christmas', desc: 'Visit the Christmas tree in the Guest Grove'}, {id: 'parents', name: 'Ghar Ka Khana', desc: 'Talk to Mom and Dad'},
+  {id: 'rain', name: 'Monsoon', desc: 'Make it rain'}, {id: 'storm', name: 'Thunderstruck', desc: 'See a night thunderstorm'}, {id: 'festival', name: 'Festive', desc: 'Catch a festival in the city'}, {id: 'snow', name: 'Let It Snow', desc: 'See snowfall in a Hyderabad winter'}, {id: 'xmas', name: 'Merry Christmas', desc: 'Visit the Christmas tree in the Guest Grove'}, {id: 'parents', name: 'Ghar Ka Khana', desc: 'Talk to Mom and Dad'}, {id: 'sister', name: 'Sibling Squad', desc: 'Walk the city with Sakshi and Bruno'}, {id: 'hug', name: 'Bhai-Behen Hug', desc: 'Double-tap Sakshi for a hug'},
   {id: 'konami', name: 'Old School', desc: 'Enter the Konami code'}
 ];
 const contactLinks = () => { const o = []; if (CONFIG.linkedin) o.push(['LINKEDIN ↗', CONFIG.linkedin]); if (CONFIG.github) o.push(['GITHUB ↗', CONFIG.github]); if (CONFIG.email) o.push(['EMAIL ✉', 'mailto:' + CONFIG.email]); return o; };
@@ -1007,6 +1020,14 @@ const ROAM = ['pitch', 'deloitte', 'kc', 'lab', 'cyber', 'hyd', 'lake', 'grove',
 const friends = FRIENDS.map((f, n) => { const h = f.pos || homeOf(f.home); return {...f, ps: makeSprite(f), i: f.pos ? h[0] : h[0] + (n % 2 ? .9 : -.9), j: f.pos ? h[1] : h[1] + .2, flip: !!(f.pos && n % 2), path: null, wait: 1 + n, dist: 0, say: '', until: 0, li: 0, party: false, back: false}; });
 friends.forEach(f => { if (!f.pos && !canStand(f.i, f.j)) { const h = homeOf(f.home); f.i = h[0]; f.j = h[1]; } });
 let party = [];
+const SIS = friends.find(f => f.sister); let hugS = null, hearts = [];
+function toggleSister(s = SIS) { if (!s || hugS) return; if (s.follow) { s.follow = false; const d = BY.sakshi.door; s.path = findPath(s.i, s.j, d[0] + .5, d[1] + .3); s.wait = 4; speak(s, 'Going home! Bye bhaiya.'); beep(440, .06); }
+  else { s.follow = true; s.path = null; speak(s, ['Yay! Me, you and Bruno!', 'Coming! Wait up!', 'Where are we going?'][Math.floor(Math.random() * 3)]); beep(880, .06); unlock('sister'); } }
+function hug(s = SIS) { if (!s || hugS || ride) return; const d = Math.hypot(s.i - player.i, s.j - player.j);
+  if (d > 1.4) { s.path = null; walkTo(player, s.i - .5, s.j, () => hug(s)); return; }
+  player.path = null; keys.u = keys.d = keys.l = keys.r = false; hugS = {s, t: 0}; const a = [player.i, player.j]; if (canStand(a[0] + .42, a[1])) { s.i = a[0] + .42; s.j = a[1]; } else { s.i = a[0]; s.j = a[1] + .42; }
+  player.flip = false; player.back = false; s.flip = true; s.back = false; s.moving = false; speak(s, ['Aww, love you bhaiya!', 'Best brother ever!', 'Group hug! Bruno too!'][Math.floor(Math.random() * 3)], 2200); unlock('hug');
+  if (typeof beep === 'function') { beep(660, .08); setTimeout(() => beep(880, .08), 120); setTimeout(() => beep(1175, .14), 240); } if (navigator.vibrate) try { navigator.vibrate([20, 60, 20]); } catch (er) {} }
 B.forEach((b, n) => { if (!NPC_LINES[b.id]) return; const [di, dj] = b.door; const gi = b.doorSide === 'i' ? di : di + 1.1, gj = b.doorSide === 'i' ? dj + 1.1 : dj;
   if (!canStand(gi, gj)) return;
   b.npc = {i: gi, j: gj, ps: makeSprite({hair: ['short', 'spiky', 'long', 'buzz'][n % 4], hairColor: ['#1b1b1b', '#4a2c18', '#2a2a2a'][n % 3], skin: SKINS[(n * 3) % 5], shirt: ['#e2474b', '#16a3b8', '#f2b632', '#ff8a3d', '#5163a0', '#ffffff'][n % 6], pants: '#2f3b55', acc: ['none', 'shades', 'none', 'cap'][n % 4]}), say: '', until: 0, b}; });
@@ -1081,7 +1102,7 @@ function toggleParty() { let best = null, bd = 1.6;
   else if (party.length >= 3) speak(best, 'Party is full (3 max).');
   else { best.party = true; party.push(best); speak(best, "I'm in!"); if (party.length >= 3) unlock('party'); } }
 function toggleBike() { player.bike = !player.bike; beep(player.bike ? 880 : 440, .06); if (player.bike) unlock('bike'); }
-function teleport(i, j) { player.i = i; player.j = j; player.path = null; trail.length = 0; dog.i = i - .5; dog.j = j; party.forEach((f, n) => { f.i = i - .5 * (n + 2); f.j = j; if (!canStand(f.i, f.j)) { f.i = i; f.j = j; } }); if (!canStand(dog.i, dog.j)) { dog.i = i; dog.j = j; } camFree = false; snapCam(); }
+function teleport(i, j) { player.i = i; player.j = j; player.path = null; trail.length = 0; dog.i = i - .5; dog.j = j; if (SIS && SIS.follow) { SIS.i = i + .5; SIS.j = j; if (!canStand(SIS.i, SIS.j)) { SIS.i = i; SIS.j = j; } } party.forEach((f, n) => { f.i = i - .5 * (n + 2); f.j = j; if (!canStand(f.i, f.j)) { f.i = i; f.j = j; } }); if (!canStand(dog.i, dog.j)) { dog.i = i; dog.j = j; } camFree = false; snapCam(); }
 function fadeTo(fn) { const f = $('#fade'); f.classList.add('on'); setTimeout(() => { fn(); setTimeout(() => f.classList.remove('on'), 60); }, reduce ? 0 : 260); }
 
 /* ---------- update ---------- */
@@ -1120,9 +1141,11 @@ function update(dt) {
     const lt = trail[trail.length - 1]; if (!lt || Math.hypot(lt[0] - player.i, lt[1] - player.j) > .1) { trail.push([player.i, player.j]); if (trail.length > 120) trail.shift(); } } else stillT += dt;
   const follow = (o, n) => { const idx = trail.length - 1 - n * 7; if (idx < 0) { o.moving = false; return; } const [ti, tj] = trail[idx], di = ti - o.i, dj = tj - o.j, d = Math.hypot(di, dj);
     if (d > .05) { const st = Math.min(d, Math.max(2, d * 5) * dt); o.i += di / d * st; o.j += dj / d * st; o.dist = (o.dist || 0) + st * 16; face(o, di, dj); o.moving = true; } else o.moving = false; };
-  follow(dog, 1); party.forEach((f, n) => follow(f, n + 2));
-  for (const f of friends) { if (f.party) continue; if (f.stationary) { f.moving = false; continue; }
-    if (f.path) f.moving = followPath(f, 1.4, dt); else { f.moving = false; f.wait -= dt; if (f.wait <= 0) { if (f.roam && Math.random() < .35) f.home = ROAM[Math.floor(Math.random() * ROAM.length)]; const h = homeOf(f.home), p = findPath(f.i, f.j, h[0] + (Math.random() * 5 - 2.5), h[1] + (Math.random() * 3 - 1)); f.path = p && p.length < 60 ? p : null; f.wait = 1.5 + Math.random() * 4; } } }
+  follow(dog, 1); if (SIS && SIS.follow && !hugS) follow(SIS, 2); party.forEach((f, n) => follow(f, n + (SIS && SIS.follow ? 3 : 2)));
+  if (hugS) { hugS.t += dt; if (Math.random() < dt * 7) { const p = P((player.i + hugS.s.i) / 2, (player.j + hugS.s.j) / 2, 16); hearts.push({x: p.x + Math.random() * 10 - 5, y: p.y, vy: -14 - Math.random() * 10, life: 1.4}); } if (hugS.t > 2.2) hugS = null; }
+  hearts = hearts.filter(h => (h.life -= dt) > 0); for (const h of hearts) { h.y += h.vy * dt; h.x += Math.sin(h.life * 6) * .3; }
+  for (const f of friends) { if (f.party || f.follow || (hugS && hugS.s === f)) continue; if (f.stationary) { f.moving = false; continue; }
+    if (f.path) f.moving = followPath(f, 1.4, dt); else { f.moving = false; f.wait -= dt; if (f.wait <= 0) { if (f.roam && Math.random() < .35) f.home = ROAM[Math.floor(Math.random() * ROAM.length)]; const h = homeOf(f.home), sp2 = f.sister ? .45 : 1, p = findPath(f.i, f.j, h[0] + (Math.random() * 5 - 2.5) * sp2 + (f.sister ? .5 : 0), h[1] + (Math.random() * 3 - 1) * sp2 + (f.sister ? .3 : 0)); f.path = p && p.length < 60 ? p : null; f.wait = 1.5 + Math.random() * 4; } } }
   // vehicles
   for (const c of cars) { if (c.stopT > 0) { c.stopT -= dt; continue; }
     if (c.type === 'bus') BUS_STOPS.forEach((s, n) => { if (s.lane === c.lane && n !== c.lastStop && Math.abs(c.x - s.i) < .1) { c.stopT = 2.6; c.lastStop = n; } });
@@ -1191,7 +1214,7 @@ function objs() {
   L.push({i0: 0, j0: 12, i1: MW, j1: 13, draw: drawMetro});
   const ch = (o, kind) => pt(o.i, o.j, .15, drawChar, {o, kind}, 10, 24);
   if (!player.hidden) { ch(player, 'player'); ch(dog, 'dog'); party.forEach(f => ch(f, 'friend')); }
-  friends.forEach(f => { if (!f.party) ch(f, 'friend'); });
+  friends.forEach(f => { if (!f.party && !(f.follow && player.hidden)) ch(f, 'friend'); });
   B.forEach(b => { if (b.npc) ch(b.npc, 'npc'); });
   commuters.forEach(c => { if (c.on) pt(c.i, c.j, .1, drawCommuter, {c}, 6, 10); });
   for (const c of cars) { const ci = c.cross !== undefined ? c.cross : c.x, cj = c.cross !== undefined ? c.x : c.lane, len = c.type === 'bus' ? 1 : c.type === 'auto' ? .35 : .45, wd = c.type === 'bus' ? .32 : .3;
@@ -1244,7 +1267,7 @@ function extras(b) { const [i, j, w, d] = b.at, h = b.h;
   if (b.id === 'deloitte') { const p = P(i + 5.5, j + 1.5, 154), t = 'DELOITTE', w2 = tw(t) + 8, x = Math.round(p.x - w2 / 2), y = p.y - 22;
     R(x + 3, y + 10, 1, 8, '#2a3a4a'); R(x + w2 - 4, y + 10, 1, 8, '#2a3a4a'); R(x - 1, y - 1, w2 + 2, 12, '#151515'); R(x, y, w2, 10, nightT > .5 ? '#0f1830' : '#1f2c3b'); TX(t, x + 4, y + 1, nightT > .5 ? '#9ff6ff' : '#ffffff');
     if (nightT > .3) { g.globalAlpha = nightT * .35; R(x - 3, y - 3, w2 + 6, 16, '#7fe8ff'); g.globalAlpha = 1; } }
-  const sn = {agva: ['AGVA LAB', '#c03535'], insofe: ['INSOFE', '#3a2a20'], unitedway: ['UNITED WAY', '#e2474b'], databeat: ['DATABEAT', '#5fc7d8'], anova: ['ANOVA', '#3b2a6b'], kc: ['KNOWLEDGE CITY', '#0f5c6e'], cortexa: ['CORTEXA', '#232c47'], codewatch: ['CODEWATCH', '#1f2a1f'], ecosense: ['ECOSENSE', '#2f8f4e'], edi: ['DOC INTEL', '#4a3f30'], home: ["YASH'S HOME", '#c0392b'], lab: ['AI LAB', '#24392f'], cyber: ['CYBER TOWERS', '#b8702a'], golconda: ['GOLCONDA FORT', '#6e5d42'], birla: ['BIRLA MANDIR', '#c0392b']}[b.id];
+  const sn = {agva: ['AGVA LAB', '#c03535'], insofe: ['INSOFE', '#3a2a20'], unitedway: ['UNITED WAY', '#e2474b'], databeat: ['DATABEAT', '#5fc7d8'], anova: ['ANOVA', '#3b2a6b'], kc: ['KNOWLEDGE CITY', '#0f5c6e'], cortexa: ['CORTEXA', '#232c47'], codewatch: ['CODEWATCH', '#1f2a1f'], ecosense: ['ECOSENSE', '#2f8f4e'], edi: ['DOC INTEL', '#4a3f30'], home: ["YASH'S HOME", '#c0392b'], sakshi: ["SAKSHI'S HOME", '#e85d9a'], lab: ['AI LAB', '#24392f'], cyber: ['CYBER TOWERS', '#b8702a'], golconda: ['GOLCONDA FORT', '#6e5d42'], birla: ['BIRLA MANDIR', '#c0392b']}[b.id];
   if (sn) { const z = h + (b.id === 'kc' ? 6 : b.id === 'insofe' ? 16 : b.id === 'golconda' ? 0 : b.id === 'birla' ? 4 : 4); const p = P(i + w / 2, j + d / 2, z); signBoard(sn[0], p.x, p.y - 14, b.id === 'databeat' ? '#0e1a2b' : '#ffffff', sn[1]); }
 }
 function signBoard(t, cx2, y, fg, bg) { const w2 = tw(t) + 6, x = Math.round(cx2 - w2 / 2); R(x - 1, y - 1, w2 + 2, 11, '#151515'); R(x, y, w2, 9, bg); TX(t, x + 3, y + 1, fg); R(x + 2, y + 10, 1, 3, '#151515'); R(x + w2 - 3, y + 10, 1, 3, '#151515'); }
@@ -1296,9 +1319,9 @@ function drawPylon() { const top = P(47.5, 18.3, 74), L1 = P(47.08, 18.3, 0), L2
 function drawGoal(gi) { const a = P(gi, 27), b2 = P(gi, 28); R(a.x, a.y - 9, 1, 9, '#fff'); R(b2.x, b2.y - 9, 1, 9, '#fff'); line(a.x, a.y - 9, b2.x, b2.y - 9, '#ffffff'); }
 function drawFootball() { const ph = reduce ? .5 : (T / 1300) % 2, u = ph < 1 ? ph : 2 - ph; const A = P(2.6, 27.5), Bp = P(6.4, 27.5);
   tiny(A.x - 1, A.y - 5, '#2f80ed'); tiny(Bp.x - 1, Bp.y - 5, '#e2474b'); R(Math.round(A.x + 2 + (Bp.x - A.x - 4) * u), Math.round(A.y - 3 - Math.sin(u * Math.PI) * 12), 2, 2, '#ffffff'); }
-function drawLotSign() { const p = P(27.7, 27.7); const l1 = 'YOUR IDEA', l2 = 'GOES HERE', bw = Math.max(tw(l1), tw(l2)) + 8, x = Math.round(p.x - bw / 2), y = p.y - 36;
+function drawLotSign() { const p = P(27, 27.7); const l1 = 'YOUR IDEA', l2 = 'GOES HERE', bw = Math.max(tw(l1), tw(l2)) + 8, x = Math.round(p.x - bw / 2), y = p.y - 36;
   R(x + 4, y + 20, 2, 16, '#6b4a2a'); R(x + bw - 6, y + 20, 2, 16, '#6b4a2a'); R(x - 1, y - 1, bw + 2, 22, '#151515'); R(x, y, bw, 20, '#f2d14b'); TX(l1, x + 4, y + 2, '#151515'); TX(l2, x + 4, y + 11, '#151515');
-  for (let n = 0; n < 12; n++) { const q = P(25.1 + n * .5, 28.9); R(q.x, q.y - 6, 1, 6, '#f4f1e6'); } }
+  for (let n = 0; n < 8; n++) { const q = P(25.1 + n * .5, 28.9); R(q.x, q.y - 6, 1, 6, '#f4f1e6'); } }
 function drawStudents() { for (let n = 0; n < 7; n++) { const p = P(25.8 + n * .7 + (n > 2 ? 1 : 0), 10.4 + (n % 2) * .25); tiny(p.x - 1, p.y - 5 - (Math.floor(T / 380 + n) % 2), SHIRTS[n]); } }
 function drawGuestTree(o) { const p = P(o.ti, o.tj), c = TREECOL[Math.floor(o.gt.seed * TREECOL.length)], h = 14 + Math.round(o.gt.seed * 8);
   R(p.x, p.y - 8, 2, 8, '#7a4f2e'); disc(p.x + 1, p.y - h, 6, nightT > .5 ? mix(c, NIGHT, .5) : c); disc(p.x - 1, p.y - h - 2, 2, 'rgba(255,255,255,.25)'); o.gt._p = p; }
@@ -1377,6 +1400,8 @@ function draw() {
   g.setTransform(1, 0, 0, 1, -camX, -camY);
   if (bolt) for (let n = 1; n < bolt.pts.length; n++) { const [a, b2] = bolt.pts[n - 1], [c2, d2] = bolt.pts[n]; line(a, b2, c2, d2, '#fffbe0'); line(a + 1, b2, c2 + 1, d2, '#b8c8ff'); }
   for (const r of rockets) { R(Math.round(r.x), Math.round(r.y), 1, 3, r.c); g.globalAlpha = .5; R(Math.round(r.x), Math.round(r.y) + 3, 1, 6, '#ffe9b8'); g.globalAlpha = 1; }
+  if (hugS) { const p = P((player.i + hugS.s.i) / 2, (player.j + hugS.s.j) / 2); pix(HEART, p.x - 7, p.y - 36 - Math.round(Math.abs(Math.sin(T / 180)) * 3), {x: '#ff4f8b'}, false, 2); }
+  for (const h of hearts) { g.globalAlpha = Math.min(1, h.life * 1.4); pix(HEART, Math.round(h.x) - 3, Math.round(h.y), {x: '#ff4f8b'}); } g.globalAlpha = 1;
   for (const f of fireworks) if (f.delay <= 0) { g.globalAlpha = Math.min(1, f.life * 1.5); R(Math.round(f.x), Math.round(f.y), 1, 1, f.c); }
   for (const f of puffs) { g.globalAlpha = Math.min(.8, f.life); R(Math.round(f.x), Math.round(f.y), 2, 2, f.c); } g.globalAlpha = 1;
   if (photoOn) { drawMini(); return; }
@@ -1443,7 +1468,7 @@ function mouseSteer() {
 }
 function hitTest(x, y) {
   for (let n = sorted.length - 1; n >= 0; n--) { const o = sorted[n];
-    if (o.draw === drawChar && o.kind !== 'player') { const p = P(o.o.i, o.o.j); if (Math.abs(x - p.x) <= 5 && y >= p.y - 15 && y <= p.y + 2) { const c = o.o; return {char: c, label: c === dog ? `${PET.name} the dog` : c.name ? c.name + (c.party ? ' (party)' : '') : 'Local guide', x: p.x, y: p.y - 16}; } }
+    if (o.draw === drawChar && o.kind !== 'player') { const p = P(o.o.i, o.o.j), rr = o.o.sister ? 9 : 5; if (Math.abs(x - p.x) <= rr && y >= p.y - (o.o.sister ? 19 : 15) && y <= p.y + (o.o.sister ? 5 : 2)) { const c = o.o; return {char: c, label: c === dog ? `${PET.name} the dog` : c.name ? c.name + (c.party ? ' (party)' : '') : 'Local guide', x: p.x, y: p.y - 16}; } }
     if (o.draw === drawGuestTree && o.gt._p) { const p = o.gt._p; if (Math.abs(x - p.x) <= 7 && y >= p.y - 26 && y <= p.y) return {tree: o.gt, label: `${o.gt.name}: ${o.gt.note || 'planted a tree'}`, x: p.x, y: p.y - 24}; }
     if (o.draw === drawCart) { const p = P(o.c.i, o.c.j); if (Math.abs(x - p.x) <= 8 && y >= p.y - 24 && y <= p.y + 2) return {label: o.c.name + ' cart', x: p.x, y: p.y - 24}; }
     if (o.draw === drawBuilding) { const r = o.b.rect, [i, j, w, d] = o.b.at; if (x >= r.x + 4 && x <= r.x + r.w - 4 && y >= r.y + 20 && y <= r.y + r.h) { const bp = P(i + w / 2, j + d / 2); if (y <= bp.y + (w + d) * 4) return {b: o.b}; } } }
@@ -1451,8 +1476,11 @@ function hitTest(x, y) {
   for (const b of B) if (b.flat) { const [i, j, w, d] = b.at; if (q.i >= i && q.i <= i + w && q.j >= j && q.j <= j + d) return {b}; }
   return null;
 }
+let sisT = null;
+function sisTap(s) { const now = performance.now(); if (sisT && now - sisT.t < 340) { clearTimeout(sisT.timer); sisT = null; hug(s); return; } sisT = {t: now, timer: setTimeout(() => { sisT = null; toggleSister(s); }, 340)}; }
 function tapAt(sx, sy) {
   if (ride || tour.on || photoOn) return; const [x, y] = toWorld(sx, sy), h = hitTest(x, y); beep(520, .04);
+  if (h && h.char && h.char.sister) { sisTap(h.char); return; }
   if (h && h.char) { talk(h.char); return; }
   if (h && (h.tree || h.label)) { hover = h; setTimeout(() => { if (hover === h) hover = null; }, 3000); return; }
   if (h && h.b) { const [di, dj] = h.b.door; walkTo(player, di, dj, () => { if (Math.hypot(player.i - di, player.j - dj) < 1.4) openModal(h.b.i); }); return; }
@@ -1490,7 +1518,8 @@ function touchMove(e) { if (!touches.has(e.pointerId)) return; e.preventDefault(
     if (Math.abs(da) > .9 && tg.rotated < 3) { rotate(da > 0 ? 1 : -1); tg.ang0 += Math.sign(da) * Math.PI / 2; tg.rotated++; } } }
 function touchUp(e) { if (!touches.has(e.pointerId)) return; touches.delete(e.pointerId); clearTimeout(lpTimer);
   if (tg && tg.mode === 'one' && touches.size === 0 && !tg.moved && performance.now() - tg.t0 < 350) { const [sx, sy] = cssPt(e), now = performance.now();
-    if (now - lastTap.t < 320 && Math.hypot(sx - lastTap.x, sy - lastTap.y) < 30) { if (fitMode) setZoom(fitZ * 2.4, sx, sy); else setZoom(fitZ); lastTap.t = 0; }
+    const [wx, wy] = toWorld(sx, sy), hh = hitTest(wx, wy); if (hh && hh.char && hh.char.sister) { lastTap = {t: 0, x: sx, y: sy}; tapAt(sx, sy); }
+    else if (now - lastTap.t < 320 && Math.hypot(sx - lastTap.x, sy - lastTap.y) < 30) { if (fitMode) setZoom(fitZ * 2.4, sx, sy); else setZoom(fitZ); lastTap.t = 0; }
     else { lastTap = {t: now, x: sx, y: sy}; tapAt(sx, sy); } }
   if (touches.size === 0) tg = null; else if (touches.size === 1) { const [a] = [...touches.values()]; tg = {mode: 'one', x0: a.sx, y0: a.sy, t0: 0, moved: true, cx, cy}; } }
 addEventListener('pointercancel', e => { touches.delete(e.pointerId); if (!touches.size) tg = null; drag = null; mouseDown = false; });
@@ -1521,7 +1550,7 @@ addEventListener('keydown', e => {
   if (e.repeat) return;
   const onBtn = ae && ae !== cv && /^(BUTTON|A)$/.test(ae.tagName);
   if (kk === 'e' || (kk === 'Enter' && !onBtn)) { e.preventDefault(); interact(); }
-  if (kk === 't') talk(nearestTalker()); if (kk === 'f') toggleParty(); if (kk === 'r') toggleBike();
+  if (kk === 't') talk(nearestTalker()); if (kk === 'f') { if (SIS && (SIS.follow || Math.hypot(SIS.i - player.i, SIS.j - player.j) < 1.6)) toggleSister(); else toggleParty(); } if (kk === 'g') hug(); if (kk === 'r') toggleBike();
   if (kk === '-' || kk === '_') zoomStep(-1); if (kk === '=' || kk === '+') zoomStep(1); if (kk === '0') setZoom(fitZ);
   if (kk === '[') rotate(-1); if (kk === ']') rotate(1); if (kk === 'c') recenter(); if (kk === 'm') cycleMouse(); if (kk === 'p') setPhoto(true); if (kk === 'q') toggleQuest(); if (kk === 'k') toggleCtl();
   if (kk === '?' || kk === 'h') showHint(true);
@@ -1618,8 +1647,8 @@ $('#ctlBtn').addEventListener('click', toggleCtl);
 $('#questChip').addEventListener('click', () => { if (!quest.active) return; const d = BY[QUEST[quest.idx]].door; if (fitMode) setZoom(fitZ * 2); walkTo(player, d[0], d[1], () => openModal(BY[QUEST[quest.idx]].i)); });
 let hintTimer = null;
 function showHint(force) { const h = $('#hint');
-  h.innerHTML = coarse ? 'TAP to walk · TAP people &amp; buildings · DRAG to pan · PINCH to zoom · TWIST to rotate · DOUBLE-TAP to zoom · HOLD to walk there'
-    : '<kbd>↑↓←→</kbd>/<kbd>WASD</kbd> walk · <kbd>E</kbd> enter · <kbd>T</kbd> talk · <kbd>F</kbd> party · <kbd>R</kbd> bike · CLICK to walk · DRAG / right-drag to pan · WHEEL to zoom · <kbd>[</kbd><kbd>]</kbd> rotate · <kbd>M</kbd> mouse mode · <kbd>C</kbd> recenter · <kbd>P</kbd> photo · <kbd>K</kbd> show/hide buttons';
+  h.innerHTML = coarse ? 'TAP Sakshi to bring her along · DOUBLE-TAP her to hug · TAP to walk · TAP people &amp; buildings · DRAG to pan · PINCH to zoom · TWIST to rotate · DOUBLE-TAP to zoom · HOLD to walk there'
+    : '<kbd>↑↓←→</kbd>/<kbd>WASD</kbd> walk · <kbd>E</kbd> enter · <kbd>T</kbd> talk · <kbd>F</kbd> party · <kbd>R</kbd> bike · CLICK to walk · DRAG / right-drag to pan · WHEEL to zoom · <kbd>[</kbd><kbd>]</kbd> rotate · <kbd>M</kbd> mouse mode · <kbd>C</kbd> recenter · <kbd>P</kbd> photo · <kbd>K</kbd> show/hide buttons · click Sakshi to bring her along, double-click to hug (<kbd>G</kbd>)';
   h.classList.remove('off'); clearTimeout(hintTimer); hintTimer = setTimeout(() => h.classList.add('off'), force ? 9000 : 7000); }
 
 /* ---------- dialogs ---------- */
@@ -1660,9 +1689,9 @@ $('#mLike').addEventListener('click', () => { const b = B[cur]; if (likes.has(b.
 $('#mScene').addEventListener('pointerdown', e => { const r = e.currentTarget.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 200; const ex = inside.exhibits[inside.near]; if (ex && Math.abs(x - ex.x) < 9) { useExhibit(); return; } inside.tx = Math.max(10, Math.min(186, x - 8)); });
 function useExhibit() { const ex = inside.exhibits[inside.near]; if (!ex) return beep(180, .05); if (ex.clap) { clapEcho(); return; } beep(990, .05); }
 function clapEcho() { unlock('clap'); $('#mExhibit').innerHTML = '<b>👏 CLAP!</b> ...clap... ..clap.. .clap. (heard all the way up at the Bala Hissar)'; if (sfx) { [0, 380, 720, 1000].forEach((t, q) => setTimeout(() => { try { const a = AC(), s = a.createBufferSource(), gn = a.createGain(); s.buffer = noiseBuf(a, .08); gn.gain.value = .25 / (q + 1); s.connect(gn).connect(a.destination); s.start(); } catch (er) {} }, t)); } }
-const WALL = {agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
+const WALL = {agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', sakshi: '#ffe3ef', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
 const sctx = $('#mScene').getContext('2d');
-const MOMPS = makeSprite(FRIENDS.find(f => f.name === 'Mom')), DADPS = makeSprite(FRIENDS.find(f => f.name === 'Dad'));
+const SISPS = makeSprite(FRIENDS.find(f => f.sister)), MOMPS = makeSprite(FRIENDS.find(f => f.name === 'Mom')), DADPS = makeSprite(FRIENDS.find(f => f.name === 'Dad'));
 function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransform(1, 0, 0, 1, 0, 0); g.imageSmoothingEnabled = false; const t = T, Wd = 200, F = 54, k2 = b.kind;
   // walk inside
   let dx = 0; if (inKeys.l) dx -= 1; if (inKeys.r) dx += 1; if (dx) inside.tx = null;
@@ -1696,6 +1725,7 @@ function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransf
   if (k2 === 'pitch') { for (let n = 0; n < 8; n++) { R(30 + n * 18, 10, 14, 36, '#4f6b8a'); R(40 + n * 18, 26, 2, 3, '#c9d3df'); } }
   if (k2 === 'lot') { R(70, 20, 60, 24, '#151515'); R(72, 22, 56, 20, '#f2d14b'); TX('FOR LEASE', 78, 24, '#151515'); TX('YOUR IDEA', 78, 33, '#151515'); }
   if (k2 === 'grove') gtrees.slice(-8).forEach((tr, n) => { const tx = 40 + n * 18, c = TREECOL[Math.floor(tr.seed * TREECOL.length)]; R(tx, F - 14, 3, 14, '#7a4f2e'); R(tx - 6, F - 30, 15, 17, c); });
+  if (k2 === 'sakshi') { R(30, 30, 46, 14, '#ff9ec7'); R(30, 26, 46, 6, '#ffd9e8'); R(32, 22, 10, 8, '#ffffff'); R(124, 10, 36, 26, '#ffffff'); R(126, 12, 32, 22, '#ffd0e4'); pix(HEART, 138, 18, {x: '#e2474b'}); for (let n = 0; n < 16; n++) R(10 + n * 12, 4 + (n % 2) * 2, 2, 2, Math.floor(T / 300 + n) % 2 ? '#ffd34f' : '#ff7eb6'); R(88, 36, 10, 12, '#c58a4a'); disc(93, 32, 5, '#c58a4a'); R(91, 31, 1, 1, '#151515'); R(95, 31, 1, 1, '#151515'); pix(SISPS.idle, 108, F - 28, SISPS.pal, true, 2); }
   if (k2 === 'home') { pix(MOMPS.idle, 96, F - 28, MOMPS.pal, false, 2); pix(DADPS.idle, 116, F - 28, DADPS.pal, true, 2); R(40, 34, 50, 12, '#7b5cc6'); R(40, 30, 50, 6, '#8c70d4'); R(120, 14, 40, 26, '#151515'); R(122, 16, 36, 22, nightT > .5 ? '#2a3a66' : '#3a6a9a'); TX('FOOTBALL', 124, 22, '#ffffff'); R(150, 44, 20, 10, '#c58a4a'); }
   if (!outdoor && !['charminar', 'hq', 'golconda'].includes(k2)) { R(8, 10, 22, 18, nightT > .5 ? '#1a1240' : '#86c1ef'); R(18, 10, 1, 18, '#fff'); R(8, 18, 22, 1, '#fff'); }
   inside.exhibits.forEach((e, q) => { const on = q === inside.near; R(e.x - 3, F - 10, 7, 10, on ? '#f2d14b' : '#c9d3df'); R(e.x - 4, F - 11, 9, 2, '#151515'); TX(String(q + 1), e.x - 1, F - 9, '#151515');
