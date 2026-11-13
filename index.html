@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Hyderabad · Yash Sharma</title>
+<title>Hyderabad · Yash Sharma v4</title>
 <meta name="description" content="Yash Sharma, Data Engineer at Deloitte (AI & Data), Hyderabad. A living isometric pixel Hyderabad built out of his career.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -267,6 +267,7 @@ body.noctl .ctrl,body.noctl .pad,body.noctl .acts{display:none!important}
     <div class="brand"><b>HYDERABAD</b><small>Yash Sharma · Data Engineer · AI &amp; Data @ Deloitte</small></div>
     <div class="barbtns">
       <button class="ib" id="timeBtn" title="Time of day (cycle / real clock / day / night)">🕗 <span id="clock">12:00</span></button>
+      <button class="ib" id="dnBtn" title="Switch day / night">☀<span class="lbl"> DAY</span></button>
       <button class="ib" id="rainBtn" title="Season">☀ <span class="lbl" id="rainLbl">SUMMER</span></button>
       <button class="ib" id="sfxBtn" aria-pressed="false" title="Sound effects">🔈<span class="lbl"> SFX</span></button>
       <button class="ib" id="musicBtn" aria-pressed="false" title="Chiptune music">♫<span class="lbl"> MUSIC</span></button>
@@ -409,11 +410,11 @@ const CONFIG = {
    hair: short | spiky | long | buzz    acc: none | shades | cap | headphones
    home: a place id (see B below) or 'chai' */
 const FRIENDS = [
-  {name:'Suryansh', hair:'spiky', hairColor:'#1b1b1b', skin:'#c68a5e', shirt:'#2f80ed', pants:'#1f2a44', acc:'none',       home:'pitch', roam:true, lines:['Five-a-side tonight?', 'Try the shootout. I dare you.', 'Biryani after the match?']},
-  {name:'Yashana',  hair:'long',  hairColor:'#2a1810', skin:'#d9a27a', shirt:'#e85d9a', pants:'#2f3b55', acc:'none',       home:'deloitte', roam:true, lines:['SQL generation is done. Your turn.', 'Standup in 5. Chai first.', 'Meet you on the skybridge.']},
-  {name:'Rashi',    hair:'long',  hairColor:'#4a2c18', skin:'#e0b08a', shirt:'#f2b632', pants:'#6b4a2a', acc:'shades',     home:'kc', roam:true, lines:['Lunch at Knowledge City?', 'KFC or burritos? Decide.', 'This city looks good at night.']},
-  {name:'Mitali',   hair:'long',  hairColor:'#1b1b1b', skin:'#c98a62', shirt:'#7b5cc6', pants:'#1f2a44', acc:'none',       home:'lab', roam:true, lines:['Rules extracted. Over to your mapping agent.', 'Did you push the fix?', 'Demo is recorded. Ship it.']},
-  {name:'Sujal',    hair:'short', hairColor:'#2a2a2a', skin:'#b97c52', shirt:'#27ae60', pants:'#151515', acc:'headphones', home:'cyber', roam:true, lines:['Metro or bike?', 'Cyber Towers at night hits different.', 'LoRA or full fine-tune? Fight me.']},
+  {name:'Suryansh', hair:'spiky', hairColor:'#1b1b1b', skin:'#c68a5e', shirt:'#2f80ed', pants:'#1f2a44', acc:'none',       home:'pizza', roam:true, lines:['Pizza? Pizza. New York Slice, now.', 'Five-a-side tonight?', 'Extra cheese or nothing.']},
+  {name:'Yashana',  hair:'long',  hairColor:'#2a1810', skin:'#d9a27a', shirt:'#e85d9a', pants:'#2f3b55', acc:'none',       home:'fhub', roam:true, lines:['SQL generation is done. Your turn.', 'Standup in 5. Chai first.', 'Meet you on the skybridge.']},
+  {name:'Rashi',    hair:'long',  hairColor:'#4a2c18', skin:'#e0b08a', shirt:'#f2b632', pants:'#6b4a2a', acc:'shades',     home:'fhub', roam:true, lines:['Lunch at Knowledge City?', 'KFC or burritos? Decide.', 'This city looks good at night.']},
+  {name:'Mitali',   hair:'long',  hairColor:'#1b1b1b', skin:'#c98a62', shirt:'#7b5cc6', pants:'#1f2a44', acc:'none',       home:'fhub', roam:true, lines:['Rules extracted. Over to your mapping agent.', 'Did you push the fix?', 'Demo is recorded. Ship it.']},
+  {name:'Sujal',    hair:'short', hairColor:'#2a2a2a', skin:'#b97c52', shirt:'#27ae60', pants:'#151515', acc:'headphones', home:'fhub', roam:true, lines:['Metro or bike?', 'Cyber Towers at night hits different.', 'LoRA or full fine-tune? Fight me.']},
   {name:'Sakshi',   hair:'long',  hairColor:'#3a2214', skin:'#e0b08a', shirt:'#ff7eb6', pants:'#7b5cc6', acc:'none',       home:'sakshi', sister:true, pos:[30.7, 28.6], lines:['Bhaiya! Take me and Bruno along?', 'Tap me to come along, tap again and I go home.', 'Double-tap for a hug!', 'Chai at Irani cafe? You are paying.']},
   {name:'Mom',      hair:'long',  hairColor:'#2a1a12', skin:'#d29a6c', shirt:'#c2185b', pants:'#c2185b', acc:'none',       home:'home', stationary:true, pos:[36.2, 28.75], parent:true, lines:['Beta, did you eat?', 'Take Bruno for a walk, he is waiting.', 'Call more often!', 'Wear a jacket, it is cold.']},
   {name:'Dad',      hair:'short', hairColor:'#6a6a6a', skin:'#c68a5e', shirt:'#e8dcc0', pants:'#3a3a3a', acc:'none',       home:'home', stationary:true, pos:[37.65, 28.75], parent:true, lines:['How is work at Deloitte?', 'Drive carefully, beta.', 'Proud of you.', 'Check the car tyres this weekend.']},
@@ -460,24 +461,26 @@ const B = [
   floors:[{role:'Offices',when:'',bullets:['A cluster of glass office towers, one of Hyderabad\'s newest work hubs.','A skybridge links two of the towers.']},
           {role:'Food court',when:'',bullets:['McD for the quick lunch.','KFC for the bucket runs.','California Burrito for the big burrito orders.']}],
   tags:['Landmark','Offices','Food']},
- {id:'cortexa',kind:'cortexa',short:'CORTEXA',name:'CORTEXA Innovations',years:'2025 – 2026',where:'Hyderabad',type:'work',at:[35,6,3,4],h:104,
+ {id:'cortexa',kind:'cortexa',short:'TEKFRAMEWORKS',name:'TekFrameworks',years:'2025 – 2026',where:'Hyderabad',type:'work',at:[35,6,3,4],h:104,
   quote:'Three floors in one year: from measuring AI\'s carbon to adapting LLMs to pharma.',
   floors:[{role:'AI Intern',when:'Jan – May 2026 · On-site',start:202601,bullets:['Designed and built the FoRMLM architecture: a scalable pipeline that turns complex pharma and regulatory data into LLM-ready datasets.','Led end-to-end data engineering in Python: source identification, validation and large-scale extraction.','Benchmarked Base vs DAPT vs DAPT + LoRA models with standardised pipelines and perplexity metrics.']},
           {role:'AI Infrastructure Intern',when:'Aug 2025 – Jan 2026 · Remote',start:202508,bullets:['Ran novelty analysis across multiple LLMs to surface unique, high-value insights in analyst reports.','Benchmarked how well models detect novel patterns, improving analytical accuracy.','Applied the findings inside the SparLM framework for report analysis.']},
           {role:'Research Intern 3',when:'Jun – Aug 2025 · On-site',start:202506,bullets:['Built Python tools on AWS to track model efficiency, CPU/GPU use and energy (with CodeCarbon) for GenAI workloads.','Contributed to frameworks that pair AI performance metrics with ESG benchmarks for responsible AI.']}],
   tags:['DAPT','LoRA','LLM evaluation','AWS','CodeCarbon','Green AI']},
- {id:'codewatch',kind:'codewatch',short:'CODEWATCH',name:'CodeWatch',years:'Project',where:'Side project',type:'project',at:[35,1,4,3],h:34,
-  quote:'A small language model that hunts bugs in C.',
-  floors:[{role:'Builder',when:'Side project',bullets:['Fine-tuned StarCoder2-3B with LoRA for C bug detection.','Shipped it as a CLI tool, a VS Code extension and a Hugging Face demo.','Wrote up the approach as a paper outline.']}],
-  tags:['SLM','StarCoder2','LoRA','VS Code','Hugging Face']},
- {id:'ecosense',kind:'eco',short:'ECOSENSE',name:'EcoSense',years:'Project',where:'Open source',type:'project',at:[1,19,3,3],h:44,
-  quote:'How much power, water and carbon does one AI chat cost?',
-  floors:[{role:'Builder',when:'Side project',bullets:['An open-source calculator estimating the electricity, water and carbon cost of AI interactions.','Backed by a detailed methodology write-up.']}],
-  tags:['Green AI','Sustainability'],links:[['OPEN ECOSENSE ↗','https://yasharm4x.github.io/EcoSense/']]},
- {id:'edi',kind:'edi',short:'DOC INTEL',name:'Enterprise Document Intelligence',years:'Project',where:'Portfolio build',type:'project',at:[5,19,4,3],h:36,
-  quote:'A production-grade RAG platform, designed properly before it gets built.',
-  floors:[{role:'Architect & builder',when:'In progress',bullets:['Designed a production-oriented RAG system: architecture diagrams, cost breakdowns in INR and a 14-slide design deck.','Core implementation underway.']}],
-  tags:['RAG','System design','Cost modelling']},
+ {id:'hub',kind:'hub',short:'INNOVATION HUB',name:'The Innovation Hub',years:'Side projects',where:'Where the side projects live',type:'project',at:[35.3,0.4,3.4,3.4],h:126,doorSide:'j',door:[37,4.4],
+  quote:'One spiral tower, every side project on its own floor.',
+  floors:[{role:'CodeWatch',when:'Floor 3 · SLM for C bugs',bullets:['Fine-tuned StarCoder2-3B with LoRA for C bug detection.','Shipped it as a CLI tool, a VS Code extension and a Hugging Face demo.']},
+          {role:'EcoSense',when:'Floor 2 · Green AI',bullets:['An open-source calculator for the electricity, water and carbon cost of AI interactions.','Backed by a detailed methodology write-up.']},
+          {role:'Enterprise Document Intelligence',when:'Floor 1 · RAG platform',bullets:['A production-oriented RAG system with architecture diagrams, INR cost breakdowns and a 14-slide design deck.','Core implementation underway.']}],
+  tags:['SLM','LoRA','Green AI','RAG','System design'],links:[['OPEN ECOSENSE ↗','https://yasharm4x.github.io/EcoSense/']]},
+ {id:'pizza',kind:'pizza',short:'NEW YORK SLICE',name:'New York Slice',years:'Pizza',where:'Next to Knowledge City',type:'place',at:[13.4,1.2,6.4,3.6],h:20,door:[16.6,5.3],
+  quote:'Big slices, bigger arguments about toppings. Suryansh\'s favourite place.',
+  floors:[{role:'On the menu',when:'',bullets:['Giant New York style slices.','Suryansh always ends up here after a walk.','Outdoor tables for the after-work crowd.']}],tags:['Food','Pizza']},
+ {id:'shawarma',kind:'shawarma',short:'SHAWARMA',name:'Shawarma Point',years:'Late-night food',where:'HITEC City',type:'place',at:[48.9,0.4,2.7,2.4],h:16,door:[50.2,3.4],
+  quote:'The spit never stops turning.',floors:[{role:'On the menu',when:'',bullets:['Chicken shawarma rolls, extra garlic.','The post-office-hours queue starts at 7 pm.']}],tags:['Food']},
+ {id:'fhub',kind:'fhub',short:'FRIENDS HUB',name:'Friends Hub',years:'The squad',where:'Where the gang lives',type:'place',at:[1.5,16.2,6,4.8],h:56,door:[4.5,21.5],
+  quote:'A purple apartment block, one big orange couch, and too many inside jokes.',
+  floors:[{role:'Residents',when:'',bullets:['Yashana, Mitali, Rashi and Sujal live here.','Suryansh visits, then wanders off for pizza.','They head out in different directions and always come back here.']}],tags:['Friends']},
  {id:'deloitte',kind:'hq',short:'DELOITTE',name:'Deloitte',years:'Sep 2026 – now',where:'Hyderabad · On-site',type:'work',at:[13,17,7,3],h:150,door:[16.5,20.6],
   quote:'Two glass towers, one skybridge, and the next chapter.',
   floors:[{role:'Data Engineer I · AI & Data',when:'Sep 2026 – Present',start:202609,bullets:['Building GenAI agents and data engineering solutions in the AI & Data practice.','Project details stay inside the building.']}],
@@ -519,18 +522,29 @@ const B = [
   quote:'Home. Bruno runs this place.',
   floors:[{role:'Residents',when:'',bullets:['A three-floor villa. Mom and Dad usually wait by the door.','Three cars in the carport: red, orange and green.','Yash Sharma, Data Engineer.','Bruno, Head of Security and Snacks.']}],tags:[]}
 ];
-const OFFMAP = [{id:'muj',kind:'muj',short:'MUJ',name:'Manipal University Jaipur',years:'2022 – 2026',where:'Jaipur',type:'school',at:[25,5,6,5],h:38,
+const PROJECTS = [{id:'codewatch',kind:'codewatch',short:'CODEWATCH',name:'CodeWatch',years:'Project',where:'Side project',type:'project',at:[35,1,4,3],h:34,
+  quote:'A small language model that hunts bugs in C.',
+  floors:[{role:'Builder',when:'Side project',bullets:['Fine-tuned StarCoder2-3B with LoRA for C bug detection.','Shipped it as a CLI tool, a VS Code extension and a Hugging Face demo.','Wrote up the approach as a paper outline.']}],
+  tags:['SLM','StarCoder2','LoRA','VS Code','Hugging Face']},
+ {id:'ecosense',kind:'eco',short:'ECOSENSE',name:'EcoSense',years:'Project',where:'Open source',type:'project',at:[1,19,3,3],h:44,
+  quote:'How much power, water and carbon does one AI chat cost?',
+  floors:[{role:'Builder',when:'Side project',bullets:['An open-source calculator estimating the electricity, water and carbon cost of AI interactions.','Backed by a detailed methodology write-up.']}],
+  tags:['Green AI','Sustainability'],links:[['OPEN ECOSENSE ↗','https://yasharm4x.github.io/EcoSense/']]},
+ {id:'edi',kind:'edi',short:'DOC INTEL',name:'Enterprise Document Intelligence',years:'Project',where:'Portfolio build',type:'project',at:[5,19,4,3],h:36,
+  quote:'A production-grade RAG platform, designed properly before it gets built.',
+  floors:[{role:'Architect & builder',when:'In progress',bullets:['Designed a production-oriented RAG system: architecture diagrams, cost breakdowns in INR and a 14-slide design deck.','Core implementation underway.']}],
+  tags:['RAG','System design','Cost modelling']}];
+const OFFMAP = [...PROJECTS, {id:'muj',kind:'muj',short:'MUJ',name:'Manipal University Jaipur',years:'2022 – 2026',where:'Jaipur',type:'school',at:[25,5,6,5],h:38,
   quote:'A B.Tech in Data Science, plus two years helping 1,000+ classmates get hired.',
   floors:[{role:'Student Placement Coordinator',when:'Feb 2024 – Feb 2026',start:202402,bullets:['Coordinated campus placements for 1,000+ students.']},
           {role:'B.Tech, Data Science & Engineering',when:'Class of 2026',start:202208,edu:true,bullets:['Landed a Pre-Placement Offer from Deloitte through campus recruitment.']}],
   tags:['Data science','Placements','Leadership']}];
-const NPC_LINES = {kc:'Lunch rush at the food court. Pick a queue.', agva:'They printed prosthetic parts here. Cheap ones.', insofe:'Sensors, neural nets, reflexes. Big summer.', unitedway:'The kids still ask about the robots.',
+const NPC_LINES = {hub:'Every floor is a side project. Take the spiral up.', pizza:'Suryansh already ordered. Large, extra cheese.', shawarma:'One roll or two? Nobody stops at one.', fhub:'Couch is free. Grab a seat, someone is always here.', kc:'Lunch rush at the food court. Pick a queue.', agva:'They printed prosthetic parts here. Cheap ones.', insofe:'Sensors, neural nets, reflexes. Big summer.', unitedway:'The kids still ask about the robots.',
   databeat:'He came back for a second floor.', anova:'Sponsors, socials, community. All three.',
-  cortexa:'Floor 3 is where the LLMs live.', codewatch:'Mind your step. Bugs get squashed here.', ecosense:'Every prompt has a carbon cost.',
-  edi:'Designed first. Then built properly.', deloitte:'Badge in. The skybridge is the shortcut.', lab:'Small tools, big reuse.',
+  cortexa:'Floor 3 is where the LLMs live.',  deloitte:'Badge in. The skybridge is the shortcut.', lab:'Small tools, big reuse.',
   cyber:'This round building started it all.', golconda:'Go on, clap. Someone up top will hear.', birla:'Shoes off, phone on silent.'};
 const QUEST = ['agva', 'insofe', 'unitedway', 'databeat', 'anova', 'cortexa', 'deloitte'];
-const TOUR = ['agva', 'insofe', 'unitedway', 'databeat', 'anova', 'cortexa', 'deloitte', 'lab', 'kc', 'codewatch', 'ecosense', 'edi', 'hyd', 'lake', 'cyber', 'cable', 'golconda', 'birla', 'pitch', 'home'];
+const TOUR = ['agva', 'insofe', 'unitedway', 'databeat', 'anova', 'cortexa', 'deloitte', 'lab', 'kc', 'hub', 'pizza', 'fhub', 'shawarma', 'hyd', 'lake', 'cyber', 'cable', 'golconda', 'birla', 'pitch', 'home'];
 const LANDMARKS = ['hyd', 'lake', 'cyber', 'golconda', 'birla', 'cable'];
 const BY = Object.fromEntries(B.map((b, i) => { b.i = i; return [b.id, b]; }));
 B.forEach(b => { const [i, j, w, d] = b.at; if (!b.door) b.door = b.doorSide === 'i' ? [i + w + .5, j + d / 2] : [i + w / 2, j + d + .5]; });
@@ -559,7 +573,7 @@ const walk = (i, j) => i >= 0 && j >= 0 && i < MW && j < MH && !solid[Math.floor
 const canStand = (i, j) => walk(i - .2, j - .2) && walk(i + .2, j - .2) && walk(i - .2, j + .2) && walk(i + .2, j + .2);
 
 const STATIONS = [{name: 'AMEERPET', i: 4}, {name: 'MADHAPUR', i: 16.5}, {name: 'CHARMINAR', i: 27.5}, {name: 'LAKESIDE', i: 36.5}, {name: 'HITEC CITY', i: 47}];
-const STATION_NEAR = ['Agva · INSOFE · Birla Mandir', 'Deloitte · DataBeat · AI Lab', 'Charminar · Knowledge City · Empty lot', 'Hussain Sagar · CORTEXA · Home', 'Cyber Towers · Cable Bridge · Golconda'];
+const STATION_NEAR = ['Agva · INSOFE · Birla Mandir', 'Deloitte · New York Slice · Friends Hub', 'Charminar · Knowledge City · Empty lot', 'Hussain Sagar · TekFrameworks · Home', 'Cyber Towers · Cable Bridge · Golconda'];
 STATIONS.forEach(s => { s.stair = [s.i + 1.6, 14.5]; s.wait = [s.i + .4, 14.55]; block(s.i + 1.1, 14, s.i + 2.1, 15); });
 const CHAI = {i: 30.1, j: 21.2}; block(29.6, 20.8, 30.6, 21.6);
 const DOGHOUSE = {i: 35.5, j: 28.4}; block(35, 28, 36, 29);
@@ -747,6 +761,41 @@ const PAINT = {
     box(hx + .05, hj + .05, .3, .3, 34, 6, {L: '#3f9a45', R: '#2f7a35', T: '#5cb85c'}); box(hx + hw - .35, hj + hd - .3, .25, .25, 34, 5, {L: '#3f9a45', R: '#2f7a35', T: '#5cb85c'});
     stampL(hx, hj, hw, hd, 0, 34, 13, DOOR(13), {d: '#2a2a2a', g: '#c98f3d', k: '#6b4a2a'}); };
   byDepth([[car(j + .08, '#e2474b'), i + 3.55, j + .33], [car(j + .72, '#ff8a3d'), i + 3.55, j + .97], [car(j + 1.36, '#27ae60'), i + 3.55, j + 1.61], [villa, hx + hw / 2, hj + hd / 2]]); },
+ hub(b) { const [i, j, w, d] = b.at, h = b.h, ci = i + w / 2, cj = j + d / 2, r0 = 1.55;
+  box(i, j, w, d, 0, 4, {L: '#cfd6dc', R: '#aab3bc', T: '#e3e8ec'});
+  const c = P(ci, cj, 4), R0 = r0 * 16 * Math.SQRT2;
+  for (let v = 0; v < h; v++) { const k = 1 - .38 * v / h, rx = Math.round(R0 * k), ry = rx / 2;
+    for (let x = -rx; x <= rx; x++) { const t = x / Math.max(1, rx), sq = Math.sqrt(Math.max(0, 1 - t * t)), y = c.y - v + Math.round(ry * sq), ang = Math.asin(t);
+      const ph = ((ang / (2 * Math.PI) + v / 46) % 1 + 1) % 1, band = ph < .3, floor = v % 9 === 0;
+      let col = band ? mix('#5fd0e8', '#1f6f96', (t + 1) / 2) : mix('#ffffff', '#b9c4cf', (t + 1) / 2); if (floor && !band) col = mix('#dfe5ea', '#8f9aa5', (t + 1) / 2);
+      if (band && NIGHTMODE) col = hs(x * 3.1 + v * 7.7) < .55 ? '#9ff0ff' : '#ffe9a8'; else col = nc(col);
+      if (band && ph > .27) col = nc('#ffffff');
+      g.fillStyle = col; g.fillRect(c.x + x, y, 1, 2); } }
+  const kt = 1 - .38, rx = Math.round(R0 * kt), ry = rx / 2, ty = c.y - h;
+  for (let x = -rx; x <= rx; x++) { const t = x / rx, sq = Math.sqrt(Math.max(0, 1 - t * t)); g.fillStyle = nc('#eef3f6'); g.fillRect(c.x + x, ty - Math.round(ry * sq), 1, Math.round(ry * sq) * 2 + 1); }
+  disc(c.x, ty, 6, nc('#5cb85c')); disc(c.x - 3, ty - 1, 3, nc('#3f9a45')); g.fillStyle = nc('#c9d3df'); g.fillRect(c.x, ty - 26, 1, 24); g.fillStyle = '#ff4d4d'; g.fillRect(c.x - 1, ty - 27, 3, 2); },
+ pizza(b) { const [i, j] = b.at, w = 6.4, d = 2.6, h = 18;
+  box(i, j, w, d, 0, h, {L: '#b8432f', R: '#94351f', T: '#c9553f', stripe: [5, '#a63c28'], wl: win({px: 12, w: 9, py: 30, h: 8, m: 3, ox: 4, glass: '#ffe0a0', lit: 1, litc: '#ffd36a'}), wr: win({px: 10, w: 6, py: 30, h: 8, m: 3, glass: '#ffe0a0', lit: 1})}, 721);
+  box(i - .05, j - .05, w + .1, d + .1, h, 3, {L: '#2a2a2a', R: '#1f1f1f', T: '#3a3a3a'});
+  for (let k = 0; k < 16; k++) stampL(i, j, w, d, 0, 3 + k * 6, 14, ['xxxxxx', 'xxxxxx', '.xxxx.'], {x: k % 2 ? '#ffffff' : '#2e7d32'});
+  stampL(i, j, w, d, 0, 46, 11, DOOR(11), {d: '#151515', g: '#ffe0a0', k: '#5a2a1a'});
+  for (let k = 0; k < 3; k++) { const ti = i + .6 + k * 2.1; box(ti, j + 2.85, .5, .5, 0, 3, {L: '#ffffff', R: '#ddd', T: '#ffffff'}); box(ti + .22, j + 3.07, .06, .06, 3, 8, {L: '#777', R: '#555', T: '#777'}); hip(ti - .15, j + 2.7, .8, .8, 11, 2, {L: k % 2 ? '#2e7d32' : '#d62d20', R: k % 2 ? '#256a2a' : '#b5241a', T: k % 2 ? '#3fa045' : '#e84a3a'}, 1); }
+  const p = P(i + w / 2, j + d / 2, h + 3), S = ['xxxxxxxxxxxxxxxxxxxxx', '.ycccyccycccccyccccy.', '..ycpcccccccpccccy..', '...ycccccpcccccy...', '....yccpcccccpy....', '.....ycccccccy.....', '......yccpccy......', '.......yccccy.......', '........ycy........', '.........y.........'];
+  g.fillStyle = nc('#555'); g.fillRect(p.x - 1, p.y - 8, 2, 8); pix(S, p.x - 20, p.y - 30, {x: '#c98a3a', y: '#e8a23a', c: '#ffd34f', p: '#d62d20'}, false, 2); },
+ shawarma(b) { const [i, j, w, d] = b.at, h = b.h;
+  box(i, j, w, d, 0, h, {L: '#f6efe2', R: '#ddd2bd', T: '#efe6d4', wl: win({px: 20, w: 14, py: 30, h: 8, m: 3, ox: 4, glass: '#ffe9b8', lit: 1, litc: '#ffd36a'}), wr: win({px: 10, w: 6, py: 30, h: 6, m: 4, glass: '#ffe9b8'})}, 741);
+  box(i - .08, j - .08, w + .16, d + .16, h, 3, {L: '#2e7d32', R: '#256a2a', T: '#3fa045'});
+  for (let k = 0; k < 9; k++) stampL(i, j, w, d, 0, 2 + k * 5, 12, ['xxxx', 'xxxx', '.xx.'], {x: k % 2 ? '#ffffff' : '#2e7d32'});
+  stampL(i, j, w, d, 0, 8, 10, ['..aa..', '.aaaa.', '.abba.', 'aabbaa', 'aaaaaa', 'abbaab', '.aaaa.', '..aa..', '..gg..', '..gg..'], {a: '#c98a3a', b: '#8a4a1a', g: '#888'}); },
+ fhub(b) { const [i, j, w, D] = b.at, d = D - .9, h = b.h, W2 = win({px: 9, w: 6, py: 12, h: 7, m: 14, ox: 4, glass: '#2a1840', lit: .8, litc: '#ffd36a', top: 4});
+  box(i, j, w, d, 0, 12, {L: '#5a2f8a', R: '#48246f', T: '#6a3a9a', wl: win({px: 14, w: 11, py: 30, h: 7, m: 3, ox: 4, glass: '#ffd9a0', lit: 1, litc: '#ffd36a'}), wr: win({px: 14, w: 11, py: 30, h: 7, m: 3, glass: '#ffd9a0', lit: 1})}, 761);
+  for (let f = 0; f < 3; f++) box(i + .1, j + .1, w - .2, d - .2, 23 + f * 12, 2, {L: '#f2d14b', R: '#d4b437', T: '#f2d14b'});
+  box(i + .2, j + .2, w - .4, d - .4, 12, h - 12, {L: '#8a56c4', R: '#6f42a6', T: '#9d6ad6', wl: W2, wr: W2}, 781);
+  box(i + .05, j + .05, w - .1, d - .1, h, 3, {L: '#3a1f5c', R: '#2e184a', T: '#4a2a72'});
+  for (let k = 0; k < 10; k++) { const q = P(i + .4 + k * .55, j + .4, h + 3); g.fillStyle = nc(['#ff4d4d', '#ffd34f', '#4fa8ff', '#6be04f'][k % 4]); g.fillRect(q.x, q.y - 4, 2, 2); }
+  stampL(i, j, w, d, 0, 40, 11, Array.from({length: 11}, (_, r) => r === 0 ? 'yyyyyyyyyy' : 'ydddddddy.'.replace('.', 'y')), {y: '#f2d14b', d: '#5a3a1a'});
+  box(i + 1, j + d + .2, 1.6, .5, 0, 3, {L: '#e07a3e', R: '#c0612c', T: '#e88a52'}); box(i + 1, j + d + .5, 1.6, .2, 3, 3, {L: '#e07a3e', R: '#c0612c', T: '#e88a52'});
+  box(i + .95, j + d + .2, .12, .5, 3, 2, {L: '#c0612c', R: '#a04f22', T: '#e88a52'}); box(i + 2.53, j + d + .2, .12, .5, 3, 2, {L: '#c0612c', R: '#a04f22', T: '#e88a52'}); },
  sakshi(b) { const [i, j, w, d] = b.at, h = 14, wall = {L: '#ffc9df', R: '#f4a9c8', T: '#ffd9e8'};
   box(i - .05, j - .05, w + .1, d + .1, 0, 2, {L: '#ffffff', R: '#e6e0e8', T: '#fff6fa'}); box(i, j, w, d, 2, h, wall, 701); box(i - .02, j - .02, w + .04, d + .04, 2 + h - 2, 2, {L: '#ffffff', R: '#ece6ee', T: '#ffffff'});
   hip(i - .12, j - .12, w + .24, d + .24, 2 + h, 6, {L: '#a77be0', R: '#8a5fc4', T: '#b98ff0'}, 2);
@@ -1016,7 +1065,7 @@ const keys = {u: false, d: false, l: false, r: false};
 const trail = [];
 const dog = {i: player.i - .6, j: player.j, flip: false, moving: false, say: '', until: 0, li: 0};
 const homeOf = id => id === 'chai' ? [CHAI.i + .2, 22.4] : (BY[id] ? BY[id].door : home);
-const ROAM = ['pitch', 'deloitte', 'kc', 'lab', 'cyber', 'hyd', 'lake', 'grove', 'lot', 'cable', 'databeat', 'cortexa', 'home'];
+const ROAM = ['pitch', 'deloitte', 'kc', 'cyber', 'hyd', 'lake', 'grove', 'cable', 'databeat', 'cortexa', 'hub', 'pizza', 'shawarma', 'birla', 'agva', 'golconda', 'fhub'];
 const friends = FRIENDS.map((f, n) => { const h = f.pos || homeOf(f.home); return {...f, ps: makeSprite(f), i: f.pos ? h[0] : h[0] + (n % 2 ? .9 : -.9), j: f.pos ? h[1] : h[1] + .2, flip: !!(f.pos && n % 2), path: null, wait: 1 + n, dist: 0, say: '', until: 0, li: 0, party: false, back: false}; });
 friends.forEach(f => { if (!f.pos && !canStand(f.i, f.j)) { const h = homeOf(f.home); f.i = h[0]; f.j = h[1]; } });
 let party = [];
@@ -1123,7 +1172,7 @@ function update(dt) {
   else if (SET.time === 'live') { const d = new Date(); hour = d.getHours() + d.getMinutes() / 60; }
   else { const tgt = SET.time === 'day' ? 12 : 22.5; hour += (tgt - hour) * Math.min(1, dt * 2); }
   nightT += (nightness(hour) - nightT) * Math.min(1, dt * 3); duskT += (Math.min(1, duskness(hour)) - duskT) * Math.min(1, dt * 3);
-  const isNight = nightT > .5; if (isNight !== wasNight) { wasNight = isNight; document.body.classList.toggle('night', isNight); if (isNight) unlock('night'); weatherLabel(); }
+  const isNight = nightT > .5; if (isNight !== wasNight) { wasNight = isNight; document.body.classList.toggle('night', isNight); if (isNight) unlock('night'); weatherLabel(); if (typeof dnLabel === 'function') dnLabel(); }
   if (duskT > .8 && hour > 17) unlock('sunset');
   const sz = season(); if (sz !== curSeason) { curSeason = sz; rain = sz === 'monsoon'; snow = sz === 'winter'; if (typeof weatherLabel === 'function') weatherLabel(); if (typeof rainSound === 'function') rainSound(); }
   rainT += ((rain ? 1 : 0) - rainT) * Math.min(1, dt * 1.5); snowT += ((snow ? 1 : 0) - snowT) * Math.min(1, dt * 1.2);
@@ -1145,6 +1194,12 @@ function update(dt) {
   if (hugS) { hugS.t += dt; if (Math.random() < dt * 7) { const p = P((player.i + hugS.s.i) / 2, (player.j + hugS.s.j) / 2, 16); hearts.push({x: p.x + Math.random() * 10 - 5, y: p.y, vy: -14 - Math.random() * 10, life: 1.4}); } if (hugS.t > 2.2) hugS = null; }
   hearts = hearts.filter(h => (h.life -= dt) > 0); for (const h of hearts) { h.y += h.vy * dt; h.x += Math.sin(h.life * 6) * .3; }
   for (const f of friends) { if (f.party || f.follow || (hugS && hugS.s === f)) continue; if (f.stationary) { f.moving = false; continue; }
+    if (f.roam) { if (!f.base) f.base = f.home;
+      if (f.path) { f.moving = followPath(f, 1.8, dt); if (!f.path) f.wait = f.dest === f.base ? 8 + Math.random() * 7 : 2.5 + Math.random() * 3; }
+      else { f.moving = false; f.wait -= dt; if (f.wait <= 0) {
+        if (!f.plan || !f.plan.length) { const pool = ROAM.filter(x => x !== f.base && x !== 'fhub' && x !== 'pizza'); for (let k = pool.length - 1; k > 0; k--) { const q = Math.floor(Math.random() * (k + 1)); [pool[k], pool[q]] = [pool[q], pool[k]]; } f.plan = pool.slice(0, 2 + Math.floor(Math.random() * 2)); if (f.base !== 'pizza') f.plan.push(f.base); else f.plan.push('fhub', 'pizza'); }
+        f.dest = f.plan.shift(); const h = homeOf(f.dest), pth = findPath(f.i, f.j, h[0] + Math.random() * 2.4 - 1.2, h[1] + Math.random() * .8); f.path = pth && pth.length ? pth : null; if (!f.path) f.wait = 1; } }
+      continue; }
     if (f.path) f.moving = followPath(f, 1.4, dt); else { f.moving = false; f.wait -= dt; if (f.wait <= 0) { if (f.roam && Math.random() < .35) f.home = ROAM[Math.floor(Math.random() * ROAM.length)]; const h = homeOf(f.home), sp2 = f.sister ? .45 : 1, p = findPath(f.i, f.j, h[0] + (Math.random() * 5 - 2.5) * sp2 + (f.sister ? .5 : 0), h[1] + (Math.random() * 3 - 1) * sp2 + (f.sister ? .3 : 0)); f.path = p && p.length < 60 ? p : null; f.wait = 1.5 + Math.random() * 4; } } }
   // vehicles
   for (const c of cars) { if (c.stopT > 0) { c.stopT -= dt; continue; }
@@ -1267,8 +1322,8 @@ function extras(b) { const [i, j, w, d] = b.at, h = b.h;
   if (b.id === 'deloitte') { const p = P(i + 5.5, j + 1.5, 154), t = 'DELOITTE', w2 = tw(t) + 8, x = Math.round(p.x - w2 / 2), y = p.y - 22;
     R(x + 3, y + 10, 1, 8, '#2a3a4a'); R(x + w2 - 4, y + 10, 1, 8, '#2a3a4a'); R(x - 1, y - 1, w2 + 2, 12, '#151515'); R(x, y, w2, 10, nightT > .5 ? '#0f1830' : '#1f2c3b'); TX(t, x + 4, y + 1, nightT > .5 ? '#9ff6ff' : '#ffffff');
     if (nightT > .3) { g.globalAlpha = nightT * .35; R(x - 3, y - 3, w2 + 6, 16, '#7fe8ff'); g.globalAlpha = 1; } }
-  const sn = {agva: ['AGVA LAB', '#c03535'], insofe: ['INSOFE', '#3a2a20'], unitedway: ['UNITED WAY', '#e2474b'], databeat: ['DATABEAT', '#5fc7d8'], anova: ['ANOVA', '#3b2a6b'], kc: ['KNOWLEDGE CITY', '#0f5c6e'], cortexa: ['CORTEXA', '#232c47'], codewatch: ['CODEWATCH', '#1f2a1f'], ecosense: ['ECOSENSE', '#2f8f4e'], edi: ['DOC INTEL', '#4a3f30'], home: ["YASH'S HOME", '#c0392b'], sakshi: ["SAKSHI'S HOME", '#e85d9a'], lab: ['AI LAB', '#24392f'], cyber: ['CYBER TOWERS', '#b8702a'], golconda: ['GOLCONDA FORT', '#6e5d42'], birla: ['BIRLA MANDIR', '#c0392b']}[b.id];
-  if (sn) { const z = h + (b.id === 'kc' ? 6 : b.id === 'insofe' ? 16 : b.id === 'golconda' ? 0 : b.id === 'birla' ? 4 : 4); const p = P(i + w / 2, j + d / 2, z); signBoard(sn[0], p.x, p.y - 14, b.id === 'databeat' ? '#0e1a2b' : '#ffffff', sn[1]); }
+  const sn = {agva: ['AGVA LAB', '#c03535'], insofe: ['INSOFE', '#3a2a20'], unitedway: ['UNITED WAY', '#e2474b'], databeat: ['DATABEAT', '#5fc7d8'], anova: ['ANOVA', '#3b2a6b'], kc: ['KNOWLEDGE CITY', '#0f5c6e'], cortexa: ['TEKFRAMEWORKS', '#232c47'], hub: ['INNOVATION HUB', '#1f6f96'], pizza: ['NEW YORK SLICE', '#b8432f'], shawarma: ['SHAWARMA POINT', '#2e7d32'], fhub: ['FRIENDS HUB', '#6a3a9a'], codewatch: ['CODEWATCH', '#1f2a1f'], ecosense: ['ECOSENSE', '#2f8f4e'], edi: ['DOC INTEL', '#4a3f30'], home: ["YASH'S HOME", '#c0392b'], sakshi: ["SAKSHI'S HOME", '#e85d9a'], lab: ['AI LAB', '#24392f'], cyber: ['CYBER TOWERS', '#b8702a'], golconda: ['GOLCONDA FORT', '#6e5d42'], birla: ['BIRLA MANDIR', '#c0392b']}[b.id];
+  if (sn) { const z = h + (b.id === 'pizza' ? 40 : b.id === 'hub' ? 28 : b.id === 'kc' ? 6 : b.id === 'insofe' ? 16 : b.id === 'golconda' ? 0 : b.id === 'birla' ? 4 : 4); const p = P(i + w / 2, j + d / 2, z); signBoard(sn[0], p.x, p.y - 14, b.id === 'databeat' ? '#0e1a2b' : '#ffffff', sn[1]); }
 }
 function signBoard(t, cx2, y, fg, bg) { const w2 = tw(t) + 6, x = Math.round(cx2 - w2 / 2); R(x - 1, y - 1, w2 + 2, 11, '#151515'); R(x, y, w2, 9, bg); TX(t, x + 3, y + 1, fg); R(x + 2, y + 10, 1, 3, '#151515'); R(x + w2 - 3, y + 10, 1, 3, '#151515'); }
 function postSign(i, j, t, bg) { const p = P(i, j); R(p.x, p.y - 16, 1, 16, '#6b4a2a'); signBoard(t, p.x, p.y - 28, '#ffffff', bg); }
@@ -1585,7 +1640,7 @@ $('#tabs').addEventListener('click', e => { const b = e.target.closest('button')
 /* ---------- content lists ---------- */
 const exp = B.concat(OFFMAP).filter(b => b.type === 'work' || b.type === 'school').flatMap(b => b.floors.map(f => ({f, b}))).sort((a, z) => z.f.start - a.f.start);
 $('#logExp').innerHTML = exp.map(({f, b}) => `<li><span><span class="lw">${esc(f.when)}</span><b>${esc(f.role)}</b> · ${esc(b.name)}<small>${esc(b.where)}</small></span>${BY[b.id] ? `<button class="pbtn sm" data-go="${b.i}">VISIT ▸</button>` : ''}</li>`).join('');
-$('#logProj').innerHTML = B.filter(b => b.type === 'project').map(b => `<li><span><b>${esc(b.name)}</b><small>${esc(b.quote)}</small></span><button class="pbtn sm" data-go="${b.i}">VISIT ▸</button></li>`).join('');
+$('#logProj').innerHTML = PROJECTS.map(b => `<li><span><b>${esc(b.name)}</b><small>${esc(b.quote)} · inside the Innovation Hub</small></span><button class="pbtn sm" data-go="${BY.hub.i}">VISIT ▸</button></li>`).join('');
 const groups = [['CAREER', B.filter(b => b.type === 'work' || b.type === 'school')], ['PROJECTS', B.filter(b => b.type === 'project')], ['LANDMARKS', B.filter(b => b.type === 'landmark')], ['AROUND TOWN', B.filter(b => b.type === 'place')]];
 function renderPlaces() { $('#placeList').innerHTML = groups.map(([t, list]) => `<h3>${t}</h3><div class="places">${list.map(b => `<button data-go="${b.i}">${likes.has(b.id) ? '♥ ' : ''}${esc(b.short)}<small>${esc(b.years)}${visited.has(b.id) ? ' · visited' : ''}</small></button>`).join('')}</div>`).join('') +
   `<h3>METRO</h3><div class="places">${STATIONS.map((s, n) => `<button data-st="${n}">🚇 ${esc(s.name)}<small>${esc(STATION_NEAR[n])}</small></button>`).join('')}</div>`; }
@@ -1630,8 +1685,10 @@ function syncControls() {
   document.body.classList.toggle('noctl', !SET.ctl); const cb = $('#ctlBtn'); if (cb) { cb.classList.toggle('on', SET.ctl); cb.setAttribute('aria-pressed', SET.ctl); }
   document.body.classList.toggle('pads', SET.pads === 'on'); document.body.classList.toggle('nopads', SET.pads === 'off'); document.body.classList.toggle('nomini', !SET.mini);
   const mb = $('#mouseBtn'); mb.textContent = '🖱 ' + {click: 'CLICK', follow: 'FOLLOW', hold: 'HOLD'}[SET.mouse]; mb.classList.toggle('on', SET.mouse !== 'click');
-  $('#timeBtn').title = 'Time: ' + SET.time; }
-$('#timeBtn').addEventListener('click', () => { const m = ['cycle', 'live', 'day', 'night']; SET.time = m[(m.indexOf(SET.time) + 1) % 4]; saveSet(); syncControls(); toastAch('🕗 Time: ' + {cycle: 'LIVE CYCLE', live: 'REAL CLOCK', day: 'ALWAYS DAY', night: 'ALWAYS NIGHT'}[SET.time], {cycle: 'A full day passes every 6 minutes.', live: 'Matches your local time.', day: 'Sun stays up.', night: 'Lights stay on.'}[SET.time]); });
+  $('#timeBtn').title = 'Time: ' + SET.time; if ($('#dnBtn')) dnLabel(); }
+function dnLabel() { const b = $('#dnBtn'); if (!b) return; const nt = SET.time === 'night' || (SET.time !== 'day' && nightT > .5); b.innerHTML = nt ? '🌙<span class="lbl"> NIGHT</span>' : '☀<span class="lbl"> DAY</span>'; b.classList.toggle('on', SET.time === 'day' || SET.time === 'night'); b.title = SET.time === 'day' || SET.time === 'night' ? 'Pinned to ' + SET.time + '. Click to switch.' : 'Following the ' + (SET.time === 'live' ? 'real clock' : 'day cycle') + '. Click to switch day/night.'; }
+$('#dnBtn').addEventListener('click', () => { const nt = SET.time === 'night' || (SET.time !== 'day' && nightT > .5); SET.time = nt ? 'day' : 'night'; saveSet(); syncControls(); dnLabel(); if (sideOpen()) renderSettings(); toastAch(SET.time === 'day' ? '☀ Day' : '🌙 Night', 'Pinned. Tap the clock to go back to the live day cycle.'); });
+$('#timeBtn').addEventListener('click', () => { const m = ['cycle', 'live', 'day', 'night']; SET.time = m[(m.indexOf(SET.time) + 1) % 4]; saveSet(); syncControls(); dnLabel(); toastAch('🕗 Time: ' + {cycle: 'LIVE CYCLE', live: 'REAL CLOCK', day: 'ALWAYS DAY', night: 'ALWAYS NIGHT'}[SET.time], {cycle: 'A full day passes every 6 minutes.', live: 'Matches your local time.', day: 'Sun stays up.', night: 'Lights stay on.'}[SET.time]); });
 
 /* ---------- HUD ---------- */
 let hudT = 0;
@@ -1689,8 +1746,9 @@ $('#mLike').addEventListener('click', () => { const b = B[cur]; if (likes.has(b.
 $('#mScene').addEventListener('pointerdown', e => { const r = e.currentTarget.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 200; const ex = inside.exhibits[inside.near]; if (ex && Math.abs(x - ex.x) < 9) { useExhibit(); return; } inside.tx = Math.max(10, Math.min(186, x - 8)); });
 function useExhibit() { const ex = inside.exhibits[inside.near]; if (!ex) return beep(180, .05); if (ex.clap) { clapEcho(); return; } beep(990, .05); }
 function clapEcho() { unlock('clap'); $('#mExhibit').innerHTML = '<b>👏 CLAP!</b> ...clap... ..clap.. .clap. (heard all the way up at the Bala Hissar)'; if (sfx) { [0, 380, 720, 1000].forEach((t, q) => setTimeout(() => { try { const a = AC(), s = a.createBufferSource(), gn = a.createGain(); s.buffer = noiseBuf(a, .08); gn.gain.value = .25 / (q + 1); s.connect(gn).connect(a.destination); s.start(); } catch (er) {} }, t)); } }
-const WALL = {agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', sakshi: '#ffe3ef', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
+const WALL = {agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', hub: '#eef6fa', pizza: '#f3e2c4', shawarma: '#f6efe2', fhub: '#7b4fb0', sakshi: '#ffe3ef', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
 const sctx = $('#mScene').getContext('2d');
+const SURY = (() => { const f = FRIENDS.find(x => x.name === 'Suryansh'); return f ? makeSprite(f) : null; })(), FRS = FRIENDS.filter(x => x.home === 'fhub').slice(0, 2).map(makeSprite);
 const SISPS = makeSprite(FRIENDS.find(f => f.sister)), MOMPS = makeSprite(FRIENDS.find(f => f.name === 'Mom')), DADPS = makeSprite(FRIENDS.find(f => f.name === 'Dad'));
 function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransform(1, 0, 0, 1, 0, 0); g.imageSmoothingEnabled = false; const t = T, Wd = 200, F = 54, k2 = b.kind;
   // walk inside
@@ -1711,6 +1769,12 @@ function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransf
   if (k2 === 'kc') { [['McD', '#d62d20', '#ffd34f'], ['KFC', '#b5121b', '#ffffff'], ['BURRITO', '#2e7d32', '#ffffff']].forEach(([t, bg, fg], n) => { const x = 34 + n * 50; R(x, 8, 44, 10, bg); TX(t, x + 3, 9, fg); R(x, 18, 44, 22, '#fffdf6'); R(x + 2, 32, 40, 8, '#c9b89a'); for (let q = 0; q < 3; q++) R(x + 6 + q * 12, 26, 6, 5, ['#f2b632', '#e2474b', '#9be03c'][(q + n) % 3]); });
     for (let n = 0; n < 4; n++) { R(40 + n * 36, 46, 18, 3, '#8a6a4a'); R(48 + n * 36, 49, 2, 5, '#6b4a2a'); } }
   if (k2 === 'cortexa') for (let n = 0; n < 5; n++) { const x = 40 + n * 25; R(x, 8, 20, 30, '#0f1424'); for (let r = 0; r < 5; r++) { R(x + 2, 11 + r * 5, 16, 3, '#1c2238'); R(x + 3 + ((r + n) % 3) * 5, 12 + r * 5, 2, 1, hs(r * 7 + n * 13 + Math.floor(t / 250)) < .5 ? '#9be03c' : '#2a6a2a'); } }
+  if (k2 === 'hub') { for (let n = 0; n < 3; n++) { const x = 34 + n * 50; R(x, 8, 40, 34, ['#151515', '#1d2a1d', '#2a2418'][n]); TX(['DOC INTEL', 'ECOSENSE', 'CODEWATCH'][n], x + 2, 10, ['#ffd36a', '#9be03c', '#e2474b'][n]); }
+    for (let r = 0; r < 4; r++) R(36, 22 + r * 4, 8 + Math.round((Math.sin(T / 300 + r) + 1) * 12), 2, '#ffd36a'); R(90, 24, Math.round(10 + (Math.sin(T / 800) + 1) * 12), 4, '#9be03c'); TX('CO2', 90, 30, '#9be03c');
+    for (let n = 0; n < 3; n++) { const bx = 136 + ((T / 30 + n * 12) % 30); pix(BUG, Math.round(bx), 26, {x: '#2e7d32'}); } for (let k = 0; k < 6; k++) R(14 + k * 3, 50 - k * 7, 6, 2, '#9aa7b8'); }
+  if (k2 === 'pizza') { R(30, 14, 140, 12, '#b8432f'); TX('NEW YORK SLICE', 62, 16, '#ffd34f'); R(40, 30, 60, 14, '#c9b89a'); disc(70, 36, 6, '#ffd34f'); R(68, 34, 2, 2, '#d62d20'); R(73, 37, 2, 2, '#d62d20'); for (let n = 0; n < 3; n++) { R(118 + n * 18, 44, 12, 3, '#8a6a4a'); R(123 + n * 18, 47, 2, 6, '#6b4a2a'); } if (SURY) pix(SURY.idle, 150, F - 28, SURY.pal, true, 2); }
+  if (k2 === 'shawarma') { R(40, 10, 60, 10, '#2e7d32'); TX('SHAWARMA', 46, 12, '#ffffff'); R(60, 22, 3, 26, '#888'); for (let r = 0; r < 8; r++) R(56 - (r < 4 ? r : 7 - r), 24 + r * 3, 11 + (r < 4 ? r : 7 - r) * 2, 3, Math.floor(T / 200 + r) % 2 ? '#c98a3a' : '#8a4a1a'); R(110, 30, 50, 12, '#c9b89a'); }
+  if (k2 === 'fhub') { R(0, 0, Wd, F, '#7b4fb0'); R(70, 8, 24, 24, '#f2d14b'); R(74, 12, 16, 16, '#5a3a1a'); disc(82, 20, 3, '#f2d14b'); R(20, 34, 50, 10, '#e07a3e'); R(20, 30, 50, 5, '#c0612c'); R(110, 12, 30, 20, '#ffffff'); TX('FRIENDS', 112, 18, '#7b4fb0'); for (let n = 0; n < 12; n++) R(8 + n * 16, 3, 2, 2, ['#ff4d4d', '#ffd34f', '#4fa8ff', '#6be04f'][n % 4]); FRS.forEach((ps, n) => pix(ps.idle, 120 + n * 14, F - 28, ps.pal, n % 2 === 0, 2)); }
   if (k2 === 'codewatch') { R(30, 44, 130, 4, '#333'); const py = 28 + Math.round(Math.max(0, Math.sin(t / 300)) * 12); R(116, 10, 4, py - 10, '#777'); R(108, py, 20, 6, '#e2474b'); for (let n = 0; n < 5; n++) { const bx = ((t / 25 + n * 30) % 130) + 30; if (bx > 108 && bx < 128 && py > 36) R(Math.round(bx), 42, 7, 2, '#2e7d32'); else pix(BUG, Math.round(bx), 37, {x: '#2e7d32'}); } TX('BUGS SQUASHED', 40, 10, '#f2d14b'); }
   if (k2 === 'eco') { R(120, 10, 46, 30, '#151515'); TX('CO2', 126, 13, '#9be03c'); R(126, 24, Math.round(10 + (Math.sin(t / 800) + 1) * 10), 4, '#9be03c'); TX('kWh H2O', 126, 30, '#5fc7d8'); }
   if (k2 === 'edi') for (let s = 0; s < 3; s++) { R(36, 14 + s * 14, 128, 2, '#6a4a2a'); for (let n = 0; n < 30; n++) R(38 + n * 4, 6 + s * 14, 3, 8, TREECOL[(n + s) % 6]); }
@@ -1783,7 +1847,7 @@ function collect(n) { got.add(n); store.set('packets', [...got]); beep(988, .05)
 
 /* ---------- Ask Yash (offline retrieval) ---------- */
 const STOP = new Set('a an the is are was were what which who whom how why when where do does did i you he she it they his her him me my your of to in on at for with and or about tell can could would should has have had be been this that there any some yash yoshi sharma please know ever'.split(' '));
-const SYN = {llm: ['dapt', 'lora', 'perplexity', 'models'], llms: ['dapt', 'lora', 'perplexity', 'models'], ml: ['machine', 'learning', 'neural', 'models'], ai: ['llm', 'genai', 'models', 'agents'], green: ['carbon', 'energy', 'codecarbon', 'sustainability'], carbon: ['codecarbon', 'energy'], rag: ['retrieval', 'chatbots'], bugs: ['codewatch', 'bug'], bug: ['codewatch'], pipeline: ['pipelines', 'extraction', 'ingested'], data: ['pipelines', 'sql', 'extraction'], teach: ['taught', 'teacher'], teaching: ['taught', 'teacher'], pharma: ['regulatory'], fine: ['lora', 'tuned'], side: ['project'], projects: ['project'], hobby: ['football', 'dramatics'], hobbies: ['football', 'dramatics'], sports: ['football'], fort: ['golconda'], temple: ['birla', 'marble'], food: ['kfc', 'burrito', 'court'], lunch: ['kfc', 'burrito', 'court'], office: ['offices', 'towers'], bridge: ['cable', 'durgam'], hitec: ['cyber'], landmark: ['charminar', 'golconda', 'cyber']};
+const SYN = {llm: ['dapt', 'lora', 'perplexity', 'models'], llms: ['dapt', 'lora', 'perplexity', 'models'], ml: ['machine', 'learning', 'neural', 'models'], ai: ['llm', 'genai', 'models', 'agents'], green: ['carbon', 'energy', 'codecarbon', 'sustainability'], carbon: ['codecarbon', 'energy'], rag: ['retrieval', 'chatbots'], bugs: ['codewatch', 'bug'], bug: ['codewatch'], pizza: ['slice', 'suryansh'], shawarma: ['spit'], friends: ['yashana', 'mitali', 'rashi', 'sujal', 'squad'], pipeline: ['pipelines', 'extraction', 'ingested'], data: ['pipelines', 'sql', 'extraction'], teach: ['taught', 'teacher'], teaching: ['taught', 'teacher'], pharma: ['regulatory'], fine: ['lora', 'tuned'], side: ['project'], projects: ['project'], hobby: ['football', 'dramatics'], hobbies: ['football', 'dramatics'], sports: ['football'], fort: ['golconda'], temple: ['birla', 'marble'], food: ['kfc', 'burrito', 'court'], lunch: ['kfc', 'burrito', 'court'], office: ['offices', 'towers'], bridge: ['cable', 'durgam'], hitec: ['cyber'], landmark: ['charminar', 'golconda', 'cyber']};
 const toks = s => String(s).toLowerCase().replace(/[^a-z0-9+ ]/g, ' ').split(/\s+/).filter(w => w && !STOP.has(w));
 const DOCS = B.concat(OFFMAP).map(b => { const parts = [b.name, b.full, b.where, b.years, b.quote, ...(b.floors || []).flatMap(f => [f.role, f.when, ...(f.bullets || [])]), ...(b.tags || []), NPC_LINES[b.id] || ''];
   return {b, t: toks(parts.join(' ')), bullets: (b.floors || []).flatMap(f => (f.bullets || []).map(x => ({x, t: toks(x + ' ' + f.role)})))}; });
@@ -1802,7 +1866,7 @@ function answer(q) { const ql = q.toLowerCase();
   for (const d of DOCS) { let s = 0; for (const w of qt) { const tf = d.t.filter(x => match(w, x)).length; if (tf) s += (1 + Math.log(tf)) * Math.log(1 + N / (DF[w] || 1)); } if (s > bs) { bs = s; best = d; } }
   if (!best || bs < .6) return {text: "I only know what's in this city. Try asking about LoRA, RAG, DataBeat, CodeWatch, teaching, Golconda, or football."};
   let pick = null, ps = 0; for (const bl of best.bullets) { const s = qt.filter(w => bl.t.some(x => match(w, x))).length; if (s > ps) { ps = s; pick = bl.x; } }
-  return {text: `${best.b.name} (${best.b.years}): ${pick || best.b.quote}`, go: BY[best.b.id] ? best.b.id : null}; }
+  return {text: `${best.b.name} (${best.b.years}): ${pick || best.b.quote}`, go: BY[best.b.id] ? best.b.id : PROJECTS.includes(best.b) ? 'hub' : null}; }
 const SUGG = ['What does he do now?', 'Tell me about LoRA', 'Any side projects?', 'Has he taught?', 'Who is Bruno?', 'Tell me about Golconda', 'How do I contact him?'];
 function addMsg(who, text, go) { const d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = text;
   if (go) { const b = document.createElement('button'); b.className = 'gbtn'; b.textContent = 'VISIT ' + BY[go].short + ' ▸'; b.dataset.go = BY[go].i; d.appendChild(b); } $('#chat').appendChild(d); $('#chat').scrollTop = 1e6; }
@@ -1923,7 +1987,7 @@ addEventListener('orientationchange', () => setTimeout(() => { resize(); snapCam
 if (window.visualViewport) visualViewport.addEventListener('resize', () => { resize(); snapCam(); });
 document.addEventListener('visibilitychange', () => { if (document.hidden) { if (music.on) clearInterval(music.timer); } else if (music.on) setMusic(true); last = performance.now(); });
 curSeason = season(); rain = curSeason === 'monsoon'; snow = curSeason === 'winter'; snowT = snow ? 1 : 0; rainT = rain ? 1 : 0;
-bakeAll(); resize(); snapCam(); if (cssW < 640) { setZoom(fitZ * 1.5); snapCam(); } syncControls(); weatherLabel();
+bakeAll(); resize(); snapCam(); if (cssW < 640) { setZoom(fitZ * 1.5); snapCam(); } syncControls(); weatherLabel(); dnLabel();
 document.body.classList.toggle('night', nightness(hour) > .5); nightT = nightness(hour); duskT = Math.min(1, duskness(hour)); wasNight = nightT > .5;
 if (!store.get('welcomed', false)) $('#welcome').hidden = false; else showHint(false);
 if (quest.active) toastAch('📜 Career Story', `Resuming. Next stop: ${BY[QUEST[quest.idx]].short}.`);
