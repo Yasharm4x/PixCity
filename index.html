@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Hyderabad · Yash Sharma v4</title>
+<title>Hyderabad · Yash Sharma v6</title>
 <meta name="description" content="Yash Sharma, Data Engineer at Deloitte (AI & Data), Hyderabad. A living isometric pixel Hyderabad built out of his career.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -278,7 +278,7 @@ body.noctl .ctrl,body.noctl .pad,body.noctl .acts{display:none!important}
   </header>
   <main class="stage" id="stage">
     <canvas id="city" tabindex="0" aria-label="Isometric pixel Hyderabad. Every building is a role, project or landmark from Yash Sharma's career. Move with arrow keys or WASD, press E to enter. The menu has the same information as a list."></canvas>
-    <canvas id="mini" width="176" height="96" aria-label="Minimap. Click to walk there."></canvas>
+    <canvas id="mini" width="232" height="122" aria-label="Minimap. Click to walk there."></canvas>
     <div class="hud-tl">
       <div class="chips">
         <button class="chip" id="packChip" title="Data packets">💾 0/8</button>
@@ -347,7 +347,7 @@ body.noctl .ctrl,body.noctl .pad,body.noctl .acts{display:none!important}
       <p class="lede">I'm <strong>Yash Sharma</strong>, a Data Engineer in Deloitte's AI &amp; Data practice in Hyderabad. This city is my career so far: data pipelines, LLM fine-tuning, RAG systems, and the people and places in between.</p>
       <div class="stats" id="stats"></div>
       <div class="row"><button class="pbtn sm primary" id="sQuest">📜 CAREER STORY</button><button class="pbtn sm" id="sTour">🎬 GUIDED TOUR</button><button class="pbtn sm" id="sResume">📄 RÉSUMÉ</button></div>
-      <div class="lotcard"><h3>BUILD THE NEXT ONE WITH ME</h3><p>Got a data problem, a role, or a strange idea? The empty lot down south is waiting.</p><div class="row" id="lotLinks"></div><div class="fine" id="addr"></div></div>
+      <div class="lotcard"><h3>BUILD THE NEXT ONE WITH ME</h3><p>Got a data problem, a role, or a strange idea? GitHub House down south is waiting.</p><div class="row" id="lotLinks"></div><div class="fine" id="addr"></div></div>
     </section>
     <section class="sp" data-p="places" hidden><h2>Places</h2><p class="lede">Jump anywhere in the city. Or ride the metro.</p><div id="placeList"></div></section>
     <section class="sp" data-p="resume" hidden><h2>Résumé</h2><p class="lede">The whole city as a plain list.</p><h3>EXPERIENCE</h3><ol class="log" id="logExp"></ol><h3>PROJECTS</h3><ol class="log" id="logProj"></ol></section>
@@ -478,9 +478,31 @@ const B = [
   floors:[{role:'On the menu',when:'',bullets:['Giant New York style slices.','Suryansh always ends up here after a walk.','Outdoor tables for the after-work crowd.']}],tags:['Food','Pizza']},
  {id:'shawarma',kind:'shawarma',short:'SHAWARMA',name:'Shawarma Point',years:'Late-night food',where:'HITEC City',type:'place',at:[48.9,0.4,2.7,2.4],h:16,door:[50.2,3.4],
   quote:'The spit never stops turning.',floors:[{role:'On the menu',when:'',bullets:['Chicken shawarma rolls, extra garlic.','The post-office-hours queue starts at 7 pm.']}],tags:['Food']},
- {id:'fhub',kind:'fhub',short:'FRIENDS HUB',name:'Friends Hub',years:'The squad',where:'Where the gang lives',type:'place',at:[1.5,16.2,6,4.8],h:56,door:[4.5,21.5],
+ {id:'fhub',kind:'fhub',short:'FRIENDS HUB',name:'Friends Hub',years:'The squad',where:'Where the gang lives',type:'place',at:[0.5,16.2,4.8,4.8],h:56,door:[2.9,21.5],
   quote:'A purple apartment block, one big orange couch, and too many inside jokes.',
   floors:[{role:'Residents',when:'',bullets:['Yashana, Mitali, Rashi and Sujal live here.','Suryansh visits, then wanders off for pizza.','They head out in different directions and always come back here.']}],tags:['Friends']},
+ {id:'dhaba',kind:'dhaba',short:'13 DHABA',name:'13 Dhaba',years:'Late-night food',where:'Next to the Friends Hub',type:'place',at:[5.7,16.8,3,3.4],h:14,door:[7.2,21.5],
+  quote:'Charpai, chai and dal makhani at 1 am.',floors:[{role:'On the menu',when:'',bullets:['Dal makhani, butter naan and kulhad chai.','The squad\'s default spot after midnight.']}],tags:['Food']},
+ {id:'thub',kind:'thub',short:'T-HUB',name:'T-Hub',years:'Startup hub',where:'HITEC City',type:'landmark',at:[57,1,7,7],h:62,door:[60.1,8.5],
+  quote:'A big red T where Hyderabad\'s startups get built.',floors:[{role:'Startup campus',when:'',bullets:['One of India\'s largest startup incubators.','Founders, investors and late-night demo days.']}],tags:['Landmark','Startups']},
+ {id:'apts',kind:'apts',short:'GACHIBOWLI HEIGHTS',name:'Gachibowli Heights',years:'Residences',where:'Gachibowli',type:'place',at:[56.6,15.6,10.6,5],h:84,door:[61.9,21.5],
+  quote:'Where half of HITEC City goes home after standup.',floors:[{role:'Residences',when:'',bullets:['Two residential towers with balconies and a rooftop pool.']}],tags:[]},
+ {id:'kbr',kind:'kbr',short:'KBR PARK',name:'KBR Park',years:'Morning walks',where:'Jubilee Hills',type:'place',at:[56,26,12,4],flat:true,door:[61.5,25.5],
+  quote:'Peacocks, joggers and a lot of very happy dogs.',floors:[{role:'Park',when:'',bullets:['A jogging trail under the trees.','Bruno\'s favourite place to run.']}],tags:[]},
+ {id:'airport',kind:'airport',short:'RGIA AIRPORT',name:'Rajiv Gandhi International Airport',years:'Departures',where:'City outskirts',type:'landmark',at:[56.5,34.5,11,6.6],h:34,door:[61.5,33.5],
+  quote:'Planes take off over the fields to the east. Window seat, always.',floors:[{role:'Terminal',when:'',bullets:['A long glass terminal and a control tower.','Watch the planes take off down the runway and circle the city.']}],tags:['Landmark','Travel']},
+ {id:'falaknuma',kind:'falaknuma',short:'FALAKNUMA PALACE',name:'Falaknuma Palace',years:'1893',where:'Old City',type:'landmark',at:[43.4,34.4,8.2,6.8],h:40,door:[47.5,33.5],
+  quote:'A palace "like a mirror of the sky", sitting on a hill above the city.',floors:[{role:'The palace',when:'',bullets:['Built by Nawab Vikar-ul-Umra, later home of the Nizams.','Italian marble, Venetian chandeliers and a famous 101-seat dining table.']}],tags:['Landmark','History']},
+ {id:'du',kind:'du',short:'DELOITTE UNIVERSITY',name:'Deloitte University',years:'Learning',where:'Hyderabad',type:'work',at:[13.4,34.6,5,4.4],h:38,door:[15.9,33.5],
+  quote:'Where Deloitte people go to learn, train and level up.',floors:[{role:'Learning campus',when:'',bullets:['Classrooms, labs and training sessions.','Onboarding: Python, SQL and the Stage Gate.']}],tags:['Deloitte','Learning']},
+ {id:'starbucks',kind:'sbux',short:'STARBUCKS',name:'Starbucks',years:'Coffee',where:'Next to DU',type:'place',at:[19,35,1.8,1.8],h:14,door:[19.9,33.5],
+  quote:'A small coffee stop between training sessions.',floors:[{role:'On the menu',when:'',bullets:['Cold coffee for the post-lunch slump.']}],tags:['Food']},
+ {id:'pvr',kind:'pvr',short:'PVR CINEMAS',name:'PVR Cinemas',years:'Now showing',where:'Theatre',type:'place',at:[25.3,34.6,5.4,4.2],h:36,door:[28,33.5],
+  quote:'Friday night first show, popcorn non-negotiable.',floors:[{role:'Theatre',when:'',bullets:['Six screens, one giant popcorn counter.','Plays and stand-up on weekends too.']}],tags:['Movies','Theatre']},
+ {id:'cult',kind:'cult',short:'CULT.FIT',name:'cult.fit',years:'Gym',where:'Fitness centre',type:'place',at:[35.2,34.6,3.6,3.4],h:30,door:[37,33.5],
+  quote:'Leg day. Do not skip it.',floors:[{role:'Gym',when:'',bullets:['Weights, HRX classes and a rooftop yoga deck.']}],tags:['Fitness']},
+ {id:'cricket',kind:'cricket',short:'CRICKET GROUND',name:'Cricket Ground',years:'Weekend matches',where:'Local ground',type:'place',at:[0.5,34.5,8,7],flat:true,door:[4.5,33.5],
+  quote:'Tennis-ball cricket every Sunday morning. Last man stands.',floors:[{role:'Ground',when:'',bullets:['A 22-yard pitch, a rope boundary and a lot of appeals.']}],tags:['Cricket']},
  {id:'deloitte',kind:'hq',short:'DELOITTE',name:'Deloitte',years:'Sep 2026 – now',where:'Hyderabad · On-site',type:'work',at:[13,17,7,3],h:150,door:[16.5,20.6],
   quote:'Two glass towers, one skybridge, and the next chapter.',
   floors:[{role:'Data Engineer I · AI & Data',when:'Sep 2026 – Present',start:202609,bullets:['Building GenAI agents and data engineering solutions in the AI & Data practice.','Project details stay inside the building.']}],
@@ -512,9 +534,9 @@ const B = [
   floors:[{role:'Side quests',when:'',bullets:['Built More Than Football, a mobile web app for my weekly football group.','Into dramatics too, whenever there is a stage.']}],tags:['Football','Dramatics']},
  {id:'grove',kind:'grove',short:'GUEST GROVE',name:'Guest Grove',years:'Plant one',where:'Visitors\' trees',type:'place',at:[13,26,7,3],flat:true,door:[16.5,25.5],
   quote:'Leave a tree. Leave a note.',floors:[],tags:[]},
- {id:'lot',kind:'lot',short:'EMPTY LOT',name:'Empty Lot',years:'Next',where:'Available now',type:'place',at:[25,26,4,3],flat:true,door:[27,25.5],
-  quote:'This lot is open.',
-  floors:[{role:'Build the next one with me',when:'',bullets:['Got a data problem, a role or a strange idea? Let\'s put up the next building.']}],tags:[],contact:true},
+ {id:'lot',kind:'gh',short:'GITHUB HOUSE',name:'GitHub House',years:'Commits + contact',where:'github.com/yasharm4x',type:'place',at:[25.3,26.3,3.4,2.4],h:46,door:[27,25.5],
+  quote:'Every square on the walls is a day of commits. Darker green, busier day.',
+  floors:[{role:'Code lives here',when:'',bullets:['Repos, experiments and side projects, all on GitHub.','Got a data problem, a role or a strange idea? Let\'s build the next one together.']}],tags:['Open source'],links:[['OPEN GITHUB ↗','https://github.com/yasharm4x']],contact:true},
  {id:'sakshi',kind:'sakshi',short:"SAKSHI'S HOME",name:"Sakshi's Home",years:"Yash's sister",where:'Next door',type:'place',at:[29.2,26.2,1.7,1.6],h:22,door:[30.05,28.3],
   quote:'The cutest house on the street. Sakshi lives here.',
   floors:[{role:'Resident',when:'',bullets:['Sakshi, Yash\'s sister.','Tap her once and she joins Yash and Bruno. Tap her again and she heads home.','Double-tap her for a hug.']}],tags:[]},
@@ -550,12 +572,13 @@ const BY = Object.fromEntries(B.map((b, i) => { b.i = i; return [b.id, b]; }));
 B.forEach(b => { const [i, j, w, d] = b.at; if (!b.door) b.door = b.doorSide === 'i' ? [i + w + .5, j + d / 2] : [i + w / 2, j + d + .5]; });
 
 /* ---------- world grid ---------- */
-const MW = 52, MH = 30, MX = 150, OY = 300;
+const MW = 68, MH = 42, MX = 150, OY = 300;
 const GW = (MW + MH) * 16 + 80 + 2 * MX, GH = (MW + MH) * 8 + OY + 160;
-const CROSS = [10, 22, 32, 40];
+const MINW = (MW + MH) * 2 + 12, MINH = MW + MH + 12;
+const CROSS = [10, 22, 32, 40, 53];
 const TL = [];
 for (let j = 0; j < MH; j++) { TL.push([]); for (let i = 0; i < MW; i++) {
-  const av = (j === 11 || j === 13 || j === 23 || j === 24) ? 'road' : j === 12 ? 'med' : (j === 10 || j === 14 || j === 22 || j === 25) ? 'sw' : null;
+  const av = (j === 11 || j === 13 || j === 23 || j === 24 || j === 31 || j === 32) ? 'road' : j === 12 ? 'med' : (j === 10 || j === 14 || j === 22 || j === 25 || j === 30 || j === 33) ? 'sw' : null;
   const cr = CROSS.some(c => i === c || i === c + 1) ? 'road' : CROSS.some(c => i === c - 1 || i === c + 2) ? 'sw' : null;
   let t = 'G';
   if (av === 'road' || av === 'med') t = cr === 'road' ? 'X' : (av === 'med' ? 'M' : 'R');
@@ -564,8 +587,8 @@ for (let j = 0; j < MH; j++) { TL.push([]); for (let i = 0; i < MW; i++) {
   TL[j].push(t); } }
 const zone = (i0, i1, j0, j1, t) => { for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) if (TL[j] && TL[j][i] !== undefined) TL[j][i] = t; };
 zone(13, 20, 15, 21, 'P'); zone(25, 30, 15, 21, 'P'); zone(35, 38, 16, 20, 'W'); zone(37, 37, 18, 18, 'I');
-zone(1, 7, 26, 28, 'F'); zone(13, 19, 26, 28, 'H'); zone(25, 30, 26, 28, 'D'); zone(29, 30, 26, 28, 'H');
-zone(43, 51, 16, 20, 'W'); zone(47, 47, 16, 20, 'Q'); zone(43, 51, 26, 29, 'Y'); zone(0, 5, 0, 5, 'Y'); zone(44, 50, 9, 9, 'P');
+zone(1, 7, 26, 28, 'F'); zone(13, 19, 26, 28, 'H'); zone(25, 28, 26, 28, 'P'); zone(29, 30, 26, 28, 'H');
+zone(43, 51, 16, 20, 'W'); zone(47, 47, 16, 20, 'Q'); zone(43, 51, 26, 29, 'Y'); zone(0, 5, 0, 5, 'Y'); zone(44, 50, 9, 9, 'P'); zone(0, 8, 34, 41, 'F'); zone(56, 67, 38, 41, 'P'); zone(44, 50, 41, 41, 'H'); zone(43, 51, 34, 34, 'H');
 const solid = TL.map(r => r.map(t => t === 'W' || t === 'I' || t === 'M'));
 const block = (i0, j0, i1, j1) => { for (let j = Math.floor(j0); j < Math.ceil(j1); j++) for (let i = Math.floor(i0); i < Math.ceil(i1); i++) if (solid[j] && solid[j][i] !== undefined) solid[j][i] = true; };
 B.forEach(b => { if (!b.flat) { const [i, j, w, d] = b.at; block(i, j, i + w, j + d); } });
@@ -578,7 +601,7 @@ STATIONS.forEach(s => { s.stair = [s.i + 1.6, 14.5]; s.wait = [s.i + .4, 14.55];
 const CHAI = {i: 30.1, j: 21.2}; block(29.6, 20.8, 30.6, 21.6);
 const DOGHOUSE = {i: 35.5, j: 28.4}; block(35, 28, 36, 29);
 const HATCH = {i: 38.6, j: 28.5};
-const BUS_STOPS = [{i: 6.5, j: 10.4, lane: 11.5}, {i: 25.5, j: 10.4, lane: 11.5}, {i: 44.5, j: 10.4, lane: 11.5}, {i: 12.5, j: 22.4, lane: 23.5}, {i: 34.5, j: 25.6, lane: 24.5}];
+const BUS_STOPS = [{i: 16.5, j: 30.4, lane: 31.5}, {i: 28.5, j: 30.4, lane: 31.5}, {i: 6.5, j: 10.4, lane: 11.5}, {i: 25.5, j: 10.4, lane: 11.5}, {i: 44.5, j: 10.4, lane: 11.5}, {i: 12.5, j: 22.4, lane: 23.5}, {i: 34.5, j: 25.6, lane: 24.5}];
 BUS_STOPS.forEach(s => block(s.i - .4, s.j - .2, s.i + .4, s.j + .2));
 const CARTS = [{i: 25.7, j: 21.4, c: '#e2474b', name: 'Mirchi bajji'}, {i: 35.6, j: 21.4, c: '#f2b632', name: 'Corn on the cob'}, {i: 44.2, j: 21.5, c: '#2f80ed', name: 'Ice gola'}];
 
@@ -762,17 +785,18 @@ const PAINT = {
     stampL(hx, hj, hw, hd, 0, 34, 13, DOOR(13), {d: '#2a2a2a', g: '#c98f3d', k: '#6b4a2a'}); };
   byDepth([[car(j + .08, '#e2474b'), i + 3.55, j + .33], [car(j + .72, '#ff8a3d'), i + 3.55, j + .97], [car(j + 1.36, '#27ae60'), i + 3.55, j + 1.61], [villa, hx + hw / 2, hj + hd / 2]]); },
  hub(b) { const [i, j, w, d] = b.at, h = b.h, ci = i + w / 2, cj = j + d / 2, r0 = 1.55;
-  box(i, j, w, d, 0, 4, {L: '#cfd6dc', R: '#aab3bc', T: '#e3e8ec'});
+  box(i, j, w, d, 0, 4, {L: '#9fd8ee', R: '#6fb0cc', T: '#cfeef8'});
   const c = P(ci, cj, 4), R0 = r0 * 16 * Math.SQRT2;
   for (let v = 0; v < h; v++) { const k = 1 - .38 * v / h, rx = Math.round(R0 * k), ry = rx / 2;
     for (let x = -rx; x <= rx; x++) { const t = x / Math.max(1, rx), sq = Math.sqrt(Math.max(0, 1 - t * t)), y = c.y - v + Math.round(ry * sq), ang = Math.asin(t);
-      const ph = ((ang / (2 * Math.PI) + v / 46) % 1 + 1) % 1, band = ph < .3, floor = v % 9 === 0;
-      let col = band ? mix('#5fd0e8', '#1f6f96', (t + 1) / 2) : mix('#ffffff', '#b9c4cf', (t + 1) / 2); if (floor && !band) col = mix('#dfe5ea', '#8f9aa5', (t + 1) / 2);
-      if (band && NIGHTMODE) col = hs(x * 3.1 + v * 7.7) < .55 ? '#9ff0ff' : '#ffe9a8'; else col = nc(col);
-      if (band && ph > .27) col = nc('#ffffff');
+      const ph = ((ang / (2 * Math.PI) + v / 46) % 1 + 1) % 1, band = ph < .3, floor = v % 6 === 0, mull = ((Math.round(ang * 14) % 2) + 2) % 2 === 0 && Math.abs(Math.round(ang * 14) - ang * 14) < .08, sky = Math.max(0, 1 - Math.abs(t + .35) * 1.6);
+      let col = band ? mix('#9ff0ff', '#2a8fb8', (t + 1) / 2) : mix('#6fbfe0', '#173f66', (t + 1) / 2); col = mix(col, '#e8f8ff', sky * .45 * (v / h));
+      if (floor) col = band ? mix('#d9fbff', '#5fb0d0', (t + 1) / 2) : mix('#a8d8ec', '#2a5a80', (t + 1) / 2); if (mull) col = mix('#cfeaf6', '#3a6a8a', (t + 1) / 2);
+      if (NIGHTMODE) col = band ? (floor ? '#ffffff' : '#9ff0ff') : (hs(Math.floor((ang + 2) * 9) * 5.3 + Math.floor(v / 6) * 2.9) < .45 && !floor && !mull ? '#ffe9a8' : mix('#1a3a5a', '#0a1a30', (t + 1) / 2)); else col = nc(col);
+      if (band && ph > .27) col = NIGHTMODE ? '#e8ffff' : nc('#e8fbff');
       g.fillStyle = col; g.fillRect(c.x + x, y, 1, 2); } }
   const kt = 1 - .38, rx = Math.round(R0 * kt), ry = rx / 2, ty = c.y - h;
-  for (let x = -rx; x <= rx; x++) { const t = x / rx, sq = Math.sqrt(Math.max(0, 1 - t * t)); g.fillStyle = nc('#eef3f6'); g.fillRect(c.x + x, ty - Math.round(ry * sq), 1, Math.round(ry * sq) * 2 + 1); }
+  for (let x = -rx; x <= rx; x++) { const t = x / rx, sq = Math.sqrt(Math.max(0, 1 - t * t)); g.fillStyle = NIGHTMODE ? '#3a8fb8' : nc(mix('#bff4ff', '#5fb0d0', (t + 1) / 2)); g.fillRect(c.x + x, ty - Math.round(ry * sq), 1, Math.round(ry * sq) * 2 + 1); }
   disc(c.x, ty, 6, nc('#5cb85c')); disc(c.x - 3, ty - 1, 3, nc('#3f9a45')); g.fillStyle = nc('#c9d3df'); g.fillRect(c.x, ty - 26, 1, 24); g.fillStyle = '#ff4d4d'; g.fillRect(c.x - 1, ty - 27, 3, 2); },
  pizza(b) { const [i, j] = b.at, w = 6.4, d = 2.6, h = 18;
   box(i, j, w, d, 0, h, {L: '#b8432f', R: '#94351f', T: '#c9553f', stripe: [5, '#a63c28'], wl: win({px: 12, w: 9, py: 30, h: 8, m: 3, ox: 4, glass: '#ffe0a0', lit: 1, litc: '#ffd36a'}), wr: win({px: 10, w: 6, py: 30, h: 8, m: 3, glass: '#ffe0a0', lit: 1})}, 721);
@@ -796,6 +820,72 @@ const PAINT = {
   stampL(i, j, w, d, 0, 40, 11, Array.from({length: 11}, (_, r) => r === 0 ? 'yyyyyyyyyy' : 'ydddddddy.'.replace('.', 'y')), {y: '#f2d14b', d: '#5a3a1a'});
   box(i + 1, j + d + .2, 1.6, .5, 0, 3, {L: '#e07a3e', R: '#c0612c', T: '#e88a52'}); box(i + 1, j + d + .5, 1.6, .2, 3, 3, {L: '#e07a3e', R: '#c0612c', T: '#e88a52'});
   box(i + .95, j + d + .2, .12, .5, 3, 2, {L: '#c0612c', R: '#a04f22', T: '#e88a52'}); box(i + 2.53, j + d + .2, .12, .5, 3, 2, {L: '#c0612c', R: '#a04f22', T: '#e88a52'}); },
+ gh(b) { const [i, j, w, d] = b.at, h = b.h, rr = rotRect(i, j, i + w, j + d), Lw = Math.round((rr[2] - rr[0]) * 16), Rw = Math.round((rr[3] - rr[1]) * 16);
+  const GP = {a: '#0e4429', b: '#006d32', c: '#26a641', d: '#39d353', e: '#9be9a8', o: '#21262d'};
+  const grid = (len, seed) => { const cols = Math.floor((len - 4) / 4), rows = Math.floor((h - 10) / 4), out = [];
+    for (let r = 0; r < rows; r++) { let line = ''; for (let c = 0; c < cols; c++) { const x = hs(seed + r * 17.1 + c * 3.7), k = x < .22 ? 'o' : x < .42 ? 'e' : x < .62 ? 'd' : x < .8 ? 'c' : x < .92 ? 'b' : 'a'; line += k + k + k + '.'; } out.push(line, line, line, '.'.repeat(line.length)); }
+    return out; };
+  box(i - .1, j - .1, w + .2, d + .2, 0, 3, {L: '#30363d', R: '#21262d', T: '#3a414a'});
+  box(i, j, w, d, 3, h - 3, {L: '#0d1117', R: '#090c10', T: '#161b22'}, 801);
+  stampL(i, j, w, d, 3, 2, h - 8, grid(Lw, 11), GP); stampR(i, j, w, d, 3, 2, h - 8, grid(Rw, 57), GP);
+  box(i - .05, j - .05, w + .1, d + .1, h, 3, {L: '#26a641', R: '#006d32', T: '#161b22'});
+  for (let k = 0; k < 4; k++) for (let q = 0; q < 3; q++) box(i + .35 + k * .75, j + .35 + q * .6, .45, .4, h + 3, 2 + (k + q) % 3, {L: ['#0e4429', '#26a641', '#39d353'][(k + q) % 3], R: shade(['#0e4429', '#26a641', '#39d353'][(k + q) % 3], .8), T: ['#006d32', '#39d353', '#9be9a8'][(k * 2 + q) % 3]}); },
+ dhaba(b) { const [i, j, w, d] = b.at, post = {L: '#6b4a2a', R: '#523820', T: '#7a5a3a'}, tin = {L: '#9aa3ad', R: '#7d858f', T: '#b8c0c8'};
+  box(i, j, w, d, 0, 1, {L: '#c9a46a', R: '#a8854f', T: '#d8b47a'});
+  box(i + .1, j + .1, 1.4, 1.2, 1, 12, {L: '#d97a2b', R: '#b8621e', T: '#e88a3b', wl: win({px: 8, w: 5, py: 30, h: 5, m: 4, glass: '#ffd36a', lit: 1}), wr: win({px: 8, w: 5, py: 30, h: 5, m: 4, glass: '#ffd36a', lit: 1})}, 811);
+  for (const [pi, pj] of [[i + 1.7, j + .2], [i + w - .2, j + .2], [i + 1.7, j + d - .3], [i + w - .2, j + d - .3]]) box(pi, pj, .12, .12, 1, 11, post);
+  box(i + 1.6, j + .1, w - 1.65, d - .3, 12, 1, tin);
+  for (let k = 0; k < 2; k++) { box(i + 2 + k * .5, j + .6, .35, 1.1, 1, 3, {L: '#7a4f2e', R: '#5e3c22', T: '#e8d9b0'}); }
+  box(i + .3, j + 1.6, 1, .8, 1, 6, {L: '#2f80ed', R: '#245fb0', T: '#3a90f0'}); box(i + .3, j + 2.4, 1, .6, 1, 4, {L: '#f2b632', R: '#c89520', T: '#ffd34f'});
+  for (let k = 0; k < 8; k++) { const q = P(i + 1.7 + k * .17, j + d - .3, 12); g.fillStyle = NIGHTMODE ? ['#ffd36a', '#ff6b6b', '#9be03c'][k % 3] : nc('#d0d0d0'); g.fillRect(q.x, q.y + 1, 1, 1); } },
+ thub(b) { const [i, j] = b.at, red = {L: '#d32f2f', R: '#a82424', T: '#e84a4a'}, W2 = win({px: 6, w: 4, py: 7, h: 4, m: 6, glass: '#3a1414', lit: .7, litc: '#ffd36a', top: 6}), W3 = win({px: 6, w: 4, py: 7, h: 4, m: 6, glass: '#4a1a1a', lit: .7, litc: '#ffe9a8', top: 6});
+  const bar = () => { box(i, j, 7, 2.6, 0, 62, {...red, wl: W2, wr: W3}, 821); box(i - .05, j - .05, 7.1, 2.7, 62, 3, {L: '#ffffff', R: '#e0e0e0', T: '#f4f4f4'}); };
+  const stem = () => { box(i + 2.3, j + 2.6, 2.4, 4.4, 0, 46, {...red, wl: W2, wr: W3}, 841); box(i + 2.25, j + 2.6, 2.5, 4.45, 46, 3, {L: '#ffffff', R: '#e0e0e0', T: '#f4f4f4'}); stampL(i + 2.3, j + 2.6, 2.4, 4.4, 0, 14, 12, DOOR(12), {d: '#151515', g: '#ffd0d0', k: '#5a1a1a'}); };
+  byDepth([[bar, i + 3.5, j + 1.3], [stem, i + 3.5, j + 4.8]]); },
+ apts(b) { const [i, j] = b.at, W2 = win({px: 6, w: 4, py: 8, h: 4, m: 6, glass: '#4c7fa8', lit: .55, top: 6}), W3 = win({px: 6, w: 4, py: 8, h: 4, m: 6, glass: '#3f6f95', lit: .55, top: 6});
+  const tw2 = (ti, tj, h, c) => () => { box(ti, tj, 3, 3, 0, h, {L: c, R: shade(c, .82), T: shade(c, 1.08), wl: W2, wr: W3}, 851 + ti); for (let f = 12; f < h; f += 8) box(ti - .08, tj - .08, 3.16, 3.16, f, 1, {L: '#ffffff', R: '#dddddd', T: '#f4f4f4'}); box(ti + .6, tj + .6, 1.8, 1.8, h, 2, {L: '#5fc7d8', R: '#4aa8b8', T: '#7fe0ee'}); };
+  box(i, j, 10.6, 5, 0, 2, {L: '#cfd6dc', R: '#aab3bc', T: '#bfe3b0'});
+  byDepth([[tw2(i + .5, j + 1, 84, '#f2e6cf'), i + 2, j + 2.5], [tw2(i + 6.8, j + 1.4, 70, '#e8d3b0'), i + 8.3, j + 2.9]]); },
+ airport(b) { const [i, j] = b.at, glass = win({px: 4, w: 3, py: 6, h: 4, m: 3, ox: 2, glass: '#7fc8e8', lit: .9, litc: '#ffe9a8', top: 4});
+  box(i, j, 11, 6.6, 0, 1, {L: '#9aa3ad', R: '#7d858f', T: '#8a939c'});
+  box(i + .3, j + .3, 8, 2.2, 1, 18, {L: '#dfe6ee', R: '#b9c4cf', T: '#e8eef5', wl: glass, wr: glass}, 871);
+  for (let k = 0; k < 6; k++) box(i + .2 + k * 1.35, j + .2, 1.3, 2.4, 19 - Math.abs(k - 2.5) * 0, 2 + (k % 2), {L: '#f4f7fa', R: '#cfd6dc', T: '#ffffff'});
+  const tw3 = () => { box(i + 9.2, j + .8, .7, .7, 1, 44, {L: '#e8eef5', R: '#c9d3df', T: '#e8eef5'}); box(i + 8.95, j + .55, 1.2, 1.2, 45, 7, {L: '#3a5a7a', R: '#2a4560', T: '#5a7a9a', wl: glass, wr: glass}, 881); box(i + 8.9, j + .5, 1.3, 1.3, 52, 2, {L: '#ffffff', R: '#ddd', T: '#ffffff'}); };
+  const plane = (pi, pj) => () => { box(pi, pj, .5, 2.6, 1, 4, {L: '#ffffff', R: '#d9e0e8', T: '#f4f7fa'}); box(pi - 1, pj + 1.1, 2.5, .5, 3, 1, {L: '#c9d3df', R: '#aab3bc', T: '#dfe6ee'}); box(pi + .15, pj + 2.3, .2, .3, 5, 5, {L: '#e2474b', R: '#b83236', T: '#e2474b'}); box(pi - .3, pj + 2.3, 1.1, .3, 5, 1, {L: '#c9d3df', R: '#aab3bc', T: '#dfe6ee'}); };
+  for (let k = 0; k < 10; k++) { const q = P(i + .4 + k, j + 5.8, 1); g.fillStyle = nc('#f2d14b'); g.fillRect(q.x - 3, q.y, 6, 1); }
+  byDepth([[tw3, i + 9.5, j + 1.1], [plane(i + 2.3, j + 3), i + 2.5, j + 4.2], [plane(i + 6.3, j + 3.2), i + 6.5, j + 4.4]]); },
+ falaknuma(b) { const [i, j] = b.at, mb = {L: '#f6f0e4', R: '#ddd2bd', T: '#fffaf0'}, trim = {L: '#c9a227', R: '#a8861c', T: '#e0bc3a'}, roof = {L: '#d8cbb0', R: '#bfb092', T: '#ece2cc'};
+  const Wf = win({px: 7, w: 3, py: 11, h: 6, m: 5, ox: 4, glass: '#5a6e8a', lit: .9, litc: '#ffd98a', top: 4});
+  box(i, j, 8.2, 6.8, 0, 3, {L: '#b8a27e', R: '#9a865f', T: '#cbb894'});
+  box(i + .2, j + .2, 7.8, 4.4, 3, 1, {L: '#5cb85c', R: '#3f9a45', T: '#6cc860'});
+  const wing = (wi, wj, ww, wd, h, sd) => () => { box(wi, wj, ww, wd, 3, h, {...mb, wl: Wf, wr: Wf}, sd); box(wi - .05, wj - .05, ww + .1, wd + .1, 3 + h, 2, trim); for (let k = 0; k < Math.round(ww * 2); k++) box(wi + k * .5 + .1, wj + .05, .15, .15, 5 + h, 3, mb); };
+  const dome = (di, dj, z, r) => () => { const p = P(di, dj, z); for (let y = 0; y < r; y++) { const w2 = Math.round(Math.sqrt(r * r - y * y) * 1.6); g.fillStyle = nc(mix('#fffaf0', '#c9bfa8', y / r * .3 + .2)); g.fillRect(p.x - w2, p.y - y, w2 * 2, 1); } g.fillStyle = nc('#c9a227'); g.fillRect(p.x, p.y - r - 5, 1, 5); };
+  const core = () => { box(i + 2.6, j + 1.1, 3, 2.4, 3, 30, {...mb, wl: Wf, wr: Wf}, 901); box(i + 2.55, j + 1.05, 3.1, 2.5, 33, 2, trim); hip(i + 2.6, j + 1.1, 3, 2.4, 35, 4, roof, 2);
+    for (let k = 0; k < 7; k++) box(i + 2.75 + k * .42, j + 3.6, .14, .14, 3, 20, {L: '#ffffff', R: '#e6e0d4', T: '#ffffff'}); box(i + 2.6, j + 3.5, 3, .4, 23, 3, mb); hip(i + 2.6, j + 3.5, 3, .45, 26, 2, trim, 2); };
+  byDepth([[wing(i + .3, j + .5, 2.2, 2, 22, 911), i + 1.4, j + 1.5], [wing(i + 5.7, j + .5, 2.2, 2, 22, 921), i + 6.8, j + 1.5], [wing(i + .3, j + 2.5, 1.4, 2, 18, 931), i + 1, j + 3.5], [wing(i + 6.5, j + 2.5, 1.4, 2, 18, 941), i + 7.2, j + 3.5], [core, i + 4.1, j + 2.4],
+    [dome(i + 1.4, j + 1.5, 27, 6), i + 1.41, j + 1.51], [dome(i + 6.8, j + 1.5, 27, 6), i + 6.81, j + 1.51], [dome(i + 4.1, j + 2.3, 43, 9), i + 4.11, j + 2.41]]);
+  const f = P(i + 4.1, j + 5.6, 4); disc(f.x, f.y, 7, nc('#e9e2d0')); disc(f.x, f.y, 5, nc('#5fb0e0')); g.fillStyle = nc('#ffffff'); g.fillRect(f.x, f.y - 6, 1, 6);
+  for (let k = 0; k < 8; k++) { const q = P(i + .6 + k * 1, j + 6.3, 4); disc(q.x, q.y - 3, 3, nc('#2f7a35')); } },
+ du(b) { const [i, j] = b.at, W2 = win({px: 6, w: 4, py: 8, h: 5, m: 6, glass: '#3a5a70', lit: .7, litc: '#c8ffd8', top: 5});
+  box(i - .04, j - .04, 5.08, 4.48, 12, 2, {L: '#86bc25', R: '#6a9a1c', T: '#86bc25'});
+  box(i, j, 5, 4.4, 0, 38, {L: '#20262e', R: '#171b21', T: '#2a313a', wl: W2, wr: W2}, 951); box(i - .05, j - .05, 5.1, 4.5, 38, 3, {L: '#86bc25', R: '#6a9a1c', T: '#2a313a'}); box(i + .4, j + .4, 4.2, 3.6, 41, 1, {L: '#3a424c', R: '#2a313a', T: '#3a424c'});
+  stampL(i, j, 5, 4.4, 0, 12, 30, ['ddd...u..u', 'd..d..u..u', 'd..d..u..u', 'd..d..u..u', 'ddd....uu.'].map(r => r), {d: '#ffffff', u: '#86bc25'});
+  for (let k = 0; k < 3; k++) box(i + .6 + k * 1.6, j + 4.5, .5, .5, 0, 6, {L: '#3f9a45', R: '#2f7a35', T: '#5cb85c'}); },
+ sbux(b) { const [i, j, w, d] = b.at;
+  box(i, j, w, d, 0, 12, {L: '#f4efe6', R: '#dcd4c6', T: '#ece6da', wl: win({px: 8, w: 6, py: 30, h: 6, m: 3, glass: '#3a2a1a', lit: 1, litc: '#ffd36a'}), wr: win({px: 8, w: 6, py: 30, h: 6, m: 3, glass: '#3a2a1a', lit: 1, litc: '#ffd36a'})}, 961);
+  box(i - .08, j - .08, w + .16, d + .16, 12, 3, {L: '#00704a', R: '#005a3c', T: '#1e3932'});
+  for (let k = 0; k < 6; k++) stampL(i, j, w, d, 0, 2 + k * 5, 10, ['xxxx', 'xxxx'], {x: k % 2 ? '#ffffff' : '#00704a'});
+  const p = P(i + w / 2, j + d / 2, 15); disc(p.x, p.y - 6, 5, nc('#00704a')); disc(p.x, p.y - 6, 3, nc('#ffffff')); disc(p.x, p.y - 6, 2, nc('#00704a')); },
+ pvr(b) { const [i, j, w, d] = b.at;
+  box(i, j, w, d, 0, 36, {L: '#1b1b2a', R: '#141420', T: '#26263a'}, 971); box(i - .05, j - .05, w + .1, d + .1, 36, 3, {L: '#f2d14b', R: '#c8a82e', T: '#2a2a40'});
+  for (let k = 0; k < 4; k++) stampL(i, j, w, d, 0, 6 + k * 18, 30, Array.from({length: 16}, () => 'pppppppppppp'), {p: ['#e2474b', '#2f80ed', '#9be03c', '#ff8a3d'][k]});
+  box(i - .1, j + d - .2, w + .2, .6, 14, 4, {L: '#f2d14b', R: '#c8a82e', T: '#fff1a8'});
+  for (let k = 0; k < 18; k++) { const q = P(i + k * w / 18, j + d + .4, 16); g.fillStyle = NIGHTMODE ? (k % 2 ? '#ffffff' : '#ffd36a') : nc('#fff6d0'); g.fillRect(q.x, q.y, 1, 1); }
+  stampL(i, j, w, d, 0, 30, 12, DOOR(12), {d: '#151515', g: '#ffd36a', k: '#2a2a40'}); },
+ cult(b) { const [i, j, w, d] = b.at, G2 = win({px: 10, w: 8, py: 10, h: 7, m: 3, ox: 3, glass: '#2a2a2a', lit: .9, litc: '#ff7a9a', top: 3});
+  box(i, j, w, d, 0, 30, {L: '#151515', R: '#0e0e0e', T: '#222', wl: G2, wr: G2}, 981); box(i - .05, j - .05, w + .1, d + .1, 30, 2, {L: '#ff3d6b', R: '#d42d55', T: '#ff3d6b'});
+  stampL(i, j, w, d, 0, 8, 26, ['xx..........xx', 'xxx........xxx', 'xxxxxxxxxxxxxx', 'xxx........xxx', 'xx..........xx'], {x: '#ff3d6b'});
+  box(i + .6, j + .6, 1.2, 1.2, 32, 1, {L: '#5fb0e0', R: '#4a90c0', T: '#7fd0f0'}); },
  sakshi(b) { const [i, j, w, d] = b.at, h = 14, wall = {L: '#ffc9df', R: '#f4a9c8', T: '#ffd9e8'};
   box(i - .05, j - .05, w + .1, d + .1, 0, 2, {L: '#ffffff', R: '#e6e0e8', T: '#fff6fa'}); box(i, j, w, d, 2, h, wall, 701); box(i - .02, j - .02, w + .04, d + .04, 2 + h - 2, 2, {L: '#ffffff', R: '#ece6ee', T: '#ffffff'});
   hip(i - .12, j - .12, w + .24, d + .24, 2 + h, 6, {L: '#a77be0', R: '#8a5fc4', T: '#b98ff0'}, 2);
@@ -882,7 +972,8 @@ const vn = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi
 function outKind(i, j) {
   const dx = i < 0 ? -i - 1 : i >= MW ? i - MW : 0, dy = j < 0 ? -j - 1 : j >= MH ? j - MH : 0, dist = Math.max(dx, dy);
   if (dist === 0) return 'S';
-  if (dist === 1) return 'O';                                       // outer ring road
+  if (dist === 1) return 'O';
+  if (i >= MW + 2 && i <= MW + 34 && j >= 35 && j <= 39) return j === 37 ? 'RW' : j === 36 || j === 38 ? 'RE' : 'RS';                                       // outer ring road
   if (dx === 0 && ROAD_COLS.includes(i) && dist < 30) return 'V';    // city roads run on out of town
   if (dy === 0 && ROAD_ROWS.includes(j) && dist < 30) return 'U';
   for (const [li, lj, rx, ry] of LAKES) { const e = ((i - li) / rx) ** 2 + ((j - lj) / ry) ** 2; if (e < 1 + (vn(i / 2, j / 2) - .5) * .7) return e > .78 ? 'Z' : 'W'; }
@@ -899,7 +990,9 @@ function paintOutskirts() {
     const w = unrot(a + .5, b + .5), i = Math.floor(w[0]), j = Math.floor(w[1]), k = outKind(i, j), r = hs(i * 31.7 + j * 17.3);
     const dist = Math.max(i < 0 ? -i - 1 : i >= MW ? i - MW : 0, j < 0 ? -j - 1 : j >= MH ? j - MH : 0);
     const rr0 = rotRect(i, j, i + 1, j + 1), p = Praw(rr0[0], rr0[1]);
-    if (k === 'S') tileFill(i, j, nc('#d6cfbf'));
+    if (k === 'RW' || k === 'RE') { tileFill(i, j, nc('#3a3d44')); if (k === 'RW' && i % 2 === 0) { const q1 = P(i + .1, j + .5), q2 = P(i + .7, j + .5); line(q1.x, q1.y, q2.x, q2.y, nc('#ffffff')); } if (k === 'RE') { const q = P(i + .5, j + (j === 36 ? .1 : .9)); R(q.x, q.y, 2, 1, NIGHTMODE ? '#ffd36a' : nc('#ffffff')); } if (i === MW + 3 && k === 'RW') { for (let t = 0; t < 4; t++) { const q1 = P(i + .2 + t * .2, j - .9), q2 = P(i + .2 + t * .2, j + 1.9); line(q1.x, q1.y, q2.x, q2.y, nc('#ffffff')); } } }
+    else if (k === 'RS') tileFill(i, j, nc('#8fbf5a'));
+    else if (k === 'S') tileFill(i, j, nc('#d6cfbf'));
     else if (k === 'O' || k === 'U' || k === 'V') { tileFill(i, j, nc('#41444d'));
       if (k === 'U' && i % 2 === 0) { const q1 = P(i + .15, j + .5), q2 = P(i + .75, j + .5); line(q1.x, q1.y, q2.x, q2.y, nc('#e8e8e8')); }
       if (k === 'V' && j % 2 === 0) { const q1 = P(i + .5, j + .15), q2 = P(i + .5, j + .75); line(q1.x, q1.y, q2.x, q2.y, nc('#e8e8e8')); }
@@ -950,6 +1043,9 @@ function paintGround(night) {
   }
   { const ln = nc('#ffffff'); const L = (a, b2, c2, d2) => { const p1 = P(a, b2), p2 = P(c2, d2); line(p1.x, p1.y, p2.x, p2.y, ln); };
     L(1.2, 26.2, 7.8, 26.2); L(7.8, 26.2, 7.8, 28.8); L(7.8, 28.8, 1.2, 28.8); L(1.2, 28.8, 1.2, 26.2); L(4.5, 26.2, 4.5, 28.8); const pc = P(4.5, 27.5); diamond(pc.x, pc.y, 2, ln); }
+  { for (let t = 0; t <= 8; t++) { const a = P(4.25 + t * .06, 36.4), b2 = P(4.25 + t * .06, 39.6); line(a.x, a.y, b2.x, b2.y, nc('#d2b07a')); }
+    for (const cj of [36.8, 39.2]) { const a = P(4.1, cj), b2 = P(4.9, cj); line(a.x, a.y, b2.x, b2.y, nc('#ffffff')); }
+    for (let k = 0; k < 64; k++) { const an = k / 64 * Math.PI * 2, q = P(4.5 + Math.cos(an) * 3.7, 38 + Math.sin(an) * 3.3); R(q.x, q.y, 1, 1, nc('#ffffff')); } }
   for (let i = 35; i < 39; i++) { const a = P(i, 21), b2 = P(i + 1, 21); line(a.x, a.y, b2.x, b2.y, nc('#e3d9c3')); }
   for (let i = 43; i < 52; i++) { const a = P(i, 21), b2 = P(i + 1, 21); line(a.x, a.y, b2.x, b2.y, nc('#e3d9c3')); }
   NIGHTMODE = false; return c;
@@ -979,10 +1075,11 @@ function paintMetro(night, part) {
 
 /* ---------- scenery ---------- */
 const lamps = [], trees = [];
-for (const jj of [10, 14, 22, 25]) for (let i = 1; i < MW; i += 4) { if (TL[jj][i] !== 'S') continue; lamps.push({i: i + .5, j: jj + (jj === 10 || jj === 22 ? .85 : .15)}); }
-for (const jj of [10, 14, 22, 25]) for (let i = 3; i < MW; i += 4) { if (TL[jj][i] !== 'S' || BUS_STOPS.some(s => Math.abs(s.i - i - .5) < 1.2 && Math.abs(s.j - jj - .5) < 1)) continue; trees.push({i: i + .5, j: jj + (jj === 10 || jj === 22 ? .3 : .7), v: (i + jj) % 3}); }
+for (const jj of [10, 14, 22, 25, 30, 33]) for (let i = 1; i < MW; i += 4) { if (TL[jj][i] !== 'S') continue; lamps.push({i: i + .5, j: jj + (jj === 10 || jj === 22 || jj === 30 ? .85 : .15)}); }
+for (const jj of [10, 14, 22, 25, 30, 33]) for (let i = 3; i < MW; i += 4) { if (TL[jj][i] !== 'S' || BUS_STOPS.some(s => Math.abs(s.i - i - .5) < 1.2 && Math.abs(s.j - jj - .5) < 1)) continue; trees.push({i: i + .5, j: jj + (jj === 10 || jj === 22 || jj === 30 ? .3 : .7), v: (i + jj) % 3}); }
+for (let n = 0; n < 60; n++) { const i = 56.4 + hs(n * 9.7) * 11.2, j = 26.3 + hs(n * 5.3) * 3.4; if (Math.abs(j - 27.9) < .35) continue; if (trees.some(t => Math.abs(t.i - i) < .8 && Math.abs(t.j - j) < .8)) continue; trees.push({i, j, v: n % 3}); solid[Math.floor(j)][Math.floor(i)] = true; }
 const doorNear = (i, j) => B.some(b => Math.hypot(b.door[0] - i, b.door[1] - j) < 1.6) || STATIONS.some(s => Math.abs(s.i - i) < 3 && j > 13 && j < 16);
-for (let n = 0; n < 700 && trees.length < 110; n++) { const i = Math.floor(hs(n * 3.1) * MW), j = Math.floor(hs(n * 7.7) * MH);
+for (let n = 0; n < 700 && trees.length < 230; n++) { const i = Math.floor(hs(n * 3.1) * MW), j = Math.floor(hs(n * 7.7) * MH);
   if (TL[j][i] !== 'G' || solid[j][i] || doorNear(i + .5, j + .5) || trees.some(t => Math.abs(t.i - i - .5) < 1.2 && Math.abs(t.j - j - .5) < 1.2)) continue;
   trees.push({i: i + .5, j: j + .5, v: n % 3}); solid[j][i] = true; }
 const TREE_SPR = [0, 1, 2].map(v => [false, true].map(night => { const c = document.createElement('canvas'); c.width = 22; c.height = 34; g = c.getContext('2d'); NIGHTMODE = night;
@@ -990,7 +1087,7 @@ const TREE_SPR = [0, 1, 2].map(v => [false, true].map(night => { const c = docum
   R(10, 22, 2, 10, nc('#7a4f2e')); disc(11, 16, 8, nc(shade(cc, .8))); disc(11, 14, 7, nc(cc)); disc(9, 11, 3, nc(hi)); if (v === 2) disc(11, 8, 4, nc(cc));
   NIGHTMODE = false; return c; }));
 
-function paintMini() { const c = document.createElement('canvas'); c.width = 176; c.height = 96; const m = c.getContext('2d');
+function paintMini() { const c = document.createElement('canvas'); c.width = MINW; c.height = MINH; const m = c.getContext('2d');
   const col = {G: '#5a9a3a', S: '#cfc8b8', R: '#3b3e46', C: '#3b3e46', X: '#3b3e46', K: '#3b3e46', M: '#7d858c', P: '#e3d9c3', W: '#3f8fd0', I: '#bdb6a6', F: '#43a047', H: '#6fc05a', D: '#a7804f', Q: '#9aa3ad', Y: '#a99a7c'};
   for (let j = 0; j < MH; j++) for (let i = 0; i < MW; i++) { const [x, y] = miniP(i + .5, j + .5); m.fillStyle = col[TL[j][i]]; m.fillRect(x - 2, y - 1, 4, 1); m.fillRect(x - 1, y - 1, 2, 2); }
   B.forEach(b => { if (b.flat) return; const [i, j, w, d] = b.at; m.fillStyle = b.type === 'landmark' ? '#ff8a3d' : '#f2d14b'; for (let jj = j; jj < j + d; jj++) for (let ii = i; ii < i + w; ii++) { const [x, y] = miniP(ii + .5, jj + .5); m.fillRect(x - 2, y - 2, 4, 2); } });
@@ -1000,7 +1097,7 @@ function miniP(i, j) { const r = rot(i, j), RB = rdim()[1]; return [Math.round((
 
 /* ---------- canvas, zoom, camera ---------- */
 const cv = $('#city'), ctx = cv.getContext('2d'), base = document.createElement('canvas'), bctx = base.getContext('2d');
-const mini = $('#mini'), mctx = mini.getContext('2d');
+const mini = $('#mini'), mctx = mini.getContext('2d'); mini.width = MINW; mini.height = MINH;
 let dpr = 1, cssW = 0, cssH = 0, VW = 300, VH = 200, zoom = 1, fitZ = 1, fitMode = true, camFree = false, contentTop = 190;
 let camX = 0, camY = 0, cx = 0, cy = 0;
 const SET = Object.assign({time: 'cycle', festival: 'auto', season: 'auto', ctl: false, mouse: 'click', pads: 'auto', low: false, mini: true}, store.get('settings', {}));
@@ -1065,7 +1162,7 @@ const keys = {u: false, d: false, l: false, r: false};
 const trail = [];
 const dog = {i: player.i - .6, j: player.j, flip: false, moving: false, say: '', until: 0, li: 0};
 const homeOf = id => id === 'chai' ? [CHAI.i + .2, 22.4] : (BY[id] ? BY[id].door : home);
-const ROAM = ['pitch', 'deloitte', 'kc', 'cyber', 'hyd', 'lake', 'grove', 'cable', 'databeat', 'cortexa', 'hub', 'pizza', 'shawarma', 'birla', 'agva', 'golconda', 'fhub'];
+const ROAM = ['pitch', 'deloitte', 'kc', 'cyber', 'hyd', 'lake', 'grove', 'cable', 'cortexa', 'hub', 'pizza', 'shawarma', 'birla', 'golconda', 'fhub', 'thub', 'kbr', 'pvr', 'cult', 'du', 'starbucks', 'cricket', 'falaknuma', 'dhaba'];
 const friends = FRIENDS.map((f, n) => { const h = f.pos || homeOf(f.home); return {...f, ps: makeSprite(f), i: f.pos ? h[0] : h[0] + (n % 2 ? .9 : -.9), j: f.pos ? h[1] : h[1] + .2, flip: !!(f.pos && n % 2), path: null, wait: 1 + n, dist: 0, say: '', until: 0, li: 0, party: false, back: false}; });
 friends.forEach(f => { if (!f.pos && !canStand(f.i, f.j)) { const h = homeOf(f.home); f.i = h[0]; f.j = h[1]; } });
 let party = [];
@@ -1093,7 +1190,9 @@ const cars = [
   {lane: 11.5, x: 5, v: -2.6, c: '#e2474b', type: 'car'}, {lane: 11.5, x: 28, v: -3.1, c: '#ffffff', type: 'car'}, {lane: 11.5, x: 40, v: -2.2, type: 'bus'}, {lane: 11.5, x: 18, v: -2.8, type: 'auto'},
   {lane: 13.5, x: 12, v: 2.8, c: '#f2b632', type: 'car'}, {lane: 13.5, x: 33, v: 2.2, c: '#2f80ed', type: 'car'}, {lane: 13.5, x: 45, v: 2.6, type: 'auto'},
   {lane: 23.5, x: 9, v: -2.4, c: '#27ae60', type: 'car'}, {lane: 23.5, x: 30, v: -2, type: 'bus'}, {lane: 24.5, x: 20, v: 2.6, c: '#7b5cc6', type: 'car'}, {lane: 24.5, x: 36, v: 3, c: '#ff8a3d', type: 'car'}, {lane: 24.5, x: 6, v: 2.3, type: 'auto'},
-  {cross: 32.5, x: 4, v: 2.4, c: '#16a3b8', type: 'car'}, {cross: 10.5, x: 20, v: -2.2, c: '#e9eef5', type: 'car'}, {cross: 40.5, x: 8, v: 2.1, type: 'auto'}, {cross: 22.5, x: 26, v: -2.5, c: '#c0392b', type: 'car'}
+  {cross: 32.5, x: 4, v: 2.4, c: '#16a3b8', type: 'car'}, {cross: 10.5, x: 20, v: -2.2, c: '#e9eef5', type: 'car'}, {cross: 40.5, x: 8, v: 2.1, type: 'auto'}, {cross: 22.5, x: 26, v: -2.5, c: '#c0392b', type: 'car'},
+  {lane: 31.5, x: 12, v: -2.5, c: '#ffffff', type: 'car'}, {lane: 31.5, x: 44, v: -2.1, type: 'bus'}, {lane: 32.5, x: 30, v: 2.7, c: '#e2474b', type: 'car'}, {lane: 32.5, x: 58, v: 2.3, type: 'auto'}, {lane: 13.5, x: 60, v: 2.4, c: '#16a3b8', type: 'car'}, {lane: 23.5, x: 58, v: -2.6, c: '#f2b632', type: 'car'},
+  {cross: 53.5, x: 6, v: 2.3, c: '#7b5cc6', type: 'car'}, {cross: 53.5, x: 30, v: -2.6, type: 'auto'}, {cross: 32.5, x: 36, v: 2.2, c: '#ff8a3d', type: 'car'}
 ];
 cars.forEach(c => { c.stopT = 0; c.lastStop = -1; });
 const boats = [{ci: 36.7, cj: 18.4, r: 1.25, a: 0, sp: .25, c: '#e2474b'}, {ci: 36.9, cj: 18.6, r: 1.7, a: 2.5, sp: -.18, c: '#2f80ed'}, {ci: 45.1, cj: 18.2, r: .95, a: 1, sp: .3, c: '#f2b632'}, {ci: 49.6, cj: 18.4, r: 1.1, a: 4, sp: -.22, c: '#ffffff'}];
@@ -1114,6 +1213,17 @@ function festival() { if (SET.festival !== 'auto') return SET.festival; const d 
 function season() { if (SET.season !== 'auto') return SET.season; const m = new Date().getMonth() + 1; return m >= 3 && m <= 5 ? 'summer' : m >= 6 && m <= 9 ? 'monsoon' : 'winter'; }
 const flakes = Array.from({length: 220}, (_, n) => ({x: hs(n + 1500) * 1600, y: hs(n + 1700) * 900, v: 18 + hs(n + 1900) * 26, ph: hs(n + 2100) * 6, s: hs(n + 2300) < .3 ? 2 : 1}));
 let rockets = [];
+const PLANE = ['.r..........', '.rr...g.....', 'wwwwwwwwwwww', 'wbwbwbwbwwwn', '.....ggg....', '......g.....'];
+const planes = [{m: 'orbit', a: 0, r: 22, sp: .06, z: 170}, {m: 'orbit', a: 3.1, r: 15, sp: -.08, z: 130}, {m: 'takeoff', s: 0}, {m: 'land', s: 20}];
+function planePos(p) { if (p.m === 'orbit') return [MW / 2 + Math.cos(p.a) * p.r, MH / 2 + Math.sin(p.a) * p.r * .75, p.z];
+  const s = p.s; if (p.m === 'takeoff') return [MW + 4 + s, 37.5, Math.max(0, s - 14) * Math.max(0, s - 14) * .28];
+  const u = 70 - s; return [MW + 4 + u, 37.5, Math.max(0, u - 14) * Math.max(0, u - 14) * .28]; }
+function updatePlanes(dt) { for (const p of planes) { if (p.m === 'orbit') p.a += p.sp * dt; else { p.s += dt * (p.m === 'takeoff' ? (2 + p.s * .35) : 6); if (p.s > 70) p.s = p.m === 'takeoff' ? -12 : -6; } } }
+function drawPlanes() { for (const p of planes) { if (p.s < 0) continue; const [i, j, z] = planePos(p), q = P(i, j, z), q0 = P(i, j, 0);
+  const ang = p.m === 'orbit' ? p.a + Math.PI / 2 * Math.sign(p.sp) : 0, [di, dj] = p.m === 'orbit' ? [Math.cos(ang), Math.sin(ang)] : [p.m === 'takeoff' ? 1 : -1, 0], r2 = rot(di, dj), r0 = rot(0, 0), left = (r2[0] - r0[0]) - (r2[1] - r0[1]) < 0;
+  if (z < 160) { g.globalAlpha = .18 * (1 - z / 160); R(q0.x - 6, q0.y, 12, 2, '#000'); g.globalAlpha = 1; }
+  pix(PLANE, q.x - 6, q.y - 4, {r: '#e2474b', g: '#9aa3ad', w: '#ffffff', b: '#2f6fb5', n: '#151515'}, left, z > 120 ? 1 : 2);
+  if (nightT > .3 && Math.floor(T / 400) % 2) { R(q.x - 6, q.y - 2, 1, 1, '#ff4d4d'); R(q.x + 6, q.y - 2, 1, 1, '#4dff7a'); } } }
 
 /* ---------- path finding ---------- */
 function findPath(si, sj, ti, tj) {
@@ -1170,11 +1280,12 @@ function update(dt) {
   if (photoHour !== null) hour = photoHour;
   else if (SET.time === 'cycle') hour = (hour + dt * 24 / 360) % 24;
   else if (SET.time === 'live') { const d = new Date(); hour = d.getHours() + d.getMinutes() / 60; }
-  else { const tgt = SET.time === 'day' ? 12 : 22.5; hour += (tgt - hour) * Math.min(1, dt * 2); }
+  else { const tgt = SET.time === 'day' ? 12 : SET.time === 'sunset' ? 18.35 : 22.5; hour += (tgt - hour) * Math.min(1, dt * 2); }
   nightT += (nightness(hour) - nightT) * Math.min(1, dt * 3); duskT += (Math.min(1, duskness(hour)) - duskT) * Math.min(1, dt * 3);
   const isNight = nightT > .5; if (isNight !== wasNight) { wasNight = isNight; document.body.classList.toggle('night', isNight); if (isNight) unlock('night'); weatherLabel(); if (typeof dnLabel === 'function') dnLabel(); }
   if (duskT > .8 && hour > 17) unlock('sunset');
   const sz = season(); if (sz !== curSeason) { curSeason = sz; rain = sz === 'monsoon'; snow = sz === 'winter'; if (typeof weatherLabel === 'function') weatherLabel(); if (typeof rainSound === 'function') rainSound(); }
+  updatePlanes(dt);
   rainT += ((rain ? 1 : 0) - rainT) * Math.min(1, dt * 1.5); snowT += ((snow ? 1 : 0) - snowT) * Math.min(1, dt * 1.2);
   if (snowT > .05) { if (snowT > .6) unlock('snow'); const n = SET.low ? 70 : flakes.length; for (let k = 0; k < n; k++) { const f = flakes[k]; f.y += f.v * dt; f.x += Math.sin(T / 900 + f.ph) * 8 * dt; if (f.y > VH + 4) { f.y = -4; f.x = Math.random() * VW; } if (f.x < -4) f.x = VW; if (f.x > VW + 4) f.x = 0; } }
   // player
@@ -1285,10 +1396,11 @@ function objs() {
   pt(47.5, 18.3, .1, drawPylon, {}, 70, 90);
   L.push({i0: 1.2, j0: 26.9, i1: 1.4, j1: 28.1, draw: () => drawGoal(1.3)}); L.push({i0: 7.6, j0: 26.9, i1: 7.8, j1: 28.1, draw: () => drawGoal(7.7)});
   L.push({i0: 4, j0: 27, i1: 5, j1: 28, draw: drawFootball});
-  L.push({i0: 27, j0: 27.6, i1: 28.4, j1: 27.9, draw: drawLotSign});
   L.push({i0: 25.5, j0: 10.2, i1: 30.5, j1: 10.6, draw: drawStudents});
   gtrees.slice(-12).forEach((t, n) => { const ti = 13.6 + (n % 6) * 1.15, tj = 26.6 + Math.floor(n / 6) * 1.3; L.push({i0: ti - .2, j0: tj - .2, i1: ti + .2, j1: tj + .2, gt: t, ti, tj, draw: drawGuestTree}); });
   L.push({i0: 12.9, j0: 25.9, i1: 13.1, j1: 26.1, draw: () => postSign(13, 26, 'GUEST GROVE', '#2e7d32')});
+  L.push({i0: 19.3, j0: 21.2, i1: 19.5, j1: 21.4, draw: () => duBoard(19.4, 21.3)}); L.push({i0: 16.9, j0: 39.4, i1: 17.1, j1: 39.6, draw: () => duBoard(17, 39.5)});
+  L.push({i0: 4, j0: 36.3, i1: 5, j1: 39.7, draw: drawCricket});
   if (festival() === 'christmas') L.push({i0: 16.2, j0: 26.95, i1: 16.8, j1: 27.55, draw: drawXmasTree});
   L.push({i0: 42.9, j0: 21.6, i1: 43.1, j1: 21.8, draw: () => postSign(43, 21.7, 'DURGAM CHERUVU', '#7b5cc6')});
   L.push({i0: 34.9, j0: 21.6, i1: 35.1, j1: 21.8, draw: () => postSign(35, 21.7, 'HUSSAIN SAGAR', '#2f6fb5')});
@@ -1322,12 +1434,17 @@ function extras(b) { const [i, j, w, d] = b.at, h = b.h;
   if (b.id === 'deloitte') { const p = P(i + 5.5, j + 1.5, 154), t = 'DELOITTE', w2 = tw(t) + 8, x = Math.round(p.x - w2 / 2), y = p.y - 22;
     R(x + 3, y + 10, 1, 8, '#2a3a4a'); R(x + w2 - 4, y + 10, 1, 8, '#2a3a4a'); R(x - 1, y - 1, w2 + 2, 12, '#151515'); R(x, y, w2, 10, nightT > .5 ? '#0f1830' : '#1f2c3b'); TX(t, x + 4, y + 1, nightT > .5 ? '#9ff6ff' : '#ffffff');
     if (nightT > .3) { g.globalAlpha = nightT * .35; R(x - 3, y - 3, w2 + 6, 16, '#7fe8ff'); g.globalAlpha = 1; } }
-  const sn = {agva: ['AGVA LAB', '#c03535'], insofe: ['INSOFE', '#3a2a20'], unitedway: ['UNITED WAY', '#e2474b'], databeat: ['DATABEAT', '#5fc7d8'], anova: ['ANOVA', '#3b2a6b'], kc: ['KNOWLEDGE CITY', '#0f5c6e'], cortexa: ['TEKFRAMEWORKS', '#232c47'], hub: ['INNOVATION HUB', '#1f6f96'], pizza: ['NEW YORK SLICE', '#b8432f'], shawarma: ['SHAWARMA POINT', '#2e7d32'], fhub: ['FRIENDS HUB', '#6a3a9a'], codewatch: ['CODEWATCH', '#1f2a1f'], ecosense: ['ECOSENSE', '#2f8f4e'], edi: ['DOC INTEL', '#4a3f30'], home: ["YASH'S HOME", '#c0392b'], sakshi: ["SAKSHI'S HOME", '#e85d9a'], lab: ['AI LAB', '#24392f'], cyber: ['CYBER TOWERS', '#b8702a'], golconda: ['GOLCONDA FORT', '#6e5d42'], birla: ['BIRLA MANDIR', '#c0392b']}[b.id];
-  if (sn) { const z = h + (b.id === 'pizza' ? 40 : b.id === 'hub' ? 28 : b.id === 'kc' ? 6 : b.id === 'insofe' ? 16 : b.id === 'golconda' ? 0 : b.id === 'birla' ? 4 : 4); const p = P(i + w / 2, j + d / 2, z); signBoard(sn[0], p.x, p.y - 14, b.id === 'databeat' ? '#0e1a2b' : '#ffffff', sn[1]); }
+  const sn = {agva: ['AGVA LAB', '#c03535'], insofe: ['INSOFE', '#3a2a20'], unitedway: ['UNITED WAY', '#e2474b'], databeat: ['DATABEAT', '#5fc7d8'], anova: ['ANOVA', '#3b2a6b'], kc: ['KNOWLEDGE CITY', '#0f5c6e'], cortexa: ['TEKFRAMEWORKS', '#232c47'], hub: ['INNOVATION HUB', '#1f6f96'], pizza: ['NEW YORK SLICE', '#b8432f'], shawarma: ['SHAWARMA POINT', '#2e7d32'], fhub: ['FRIENDS HUB', '#6a3a9a'], dhaba: ['13 DHABA', '#d97a2b'], thub: ['T-HUB', '#a82424'], apts: ['GACHIBOWLI HEIGHTS', '#5a6470'], airport: ['RGIA AIRPORT', '#2f6fb5'], falaknuma: ['FALAKNUMA PALACE', '#8a6a1c'], du: ['DELOITTE UNIVERSITY', '#1f2a1f'], starbucks: ['STARBUCKS', '#00704a'], pvr: ['PVR CINEMAS', '#2a2a40'], cult: ['CULT.FIT', '#d42d55'], lot: ['GITHUB HOUSE', '#0d1117'], codewatch: ['CODEWATCH', '#1f2a1f'], ecosense: ['ECOSENSE', '#2f8f4e'], edi: ['DOC INTEL', '#4a3f30'], home: ["YASH'S HOME", '#c0392b'], sakshi: ["SAKSHI'S HOME", '#e85d9a'], lab: ['AI LAB', '#24392f'], cyber: ['CYBER TOWERS', '#b8702a'], golconda: ['GOLCONDA FORT', '#6e5d42'], birla: ['BIRLA MANDIR', '#c0392b']}[b.id];
+  if (sn) { const z = h + (b.id === 'falaknuma' ? 16 : b.id === 'apts' ? 4 : b.id === 'airport' ? 22 : b.id === 'pizza' ? 40 : b.id === 'hub' ? 28 : b.id === 'kc' ? 6 : b.id === 'insofe' ? 16 : b.id === 'golconda' ? 0 : b.id === 'birla' ? 4 : 4); const p = P(i + w / 2, j + d / 2, z); signBoard(sn[0], p.x, p.y - 14, b.id === 'databeat' ? '#0e1a2b' : '#ffffff', sn[1]); }
 }
 function signBoard(t, cx2, y, fg, bg) { const w2 = tw(t) + 6, x = Math.round(cx2 - w2 / 2); R(x - 1, y - 1, w2 + 2, 11, '#151515'); R(x, y, w2, 9, bg); TX(t, x + 3, y + 1, fg); R(x + 2, y + 10, 1, 3, '#151515'); R(x + w2 - 3, y + 10, 1, 3, '#151515'); }
 function postSign(i, j, t, bg) { const p = P(i, j); R(p.x, p.y - 16, 1, 16, '#6b4a2a'); signBoard(t, p.x, p.y - 28, '#ffffff', bg); }
 function drawTree(o) { const t = o.t, p = P(t.i, t.j); night2(TREE_SPR[t.v][0], TREE_SPR[t.v][1], p.x - 11, p.y - 32); }
+function duBoard(i, j) { const p = P(i, j); R(p.x - 9, p.y - 22, 2, 22, '#2a2a2a'); R(p.x + 8, p.y - 22, 2, 22, '#2a2a2a'); R(p.x - 15, p.y - 38, 31, 18, '#151515'); R(p.x - 14, p.y - 37, 29, 16, '#1f2a1f'); g.font = '16px Silkscreen'; TX('DU', p.x - 9, p.y - 37, '#ffffff', 16); R(p.x + 9, p.y - 26, 4, 4, '#86bc25'); g.font = '8px Silkscreen'; }
+function drawCricket() { const bw = P(4.5, 37.1), bt = P(4.5, 38.9), ph = (T / 1600) % 1, bx = P(4.5, 37.1 + ph * 1.8);
+  pix(TINY, bt.x - 1, bt.y - 5, {k: '#1b1b1b', s: '#d29a6c', c: '#ffffff', b: '#ffffff'}); pix(TINY, bw.x - 1, bw.y - 5 - (ph < .1 ? 1 : 0), {k: '#1b1b1b', s: '#c68a5e', c: '#2f80ed', b: '#ffffff'});
+  R(bx.x, bx.y - 3 + Math.round(Math.sin(ph * Math.PI) * -3), 1, 1, '#e2474b'); for (const [di, dj] of [[2.2, 36.4], [6.6, 37.5], [3.2, 40.4], [6, 40], [1.6, 38.6]]) { const q = P(di, dj); pix(TINY, q.x - 1, q.y - 5, {k: '#1b1b1b', s: '#b97c52', c: '#2f80ed', b: '#ffffff'}); }
+  for (const cj of [36.7, 39.3]) { const q = P(4.5, cj); R(q.x - 1, q.y - 4, 1, 4, '#f4f1e6'); R(q.x + 1, q.y - 4, 1, 4, '#f4f1e6'); } }
 function drawLamp(o) { const p = P(o.l.i, o.l.j); R(p.x, p.y - 26, 1, 26, '#4a4f57'); R(p.x, p.y - 26, 4, 1, '#4a4f57'); R(p.x + 2, p.y - 25, 4, 2, nightT > .4 ? '#ffe08a' : '#2e3238');
   if (festival() === 'christmas') { disc(p.x, p.y - 15, 3, '#2e7d32'); R(p.x, p.y - 15, 1, 1, '#151515'); R(p.x - 1, p.y - 12, 3, 2, '#e2474b'); }
   if (snowT > .3) R(p.x - 1, p.y - 27, 6, 1, '#ffffff'); }
@@ -1445,7 +1562,10 @@ function draw() {
   sorted = isoSort(objs()); for (const o of sorted) o.draw(o);
   // overlays
   g.setTransform(1, 0, 0, 1, 0, 0);
-  if (duskT > .02) R(0, 0, vw, vh, `rgba(255,120,60,${duskT * .1 * (1 - rainT)})`);
+  if (duskT > .02) { const k = duskT * (1 - rainT * .7), gr = g.createLinearGradient(0, 0, 0, vh); gr.addColorStop(0, `rgba(120,40,190,${.75 * k})`); gr.addColorStop(.5, `rgba(240,70,140,${.6 * k})`); gr.addColorStop(1, `rgba(255,150,40,${.7 * k})`);
+    g.globalCompositeOperation = 'soft-light'; g.fillStyle = gr; g.fillRect(0, 0, vw, vh); g.globalCompositeOperation = 'source-over';
+    const g2 = g.createLinearGradient(0, 0, 0, vh); g2.addColorStop(0, `rgba(96,40,150,${.22 * k})`); g2.addColorStop(.55, `rgba(220,80,130,${.1 * k})`); g2.addColorStop(1, `rgba(255,140,60,${.16 * k})`); g.fillStyle = g2; g.fillRect(0, 0, vw, vh);
+    const rg = g.createRadialGradient(vw * .72, -vh * .05, 4, vw * .72, -vh * .05, vh * .95); rg.addColorStop(0, `rgba(255,220,130,${.55 * k})`); rg.addColorStop(.3, `rgba(255,150,80,${.25 * k})`); rg.addColorStop(1, 'rgba(255,120,80,0)'); g.globalCompositeOperation = 'screen'; g.fillStyle = rg; g.fillRect(0, 0, vw, vh); g.globalCompositeOperation = 'source-over'; }
   const tint = rainT * (nightT > .5 ? .18 : .26); if (tint > .01) R(0, 0, vw, vh, `rgba(40,50,72,${tint})`);
   if (rainT > .05) { g.globalAlpha = rainT * .7; g.fillStyle = nightT > .5 ? '#8fa6d8' : '#dfe9f7'; const n = SET.low ? 80 : drops.length; for (let k = 0; k < n; k++) { const d = drops[k], x = Math.round(d.x), y = Math.round(d.y); g.fillRect(x, y, 1, 3); g.fillRect(x - 1, y + 3, 1, 2); }
     g.fillStyle = '#e8f0fb'; for (const s of splashes) { const r = 1 + Math.round(s.t * 8); g.fillRect(Math.round(s.x - r), Math.round(s.y), 1, 1); g.fillRect(Math.round(s.x + r), Math.round(s.y), 1, 1); } g.globalAlpha = 1; }
@@ -1454,6 +1574,7 @@ function draw() {
   if (flash > 0) R(0, 0, vw, vh, `rgba(220,230,255,${Math.min(.75, flash * .7)})`);
   g.setTransform(1, 0, 0, 1, -camX, -camY);
   if (bolt) for (let n = 1; n < bolt.pts.length; n++) { const [a, b2] = bolt.pts[n - 1], [c2, d2] = bolt.pts[n]; line(a, b2, c2, d2, '#fffbe0'); line(a + 1, b2, c2 + 1, d2, '#b8c8ff'); }
+  drawPlanes();
   for (const r of rockets) { R(Math.round(r.x), Math.round(r.y), 1, 3, r.c); g.globalAlpha = .5; R(Math.round(r.x), Math.round(r.y) + 3, 1, 6, '#ffe9b8'); g.globalAlpha = 1; }
   if (hugS) { const p = P((player.i + hugS.s.i) / 2, (player.j + hugS.s.j) / 2); pix(HEART, p.x - 7, p.y - 36 - Math.round(Math.abs(Math.sin(T / 180)) * 3), {x: '#ff4f8b'}, false, 2); }
   for (const h of hearts) { g.globalAlpha = Math.min(1, h.life * 1.4); pix(HEART, Math.round(h.x) - 3, Math.round(h.y), {x: '#ff4f8b'}); } g.globalAlpha = 1;
@@ -1471,7 +1592,7 @@ function draw() {
   }
   drawMini();
 }
-function drawMini() { if (!SET.mini) return; mctx.clearRect(0, 0, 176, 96); mctx.drawImage(MINIBASE, 0, 0);
+function drawMini() { if (!SET.mini) return; mctx.clearRect(0, 0, MINW, MINH); mctx.drawImage(MINIBASE, 0, 0);
   mctx.fillStyle = '#e8eef5'; const [tx, ty] = miniP(train.x, 12.5); mctx.fillRect(tx - 6, ty - 3, 12, 2);
   mctx.fillStyle = '#ffffff'; for (const f of friends) { const [x, y] = miniP(f.i, f.j); mctx.fillRect(x - 1, y - 1, 2, 2); }
   PACKETS.forEach((p, n) => { if (pVisible(p, n)) { const [x, y] = miniP(p.i, p.j); mctx.fillStyle = Math.floor(T / 300) % 2 ? '#2f80ed' : '#9fd0ff'; mctx.fillRect(x - 1, y - 1, 3, 3); } });
@@ -1580,7 +1701,7 @@ function touchUp(e) { if (!touches.has(e.pointerId)) return; touches.delete(e.po
 addEventListener('pointercancel', e => { touches.delete(e.pointerId); if (!touches.size) tg = null; drag = null; mouseDown = false; });
 
 /* ---------- minimap ---------- */
-mini.addEventListener('click', e => { const r = mini.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 176, y = (e.clientY - r.top) / r.height * 96;
+mini.addEventListener('click', e => { const r = mini.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * MINW, y = (e.clientY - r.top) / r.height * MINH;
   const dd = (x - rdim()[1] * 2 - 6) / 2, ss = y - 6, w2 = unrot((ss + dd) / 2, (ss - dd) / 2); if (!ride && !tour.on) walkTo(player, w2[0], w2[1]); cv.focus({preventScroll: true}); });
 
 /* ---------- keyboard ---------- */
@@ -1660,7 +1781,7 @@ $('#sQuest').addEventListener('click', () => { setSide(false); startQuest(); });
 
 /* ---------- settings ---------- */
 const OPTS = [
-  ['time', 'TIME OF DAY', [['cycle', 'LIVE CYCLE (6 MIN DAY)'], ['live', 'REAL CLOCK'], ['day', 'ALWAYS DAY'], ['night', 'ALWAYS NIGHT']]],
+  ['time', 'TIME OF DAY', [['cycle', 'LIVE CYCLE (6 MIN DAY)'], ['live', 'REAL CLOCK'], ['day', 'ALWAYS DAY'], ['sunset', '🌇 ALWAYS SUNSET'], ['night', 'ALWAYS NIGHT']]],
   ['season', 'SEASON', [['auto', 'AUTO BY DATE'], ['summer', '☀ SUMMER'], ['monsoon', '🌧 MONSOON'], ['winter', '❄ WINTER (SNOW)']]],
   ['festival', 'FESTIVAL', [['auto', 'AUTO BY DATE'], ['none', 'NONE'], ['diwali', '🪔 DIWALI'], ['holi', '🎨 HOLI'], ['christmas', '🎄 CHRISTMAS'], ['sankranti', '🪁 SANKRANTI']]],
   ['ctl', 'ON-SCREEN BUTTONS (ZOOM, ROTATE, PADS)', [[false, 'HIDDEN'], [true, 'SHOWN']]],
@@ -1686,9 +1807,10 @@ function syncControls() {
   document.body.classList.toggle('pads', SET.pads === 'on'); document.body.classList.toggle('nopads', SET.pads === 'off'); document.body.classList.toggle('nomini', !SET.mini);
   const mb = $('#mouseBtn'); mb.textContent = '🖱 ' + {click: 'CLICK', follow: 'FOLLOW', hold: 'HOLD'}[SET.mouse]; mb.classList.toggle('on', SET.mouse !== 'click');
   $('#timeBtn').title = 'Time: ' + SET.time; if ($('#dnBtn')) dnLabel(); }
-function dnLabel() { const b = $('#dnBtn'); if (!b) return; const nt = SET.time === 'night' || (SET.time !== 'day' && nightT > .5); b.innerHTML = nt ? '🌙<span class="lbl"> NIGHT</span>' : '☀<span class="lbl"> DAY</span>'; b.classList.toggle('on', SET.time === 'day' || SET.time === 'night'); b.title = SET.time === 'day' || SET.time === 'night' ? 'Pinned to ' + SET.time + '. Click to switch.' : 'Following the ' + (SET.time === 'live' ? 'real clock' : 'day cycle') + '. Click to switch day/night.'; }
-$('#dnBtn').addEventListener('click', () => { const nt = SET.time === 'night' || (SET.time !== 'day' && nightT > .5); SET.time = nt ? 'day' : 'night'; saveSet(); syncControls(); dnLabel(); if (sideOpen()) renderSettings(); toastAch(SET.time === 'day' ? '☀ Day' : '🌙 Night', 'Pinned. Tap the clock to go back to the live day cycle.'); });
-$('#timeBtn').addEventListener('click', () => { const m = ['cycle', 'live', 'day', 'night']; SET.time = m[(m.indexOf(SET.time) + 1) % 4]; saveSet(); syncControls(); dnLabel(); toastAch('🕗 Time: ' + {cycle: 'LIVE CYCLE', live: 'REAL CLOCK', day: 'ALWAYS DAY', night: 'ALWAYS NIGHT'}[SET.time], {cycle: 'A full day passes every 6 minutes.', live: 'Matches your local time.', day: 'Sun stays up.', night: 'Lights stay on.'}[SET.time]); });
+const curDN = () => SET.time === 'day' || SET.time === 'sunset' || SET.time === 'night' ? SET.time : duskT > .6 ? 'sunset' : nightT > .5 ? 'night' : 'day';
+function dnLabel() { const b = $('#dnBtn'); if (!b) return; const m = curDN(); b.innerHTML = {day: '☀<span class="lbl"> DAY</span>', sunset: '🌇<span class="lbl"> SUNSET</span>', night: '🌙<span class="lbl"> NIGHT</span>'}[m]; b.classList.toggle('on', ['day', 'sunset', 'night'].includes(SET.time)); b.title = SET.time === 'day' || SET.time === 'night' ? 'Pinned to ' + SET.time + '. Click to switch.' : 'Following the ' + (SET.time === 'live' ? 'real clock' : 'day cycle') + '. Click to switch day/night.'; }
+$('#dnBtn').addEventListener('click', () => { SET.time = {day: 'sunset', sunset: 'night', night: 'day'}[curDN()]; saveSet(); syncControls(); dnLabel(); if (sideOpen()) renderSettings(); toastAch({day: '☀ Day', sunset: '🌇 Sunset', night: '🌙 Night'}[SET.time], 'Pinned. Tap the clock to go back to the live day cycle.'); });
+$('#timeBtn').addEventListener('click', () => { const m = ['cycle', 'live', 'day', 'sunset', 'night']; SET.time = m[(m.indexOf(SET.time) + 1) % 5]; saveSet(); syncControls(); dnLabel(); toastAch('🕗 Time: ' + {cycle: 'LIVE CYCLE', live: 'REAL CLOCK', day: 'ALWAYS DAY', sunset: 'ALWAYS SUNSET', night: 'ALWAYS NIGHT'}[SET.time], {cycle: 'A full day passes every 6 minutes.', live: 'Matches your local time.', day: 'Sun stays up.', sunset: 'Golden hour, purple sky.', night: 'Lights stay on.'}[SET.time]); });
 
 /* ---------- HUD ---------- */
 let hudT = 0;
@@ -1746,7 +1868,7 @@ $('#mLike').addEventListener('click', () => { const b = B[cur]; if (likes.has(b.
 $('#mScene').addEventListener('pointerdown', e => { const r = e.currentTarget.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 200; const ex = inside.exhibits[inside.near]; if (ex && Math.abs(x - ex.x) < 9) { useExhibit(); return; } inside.tx = Math.max(10, Math.min(186, x - 8)); });
 function useExhibit() { const ex = inside.exhibits[inside.near]; if (!ex) return beep(180, .05); if (ex.clap) { clapEcho(); return; } beep(990, .05); }
 function clapEcho() { unlock('clap'); $('#mExhibit').innerHTML = '<b>👏 CLAP!</b> ...clap... ..clap.. .clap. (heard all the way up at the Bala Hissar)'; if (sfx) { [0, 380, 720, 1000].forEach((t, q) => setTimeout(() => { try { const a = AC(), s = a.createBufferSource(), gn = a.createGain(); s.buffer = noiseBuf(a, .08); gn.gain.value = .25 / (q + 1); s.connect(gn).connect(a.destination); s.start(); } catch (er) {} }, t)); } }
-const WALL = {agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', hub: '#eef6fa', pizza: '#f3e2c4', shawarma: '#f6efe2', fhub: '#7b4fb0', sakshi: '#ffe3ef', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
+const WALL = {gh: '#0d1117', dhaba: '#e8c48a', thub: '#3a1414', apts: '#f2e6cf', airport: '#dfe6ee', falaknuma: '#f6f0e4', du: '#20262e', sbux: '#f4efe6', pvr: '#141420', cult: '#151515', kbr: '#bfe3b0', cricket: '#86c1ef', agva: '#dfe8ee', insofe: '#e8dcc4', uw: '#f6e6c4', databeat: '#2a3550', anova: '#4a3a7a', kc: '#e9f3f6', cortexa: '#1c2238', hub: '#eef6fa', pizza: '#f3e2c4', shawarma: '#f6efe2', fhub: '#7b4fb0', sakshi: '#ffe3ef', codewatch: '#5a6470', eco: '#e3f0dc', edi: '#efe6d0', hq: '#14202c', lab: '#1d2f28', charminar: '#2a1c3a', lake: '#86c1ef', pitch: '#3a4a5a', lot: '#9ec7e8', grove: '#bfe3b0', home: '#f6e6c4', cyber: '#3a2414', golconda: '#c9b48e', birla: '#f4f1e8', cable: '#1a1240'};
 const sctx = $('#mScene').getContext('2d');
 const SURY = (() => { const f = FRIENDS.find(x => x.name === 'Suryansh'); return f ? makeSprite(f) : null; })(), FRS = FRIENDS.filter(x => x.home === 'fhub').slice(0, 2).map(makeSprite);
 const SISPS = makeSprite(FRIENDS.find(f => f.sister)), MOMPS = makeSprite(FRIENDS.find(f => f.name === 'Mom')), DADPS = makeSprite(FRIENDS.find(f => f.name === 'Dad'));
@@ -1759,7 +1881,7 @@ function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransf
   if (near !== inside.near) { inside.near = near; $$('#mFloors li').forEach(li => li.classList.toggle('lit', +li.dataset.ex === near - (b.id === 'golconda' ? 1 : 0) && near >= 0));
     if (near >= 0) { const e = inside.exhibits[near]; $('#mExhibit').innerHTML = `<b>EXHIBIT ${near + 1}/${inside.exhibits.length} · ${esc(e.role)}:</b> ${esc(e.text)}`; beep(1046, .03, .02); } }
   R(0, 0, Wd, 70, WALL[k2] || '#333'); R(0, F, Wd, 16, '#8a6a4a'); for (let n = 0; n < Wd; n += 12) R(n, F, 1, 16, '#765a3e'); R(0, F, Wd, 2, '#5a4430');
-  const outdoor = ['lot', 'grove', 'lake', 'cable'].includes(k2);
+  const outdoor = ['grove', 'lake', 'cable', 'kbr', 'cricket'].includes(k2);
   if (outdoor) { R(0, 0, Wd, F, nightT > .5 ? '#1a1240' : duskT > .4 ? '#f29a5a' : '#86c1ef'); R(0, F - 6, Wd, 6, '#77b64a'); R(0, F, Wd, 16, k2 === 'lake' || k2 === 'cable' ? '#3f8fd0' : '#a7804f'); }
   if (k2 === 'agva') { R(50, 40, 56, 3, '#8a6a4a'); R(62, 34, 22, 5, '#d29a6c'); R(84, 31, 5, 9, '#d29a6c'); R(124, 20, 30, 34, '#cfd6dc'); R(128, 24, 22, 18, '#3a4a5a'); R(130 + Math.round((Math.sin(t / 400) + 1) * 8), 26, 3, 3, '#e2474b'); }
   if (k2 === 'insofe') { R(48, 10, 80, 30, '#5a3b2a'); R(50, 12, 76, 26, '#2f4a3a'); TX('y = wx + b', 56, 16, '#ffffff'); TX('loss -> 0', 56, 26, '#f2d14b'); }
@@ -1775,6 +1897,16 @@ function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransf
   if (k2 === 'pizza') { R(30, 14, 140, 12, '#b8432f'); TX('NEW YORK SLICE', 62, 16, '#ffd34f'); R(40, 30, 60, 14, '#c9b89a'); disc(70, 36, 6, '#ffd34f'); R(68, 34, 2, 2, '#d62d20'); R(73, 37, 2, 2, '#d62d20'); for (let n = 0; n < 3; n++) { R(118 + n * 18, 44, 12, 3, '#8a6a4a'); R(123 + n * 18, 47, 2, 6, '#6b4a2a'); } if (SURY) pix(SURY.idle, 150, F - 28, SURY.pal, true, 2); }
   if (k2 === 'shawarma') { R(40, 10, 60, 10, '#2e7d32'); TX('SHAWARMA', 46, 12, '#ffffff'); R(60, 22, 3, 26, '#888'); for (let r = 0; r < 8; r++) R(56 - (r < 4 ? r : 7 - r), 24 + r * 3, 11 + (r < 4 ? r : 7 - r) * 2, 3, Math.floor(T / 200 + r) % 2 ? '#c98a3a' : '#8a4a1a'); R(110, 30, 50, 12, '#c9b89a'); }
   if (k2 === 'fhub') { R(0, 0, Wd, F, '#7b4fb0'); R(70, 8, 24, 24, '#f2d14b'); R(74, 12, 16, 16, '#5a3a1a'); disc(82, 20, 3, '#f2d14b'); R(20, 34, 50, 10, '#e07a3e'); R(20, 30, 50, 5, '#c0612c'); R(110, 12, 30, 20, '#ffffff'); TX('FRIENDS', 112, 18, '#7b4fb0'); for (let n = 0; n < 12; n++) R(8 + n * 16, 3, 2, 2, ['#ff4d4d', '#ffd34f', '#4fa8ff', '#6be04f'][n % 4]); FRS.forEach((ps, n) => pix(ps.idle, 120 + n * 14, F - 28, ps.pal, n % 2 === 0, 2)); }
+  if (k2 === 'pvr') { R(20, 6, 160, 40, '#f4f1e6'); R(22, 8, 156, 36, ['#2f80ed', '#e2474b', '#9be03c'][Math.floor(T / 1500) % 3]); TX('NOW SHOWING', 60, 22, '#ffffff'); for (let n = 0; n < 12; n++) R(24 + n * 13, 46, 9, 6, '#7a1f2a'); }
+  if (k2 === 'cult') { for (let n = 0; n < 4; n++) { const x = 30 + n * 38; R(x, 36, 20, 2, '#888'); R(x - 2, 33, 4, 8, '#333'); R(x + 18, 33, 4, 8, '#333'); } R(20, 8, 160, 4, '#ff3d6b'); TX('NO PAIN NO GAIN', 50, 16, '#ff3d6b'); }
+  if (k2 === 'du') { R(40, 8, 120, 30, '#ffffff'); TX('def stage_gate():', 46, 12, '#1f2a1f'); TX('SELECT * FROM you', 46, 22, '#2f80ed'); for (let n = 0; n < 5; n++) { R(36 + n * 28, 44, 18, 3, '#8a6a4a'); } }
+  if (k2 === 'sbux') { R(30, 30, 140, 14, '#5a3a24'); R(30, 26, 140, 4, '#00704a'); for (let n = 0; n < 4; n++) { R(46 + n * 30, 20, 6, 8, '#ffffff'); R(47 + n * 30, 22, 4, 2, '#00704a'); } }
+  if (k2 === 'dhaba') { R(0, 0, Wd, F, nightT > .5 ? '#1a1240' : '#f29a5a'); for (let n = 0; n < 14; n++) R(8 + n * 14, 6, 2, 2, Math.floor(T / 300 + n) % 2 ? '#ffd36a' : '#ff6b6b'); for (let n = 0; n < 3; n++) { const x = 30 + n * 50; R(x, 40, 34, 4, '#e8d9b0'); R(x, 44, 2, 8, '#7a4f2e'); R(x + 32, 44, 2, 8, '#7a4f2e'); } R(150, 30, 24, 14, '#c58a4a'); TX('CHAI', 152, 34, '#151515'); }
+  if (k2 === 'thub') { for (let n = 0; n < 5; n++) { R(24 + n * 34, 14, 26, 18, '#151515'); R(26 + n * 34, 16, 22, 14, ['#5fc7d8', '#9be03c', '#f2d14b', '#ff8a3d', '#e2474b'][n]); } TX('DEMO DAY', 80, 4, '#e84a4a'); }
+  if (k2 === 'airport') { R(0, 0, Wd, F, '#86c1ef'); R(20, 30, 160, 14, '#dfe6ee'); R(30, 8, 50, 16, '#151515'); TX('DEPARTURES', 32, 10, '#f2d14b'); const px = Math.round((T / 20) % 260) - 40; pix(PLANE, px, 4, {r: '#e2474b', g: '#9aa3ad', w: '#ffffff', b: '#2f80ed', n: '#151515'}, false, 2); }
+  if (k2 === 'falaknuma') { R(0, 0, Wd, F, '#f6f0e4'); for (let n = 0; n < 7; n++) { arch(16 + n * 26, 14, 16, 40, '#e9dcc0'); } disc(100, 10, 7, '#f2d14b'); for (let n = 0; n < 9; n++) R(60 + n * 9, 18, 2, 2, '#ffd98a'); TX('101-SEAT TABLE', 60, 44, '#8a6a1c'); }
+  if (k2 === 'apts') { R(30, 30, 50, 14, '#7b5cc6'); R(120, 12, 40, 26, '#86c1ef'); R(139, 12, 2, 26, '#fff'); }
+  if (k2 === 'kbr' || k2 === 'cricket') { for (let n = 0; n < 8; n++) { const tx = 14 + n * 24; R(tx, F - 14, 3, 14, '#7a4f2e'); R(tx - 6, F - 30, 15, 17, ['#3f9a45', '#2f8a5a', '#5cb85c'][n % 3]); } if (k2 === 'kbr') { R(120, F - 6, 8, 4, '#2f80ed'); R(126, F - 9, 4, 3, '#2f80ed'); } }
   if (k2 === 'codewatch') { R(30, 44, 130, 4, '#333'); const py = 28 + Math.round(Math.max(0, Math.sin(t / 300)) * 12); R(116, 10, 4, py - 10, '#777'); R(108, py, 20, 6, '#e2474b'); for (let n = 0; n < 5; n++) { const bx = ((t / 25 + n * 30) % 130) + 30; if (bx > 108 && bx < 128 && py > 36) R(Math.round(bx), 42, 7, 2, '#2e7d32'); else pix(BUG, Math.round(bx), 37, {x: '#2e7d32'}); } TX('BUGS SQUASHED', 40, 10, '#f2d14b'); }
   if (k2 === 'eco') { R(120, 10, 46, 30, '#151515'); TX('CO2', 126, 13, '#9be03c'); R(126, 24, Math.round(10 + (Math.sin(t / 800) + 1) * 10), 4, '#9be03c'); TX('kWh H2O', 126, 30, '#5fc7d8'); }
   if (k2 === 'edi') for (let s = 0; s < 3; s++) { R(36, 14 + s * 14, 128, 2, '#6a4a2a'); for (let n = 0; n < 30; n++) R(38 + n * 4, 6 + s * 14, 3, 8, TREECOL[(n + s) % 6]); }
@@ -1787,7 +1919,7 @@ function drawScene(dt) { const b = B[cur]; if (!b) return; g = sctx; g.setTransf
   if (k2 === 'cable') { R(0, F - 8, Wd, 4, '#6b6f78'); for (let n = 0; n < 9; n++) line(100, 4, 10 + n * 22, F - 8, nightT > .5 ? LED[(n + Math.floor(t / 350)) % 5] : '#dfe5ec'); R(98, 2, 4, F - 8, '#cfd6dc'); }
   if (k2 === 'lake') { R(80, 30, 40, 4, '#bdb6a6'); pix(['...ww...', '..wwww..', '..wwww..', '...ww...', '.wwwwww.', 'wwwwwwww', 'wwwwwwww', '.wwwwww.'], 92, 14, {w: '#f4f1e6'}, false, 2); }
   if (k2 === 'pitch') { for (let n = 0; n < 8; n++) { R(30 + n * 18, 10, 14, 36, '#4f6b8a'); R(40 + n * 18, 26, 2, 3, '#c9d3df'); } }
-  if (k2 === 'lot') { R(70, 20, 60, 24, '#151515'); R(72, 22, 56, 20, '#f2d14b'); TX('FOR LEASE', 78, 24, '#151515'); TX('YOUR IDEA', 78, 33, '#151515'); }
+  if (k2 === 'gh') { R(0, 0, Wd, F, '#0d1117'); for (let r = 0; r < 7; r++) for (let c = 0; c < 40; c++) { const x = hs(r * 17 + c * 3.1 + Math.floor(T / 4000)); R(16 + c * 4, 8 + r * 4, 3, 3, x < .25 ? '#21262d' : x < .45 ? '#9be9a8' : x < .65 ? '#39d353' : x < .85 ? '#26a641' : '#006d32'); } TX('git push origin main', 18, 40, '#39d353'); if (Math.floor(T / 500) % 2) R(132, 40, 4, 7, '#39d353'); }
   if (k2 === 'grove') gtrees.slice(-8).forEach((tr, n) => { const tx = 40 + n * 18, c = TREECOL[Math.floor(tr.seed * TREECOL.length)]; R(tx, F - 14, 3, 14, '#7a4f2e'); R(tx - 6, F - 30, 15, 17, c); });
   if (k2 === 'sakshi') { R(30, 30, 46, 14, '#ff9ec7'); R(30, 26, 46, 6, '#ffd9e8'); R(32, 22, 10, 8, '#ffffff'); R(124, 10, 36, 26, '#ffffff'); R(126, 12, 32, 22, '#ffd0e4'); pix(HEART, 138, 18, {x: '#e2474b'}); for (let n = 0; n < 16; n++) R(10 + n * 12, 4 + (n % 2) * 2, 2, 2, Math.floor(T / 300 + n) % 2 ? '#ffd34f' : '#ff7eb6'); R(88, 36, 10, 12, '#c58a4a'); disc(93, 32, 5, '#c58a4a'); R(91, 31, 1, 1, '#151515'); R(95, 31, 1, 1, '#151515'); pix(SISPS.idle, 108, F - 28, SISPS.pal, true, 2); }
   if (k2 === 'home') { pix(MOMPS.idle, 96, F - 28, MOMPS.pal, false, 2); pix(DADPS.idle, 116, F - 28, DADPS.pal, true, 2); R(40, 34, 50, 12, '#7b5cc6'); R(40, 30, 50, 6, '#8c70d4'); R(120, 14, 40, 26, '#151515'); R(122, 16, 36, 22, nightT > .5 ? '#2a3a66' : '#3a6a9a'); TX('FOOTBALL', 124, 22, '#ffffff'); R(150, 44, 20, 10, '#c58a4a'); }
@@ -1855,7 +1987,7 @@ const DF = {}; DOCS.forEach(d => new Set(d.t).forEach(w => DF[w] = (DF[w] || 0) 
 const match = (w, x) => x === w || (w.length > 3 && x.startsWith(w)) || (x.length > 3 && w.startsWith(x));
 function answer(q) { const ql = q.toLowerCase();
   if (/^\s*(hi|hello|hey|yo|namaste|sup)\b/.test(ql)) return {text: "Hey! I'm the Yash bot. Ask me about his work, projects, skills, the city, or how to reach him."};
-  if (/contact|hire|email|reach|linkedin|github|connect|touch/.test(ql)) { const c = contactLinks(); return {text: c.length ? 'Best ways to reach him: ' + c.map(x => x[0].replace(/[↗✉]/g, '').trim()).join(', ') + '. Links are in the menu under About, and at the Empty Lot.' : 'Head to the Empty Lot down south.', go: 'lot'}; }
+  if (/contact|hire|email|reach|linkedin|github|connect|touch/.test(ql)) { const c = contactLinks(); return {text: c.length ? 'Best ways to reach him: ' + c.map(x => x[0].replace(/[↗✉]/g, '').trim()).join(', ') + '. Links are in the menu under About, and at GitHub House.' : 'Head to GitHub House down south.', go: 'lot'}; }
   if (/bruno|dog|pet/.test(ql)) return {text: 'Bruno is Yash\'s dog. He follows you everywhere in the city and rides the metro for free.', go: 'home'};
   if (/skill|stack|tool|tech|good at|strength/.test(ql)) return {text: 'Special moves: DAPT, SFT, LoRA fine-tuning, RAG/HopRAG, NLP + OCR pipelines, LLM evaluation. Toolkit: Python, SQL, AWS, TensorFlow, Keras, Hugging Face, FastAPI, React, Pydantic AI.'};
   if (/where.*(live|based|from)|location|which city/.test(ql)) return {text: 'Based in Hyderabad. 5 of the 8 organisations in this city are there.', go: 'hyd'};
